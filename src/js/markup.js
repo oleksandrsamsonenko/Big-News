@@ -11,6 +11,7 @@ async function getFetch(searchValue) {
         from: '2022-12-26',
         apiKey: API_KEY,
         sortBy: 'publishedAt',
+        searchIn: 'title',
         safesearch: true,
         page: 1,
         pageSize: 40,
@@ -23,7 +24,7 @@ async function getFetch(searchValue) {
     console.log(error);
   }
 }
-
+getFetch('everything').then(data => createMarkup(data));
 function createMarkup(arr) {
   const markup = arr
     .map(item => {
