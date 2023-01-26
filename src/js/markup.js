@@ -3,7 +3,8 @@ const newsList = document.querySelector('.list-news');
 const NEW_IRL =
   'https://newsapi.org/v2/everything?' +
   `q= sport` +
-  '&from=2022-12-26&sortBy=publishedAt&apiKey=cfc62234939b43f5b960da3e6ec231b2';
+  '&from=2022-12-26&sortBy=publishedAt&apiKey=727143a19bc6472fa8d6197ffa5ca054';
+  // cfc62234939b43f5b960da3e6ec231b2
 const getFetch = async e => {
   try {
     const response = await axios.get(`${NEW_IRL}`);
