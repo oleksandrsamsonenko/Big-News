@@ -1,30 +1,32 @@
 import axios from 'axios';
 
 const newsList = document.querySelector('.list-news');
-const NEW_URL = 'https://newsapi.org/v2/';
+const inputEl = document.querySelector('.nav-input');
+const NEW_URL = 'https://newsapi.org/v2/everything?';
 const API_KEY = 'cfc62234939b43f5b960da3e6ec231b2';
-
-export async function getFetch (searchValue) {
+async function getFetch(searchValue) {
   try {
-    const response = await axios.get(
-      `${NEW_URL}everything?q=${searchValue}&from=2022-12-26&sortBy=publishedAt&apiKey=${API_KEY}`
-    );
+    const response = await axios.get(`${NEW_URL}`, {
+      params: {
+        q: searchValue,
+        from: '2022-12-26',
+        apiKey: API_KEY,
+        sortBy: 'publishedAt',
+        searchIn: 'title',
+        safesearch: true,
+        page: 1,
+        pageSize: 40,
+      },
+    });
     console.log(response.data.articles);
     const atributes = response.data.articles;
-    // atributes.map(item => {
-    //   createMarkup(item);
-    // });
     return atributes;
   } catch (error) {
     console.log(error);
   }
-};
-
-getFetch().then(data=>createMarkup(data))
-
-export function createMarkup(arr) {
-  console.log(e);
-
+}
+getFetch('everything').then(data => createMarkup(data));
+function createMarkup(arr) {
   const markup = arr
     .map(item => {
       const date = new Date(item.publishedAt);
@@ -33,18 +35,21 @@ export function createMarkup(arr) {
 
       const getTime = `${day} / ${month} / ${date.getFullYear()} `;
       return ` <li>
-        <div class="images">
-        <img src="${e.urlToImage}" alt="" width="288px" height="395px" />
-        <button class="img-btn">Add to favorite</button></div>
-        <h2>${e.title}</h2>
-        <p>${e.description}</p>
+<div class="images"><img src="${item.urlToImage}" alt="" width="288px" height="395px" />
+<button class="img-btn">Add to favorite</button></div>
+        <h2 class="description-title">${item.title}</h2>
+        <p>${item.description}</p>
         <div class="info-more">
           <p class="date">${getTime}</p>
           <a href="">Read more</a>
         </div>
-        </li>`;
+
+      </li>`;
     })
     .join('');
-  // newsList.insertAdjacentHTML('beforeend', markup);
   newsList.innerHTML = markup;
+}
+inputEl.addEventListener('input', handleInput);
+function handleInput(e) {
+  getFetch(e.target.value.trim()).then(data => createMarkup(data));
 }
