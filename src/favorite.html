@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header__container">
+        <a class="logo" href="">News</a>
+        <nav class="header__nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a class="nav__link" href="./index.html">Home</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link nav__link--current" href="./favorite.html"
+                >Favorite</a
+              >
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="./read.html">Read</a>
+            </li>
+          </ul>
+          <form class="search-form" id="search-form">
+            <input
+              type="text"
+              name="searchQuery"
+              autocomplete="off"
+              placeholder="Search..."
+            />
+            <svg class="#" width="24" height="24">
+              <use href="#"></use>
+            </svg>
+          </form>
+          <div class="switchbox">
+            <p>Light</p>
+            <!-- <svg class="svgteme lightsvg" width="35">
+          <use href="./img/symbol-defs.svg#icon-light"></use>
+        </svg> -->
+            <label class="switch">
+              <input class="toggle" type="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+            <p>Dark</p>
+            <!-- <svg class="svgteme dark__svg" width="35">
+          <use href="./img/symbol-defs.svg#icon-dark"></use>
+        </svg> -->
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- Header -->
+    <main>
+      <include src="./partials/news.html"></include>
+    </main>
+    <!-- Footer -->
+    <include src="./partials/footer.html"></include>
+  </body>
+</html>
