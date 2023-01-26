@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const WEATHER_API_KEY = '727143a19bc6472fa8d6197ffa5ca054';
-// ddb3f4f523554053da0c0f5cbef7c1eb
+const WEATHER_API_KEY = 'ddb3f4f523554053da0c0f5cbef7c1eb';
 // const WEATHER_API_KEY = `2b29a9c3649d4d28865120314232601`; `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=Kiev`;
 const weatherMarkup = document.querySelector(`.weather`);
 const days = [
