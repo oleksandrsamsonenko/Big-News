@@ -35,12 +35,12 @@ function createMarkup(arr) {
       const getTime = `${day} / ${month} / ${date.getFullYear()} `;
       return ` <li>
 <div class="images"><img src="${item.urlToImage}" alt="" width="288px" height="395px" />
-<button class="img-btn">Add to favorite</button></div>     
+<button class="img-btn">Add to favorite</button></div>
         <h2 class="description-title">${item.title}</h2>
         <p>${item.description}</p>
         <div class="info-more">
           <p class="date">${getTime}</p>
-          <a href="">Read more</a>
+          <a href="${item.url}" rel="noopener noreferrer">Read more</a>
         </div>
 
       </li>`;
