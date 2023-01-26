@@ -9,5 +9,5 @@ function handleSelectClick(e) {
         return
     }
     console.log(e.target.value)
-    getFetch(e.target.value)
+    getFetch(e.target.value).then(data => createMarkup(data))
 }
