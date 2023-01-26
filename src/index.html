@@ -1,82 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./main.css">
-</head>
-
-<body>
-  <header>
-    <div class="container">
-      <div class="header">
-        <h1>News</h1>
-        <nav class="nav"><a href="">Home</a><a href="">Favorite</a><a href="">Read</a></nav>
-      </div>
-    </div>
-  </header>
-  <main>
-    <ul>
-      <li>
-        <img src="./images/test.webp" alt="" width="250px">
-        <h2>8 tips for passing an online interview that will help you get a job</h2>
-        <p>Add to favorite</p>
-        <p>Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-          offered by these...</p>
-        <div class="info-more">
-          <p class="date">20/02/2021</p>
-          <a href="">Read more</a>
-        </div>
-
-      </li>
-      <li>
-        <img src="./images/test.webp" alt="" width="250px">
-        <h2>8 tips for passing an online interview that will help you get a job</h2>
-        <p>Add to favorite</p>
-        <p>Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-          offered by
-          these...</p>
-        <div class="info-more">
-          <p class="date">20/02/2021</p>
-          <a href="">Read more</a>
-        </div>
-
-      </li>
-      <li>
-        <img src="./images/test.webp" alt="" width="250px">
-        <h2>8 tips for passing an online interview that will help you get a job</h2>
-        <p>Add to favorite</p>
-        <p>Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-          offered by
-          these...</p>
-        <div class="info-more">
-          <p class="date">20/02/2021</p>
-          <a href="">Read more</a>
-        </div>
-
-      </li>
-      <li>
-        <img src="./images/test.webp" alt="" width="250px">
-        <h2>8 tips for passing an online interview that will help you get a job</h2>
-        <p>Add to favorite</p>
-        <p>Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-          offered by
-          these...</p>
-        <div class="info-more">
-          <p class="date">20/02/2021</p>
-          <a href="">Read more</a>
-        </div>
-
-      </li>
-    </ul>
-  </main>
-  <footer>
-    <div class="footer"></div>
-  </footer>
-
-</body>
-
+  <body>
+    <!-- Header -->
+    <include src="./partials/header.html"></include>
+    <main>
+      <!-- Main -->
+      <include src="./partials/filter.html"></include>
+      <include src="./partials/news.html"></include>
+      <include src="./partials/weather.html"></include>
+    </main>
+    <!-- Footer -->
+    <include src="./partials/footer.html"></include>
+    <!-- Mobile menu -->
+    <include src="./partials/mobile-menu.html"></include>
+  </body>
 </html>
