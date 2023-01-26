@@ -85,7 +85,7 @@ async function getCityName() {
   <p class="weather_geolocation">Kyiv</p></div></div>
   <img src="${`https://openweathermap.org/img/wn/${weather.data.list[0].weather[0].icon}@2x.png`}" alt="Weather condition" width=150 />
   <p class="day">${days[date.getDay()]}</p>
-  <p class="date">${date.getDate()}-${
+  <p class="date">${String(date.getDate()).padStart(2, '0')}-${
       months[date.getMonth()]
     }-${date.getFullYear()}</p>
   <input class="weather_forecast" type="button" value="Weather for week" />`;
