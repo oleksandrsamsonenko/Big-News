@@ -1,0 +1,43 @@
+.weather {
+  font-family: sans-serif;
+  background-color: #4440f7;
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 40px 32px 60px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.weather_wrapper {
+  display: flex;
+}
+
+.weather_temperature {
+  font-size: 64px;
+  line-height: 1.17;
+}
+
+.weather_condition {
+  font-size: 36px;
+  line-height: 1.17;
+}
+.weather_forecast,
+.weather_geolocation {
+  font-size: 20px;
+  line-height: 1.15;
+  width: 177px;
+  height: 42px;
+  background: rgba(254, 254, 255, 0.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: none;
+  color: #ffffff;
+}
+
+.day,
+.date {
+  font-size: 36px;
+  line-height: 1.17;
+}
