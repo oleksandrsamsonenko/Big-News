@@ -1,1 +1,80 @@
-<section>Here should be a filter</section>
+<section class="filter">
+  <div class="container">
+    <div class="flexinline">
+      <ul class="list button__list">
+        <li class="button__item">
+          <button class="button" type="button">Admin</button>
+        </li>
+        <li class="button__item">
+          <button class="button" type="button">Arts</button>
+        </li>
+        <li class="button__item">
+          <button class="button" type="button">Automobiles</button>
+        </li>
+        <li class="button__item">
+          <button class="button" type="button">Books</button>
+        </li>
+        <li class="button__item">
+          <button class="button" type="button">Briefing</button>
+        </li>
+        <li class="button__item">
+          <button class="button" type="button">Business</button>
+        </li>
+        <li class="button__item">
+          <button class="button" type="button">Others</button>
+        </li>
+      </ul>
+      <div class="calendar">
+        <label for="appt">Search date news</label>
+        <input class="calendar__input" type="text" id="datetime-picker" />
+      </div>
+    </div>
+    <h1 class="visually__hidden">Список новин</h1>
+    <p class="is-hidden">We haven’t found news from this category</p>
+
+    <ul class="news__list">
+      <li class="news__item">
+        <div class="info-upper">
+          <p>Job searching</p>
+          <p class="card__text--accept">Have read ✓</p>
+          <button class="add-read" type="submit">
+            Add to favorite
+            <svg class="#" width="24" height="24">
+              <use href="#"></use>
+            </svg>
+          </button>
+        </div>
+        <img src="#" alt="" class="news__image" loading="lazy" width="240px" />
+        <div class="info">
+          <h2>
+            8 tips for passing an online interview that will help you get a job
+          </h2>
+
+          <p>Add to favorite</p>
+          <p>
+            Before you start looking for a job, it is useful to familiarize
+            yourself with the job prospects offered by these...
+          </p>
+        </div>
+        <div class="info-more">
+          <p class="date">20/02/2021</p>
+          <a href="">Read more</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="pagination">
+      <ul class="pagination__list">
+        <li class="button__pagination"><a href="#0">Prev</a></li>
+        <li><a href="#0">1</a></li>
+        <li><span>...</span></li>
+        <li><a href="#0">4</a></li>
+        <li><a class="current" href="#0">5</a></li>
+        <li><a href="#0">6</a></li>
+        <li><span>...</span></li>
+        <li><a href="#0">20</a></li>
+        <li class="button__pagination"><a href="#0">Next</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
