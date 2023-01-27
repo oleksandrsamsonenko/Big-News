@@ -46,7 +46,7 @@ async function getWeatherCoords() {
       months[date.getMonth()]
     }-${date.getFullYear()}</p>
       <a class="weather_forecast"
-    href="https://www.weather-forecast.com/locations/Valencia/forecasts/latest"
+    href="https://openweathermap.org/city/2509951"
     target="_blank"
     rel="noreferrer noopener"
     class="socials__link link"
@@ -81,7 +81,7 @@ async function addMarkupByGeo(lat, lon) {
       months[date.getMonth()]
     }-${date.getFullYear()}</p>
     <a class="weather_forecast"
-    href="https://www.weather-forecast.com/locations/${currentCity}/forecasts/latest"
+    href="https://openweathermap.org/city/${weather.data.city.id}"
     target="_blank"
     rel="noreferrer noopener"
     class="socials__link link"
