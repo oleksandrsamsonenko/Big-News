@@ -69,54 +69,14 @@ export function createMarkup(arr) {
     .join('');
   newsList.innerHTML = markup;
 }
-// function createMarkup(arr) {
-//   const markup = arr
-//     .map(item => {
-//       const date = new Date(item.published_date);
-//       const day = String(date.getDate()).padStart(2, '0');
-//       const month = String(date.getMonth() + 1).padStart(2, '0');
-//       const getTime = `${day} / ${month} / ${date.getFullYear()}`;
-//       const imgUrl =
-//         item.media.length === 0
-//           ? './src/img/undefined.png'
-//           : item.media[0]['media-metadata'][2].url;
-//       const desription =
-//         item.media.length === 0 || item.media[0].caption === ''
-//           ? 'Sorry, this articles have not description'
-//           : item.media[0].caption;
-//       return `<li class="images">
-//           <img
-//             src="${imgUrl}"
-//             alt=""
-//             width="288px"
-//             height="395px"
-//           />
-//           <button class="img-btn">
-//             Add to favorite{' '}
-//             <svg class="favorite-icon" width="16" height="16">
-//               <use href="../img/symbol-defs.svg#icon-heart"></use>
-//             </svg>{' '}
-//           </button>
-//           <h2 class="description-title">${item.title}</h2>
-//           <p class="description-of-news">${desription}</p>
-//           <div class="info-more">
-//             <p class="date-of-news">${getTime}</p>
-//             <a href="">Read more</a>
-//           </div>
-//         </li>`;
-//     })
-//     .join('');
 
-//   newsList.innerHTML = markup;
-// }
 async function getValueFetch(value) {
   try {
     const fullfield = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${API_KEY}&facet_fields=section_name
 &facet_filter=true&begin_date=20150101`
     );
-    console.log(fullfield.data.response.docs);
-    console.log(fullfield.data.response);
+
     return fullfield.data.response;
   } catch (error) {
     console.log(error);
@@ -126,7 +86,7 @@ async function getValueFetch(value) {
 inputEl.addEventListener('submit', handleInput);
 function handleInput(e) {
   e.preventDefault();
-  console.log('123', markupValue.value);
+
   getValueFetch(markupValue.value).then(data => createValueMarkup(data));
 }
 
@@ -166,44 +126,3 @@ function createValueMarkup(e) {
     .join('');
   newsList.innerHTML = valueMarkup;
 }
-
-// function createMarkup(arr) {
-//   const markup = arr
-//     .map(item => {
-//       const date = new Date(item.published_date);
-//       const day = String(date.getDate()).padStart(2, '0');
-//       const month = String(date.getMonth() + 1).padStart(2, '0');
-//       const getTime = `${day} / ${month} / ${date.getFullYear()}`;
-//       const imgUrl =
-//         item.media.length === 0
-//           ? './src/img/undefined.png'
-//           : item.media[0]['media-metadata'][2].url;
-//       const desription =
-//         item.media.length === 0
-//           ? 'Sorry, this articles have not description'
-//           : item.media[0].caption;
-//       return `<li class="images">
-//           <img
-//             src="${imgUrl}"
-//             alt=""
-//             width="288px"
-//             height="395px"
-//           />
-//           <button class="img-btn">
-//             Add to favorite{' '}
-//             <svg class="favorite-icon" width="16" height="16">
-//               <use href="../img/symbol-defs.svg#icon-heart"></use>
-//             </svg>{' '}
-//           </button>
-//           <h2 class="description-title">${item.title}</h2>
-//           <p class="description-of-news">${desription}</p>
-//           <div class="info-more">
-//             <p class="date-of-news">${getTime}</p>
-//             <a href="">Read more</a>
-//           </div>
-//         </li>`;
-//     })
-//     .join('');
-
-//   newsList.innerHTML = markup;
-// }
