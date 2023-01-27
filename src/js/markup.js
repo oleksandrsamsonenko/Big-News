@@ -51,6 +51,7 @@ function createMarkup(arr) {
     .join('');
   newsList.innerHTML = markup;
 }
+
 inputEl.addEventListener('input', handleInput);
 function handleInput(e) {
   getFetch(e.target.value.trim()).then(data => createMarkup(data));
