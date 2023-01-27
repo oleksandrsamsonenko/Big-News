@@ -41,7 +41,7 @@ export function createMarkup(arr) {
         <p>${item.description}</p>
         <div class="info-more">
           <p class="date">${getTime}</p>
-          <a href="${item.url}" rel="noopener noreferrer">Read more</a>
+          <a class="read-more-link" href="${item.url}" target="_blank" rel="noopener noreferrer">Read more</a>
         </div>
 
       </li>`;
