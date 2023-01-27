@@ -1,3 +1,46 @@
 .description-title{
     font-family: $mainFF;
+    font-style: $fontStyle;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        letter-spacing: -0.01em;
+        color:$blackColor;
+}
+.description-of-news{
+    font-family: $mainFF;
+        font-style: $fontStyle;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: $blackColor;
+}
+
+.date-of-news{
+    font-family: $fontStyle;
+        font-style: $fontStyle;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: $dateColor;
+}
+.info-more {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.images{
+    position: relative;
+}
+.img-btn{
+    border: none;
+        position: absolute;
+    right: 27%;
+    left: 112px;
+    top: 355px;
+        width: 168px;
+            height: 28px;
+        bottom: 10%;
+        background: #F4F4F4;
+            border-radius: 20px;
 }
