@@ -1,11 +1,16 @@
-const newslistEl = document.querySelector('.list-news')
+const newslistEl = document.querySelector('.news__list')
 
 newslistEl.addEventListener('click', handleLinkClick)
 
 function handleLinkClick(e) {
-const imgURL = e.target.parentNode.parentNode.firstElementChild.firstElementChild.src;
+const newsImgURL = e.target.parentNode.parentNode.children[0].src;
+const newsTitle = e.target.parentNode.parentNode.children[2].textContent;
+const newsDescr = e.target.parentNode.parentNode.children[3].textContent;
+
+console.log(newsImgURL)
+console.log(newsTitle)
+console.log(newsDescr)
+console.log(e.target.href)
 
 console.dir(e.target.parentNode.parentNode)
 }
-
-//RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b

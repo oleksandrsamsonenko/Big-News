@@ -1,7 +1,7 @@
 import axios from 'axios'
-// import {getFetch, createMarkup} from './markup'
 
 const formEl = document.querySelector('.filter-form')
+const newsList = document.querySelector('.news__list');
 
 formEl.addEventListener('click', handleSelectClick)
 
@@ -10,30 +10,39 @@ function handleSelectClick(e) {
         return
     }
     console.log(e.target.value)
-    getFetch().then(data => console.log(data))
-    // getFetch(e.target.value).then(data => createMarkup(data))
+    getFetch(e.target.value.toLowerCase()).then(data => createMarkup(data))
 }
 
-async function getFetch() {
+async function getFetch(categoryName) {
     try {
-    //   const response = await axios.get(`${NEW_URL}`, {
-    //     params: {
-    //       q: searchValue,
-    //       from: '2022-12-26',
-    //       apiKey: API_KEY,
-    //       sortBy: 'publishedAt',
-    //       searchIn: 'title',
-    //       safesearch: true,
-    //       page: 1,
-    //       pageSize: 40,
-    //     },
-    //   });
-    //   console.log(response.data.articles);
-    //   const atributes = response.data.articles;
-    //   return atributes;
-    const response = await axios.get('https://api.nytimes.com/svc/news/v3/content/section-list.json&api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b')
-    return response
+    const response = await axios.get(`https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b`)
+    return response.data.results
     } catch (error) {
       console.log(error);
     }
+  }
+  function createMarkup(arr) {
+    const markup = arr.map(item => {
+      const date = new Date(item.published_date);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+
+      const getTime = `${day} / ${month} / ${date.getFullYear()} `;
+        const imgUrl = item.multimedia.length === 0 ? '../img/placeholder.png' : item.multimedia[2].url;
+        const description = item.multimedia.length === 0 ? "Sorry, this article has no description" : item.multimedia[0].caption;
+      // }
+
+      return ` <li>
+  <img src="${imgUrl}" alt="" width="288px" height="395px" />
+  <button class="img-btn">Add to favorite</button>
+        <h2 class="description-title">${item.title}</h2>
+        <p>${description}</p>
+        <div class="info-more">
+          <p class="date">${getTime}</p>
+          <a class="read-more-link" href="${item.url}" target="_blank" rel="noopener noreferrer">Read more</a>
+        </div>
+      </li>`;
+    })
+    .join('');
+  newsList.innerHTML = markup;
   }
