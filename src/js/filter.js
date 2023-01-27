@@ -1,4 +1,3 @@
-import {getFetch, createMarkup} from './markup'
 
 const formEl = document.querySelector('.filter-form')
 
@@ -9,5 +8,4 @@ function handleSelectClick(e) {
         return
     }
     console.log(e.target.value)
-    getFetch(e.target.value).then(data => createMarkup(data))
 }
