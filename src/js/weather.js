@@ -29,28 +29,7 @@ const date = new Date();
 
 async function getWeatherCoords() {
   try {
-    const defaultWeather = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${WEATHER_API_KEY}&q=Valencia&units=metric`
-    );
-
-    weatherMarkup.innerHTML = `<div class="weather_wrapper"><p class="weather_temperature">${Math.ceil(
-      defaultWeather.data.list[0].main.temp
-    )}&deg</p>
-      <div class="weather_info"><p class="weather_condition">${
-        defaultWeather.data.list[0].weather[0].main
-      }</p>
-      <p class="weather_geolocation">Valencia</p></div></div>
-      <img class="weather_image" src="${`https://openweathermap.org/img/wn/${defaultWeather.data.list[0].weather[0].icon}@2x.png`}" alt="Weather condition" width=128 height=121 />
-      <p class="day">${days[date.getDay()]}</p>
-      <p class="date">${String(date.getDate()).padStart(2, '0')}-${
-      months[date.getMonth()]
-    }-${date.getFullYear()}</p>
-      <a class="weather_forecast"
-    href="https://openweathermap.org/city/2509951"
-    target="_blank"
-    rel="noreferrer noopener"
-    class="socials__link link"
-    >Weather for week</a>`;
+    addMarkupByGeo(39.466667, -0.375); //заглушка на випадок недоступності координатів користувача
 
     navigator.geolocation.getCurrentPosition(position => {
       addMarkupByGeo(position.coords.latitude, position.coords.longitude);
@@ -90,10 +69,3 @@ async function addMarkupByGeo(lat, lon) {
 }
 
 getWeatherCoords();
-
-/* <input
-  class="weather_forecast"
-  type="button"
-  value="Weather for week"
-  href="https://www.weather-forecast.com/locations/Kyiv/forecasts/latest"
-/>; */
