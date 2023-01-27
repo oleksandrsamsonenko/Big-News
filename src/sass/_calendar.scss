@@ -41,7 +41,9 @@ use {
   fill: $hoverColor;
 }
 
-.calendar-input:hover,
-:focus + .svg-calendar {
+.calendar-input:hover + .svg-calendar {
+  fill: $whiteColor;
+}
+.calendar-input:focus + .svg-calendar {
   fill: $whiteColor;
 }
