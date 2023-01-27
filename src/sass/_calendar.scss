@@ -1,0 +1,47 @@
+path,
+use {
+  fill: inherit;
+}
+
+.calendar {
+  position: relative;
+}
+
+.calendar-input {
+  width: 168px;
+  height: 31px;
+  border: 1px solid #111321;
+  border-radius: 20px;
+  text-align: center;
+
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+
+  color: rgba(17, 19, 33, 0.4);
+}
+
+.calendar-input:hover,
+:focus {
+  background-color: $hoverColor;
+  color: $whiteColor;
+}
+
+.svg-calendar {
+  position: absolute;
+  margin-left: 14px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  top: 0;
+  left: 0;
+  // transform: translate(0, -50%);
+  // z-index: 1;
+  fill: $hoverColor;
+}
+
+.calendar-input:hover,
+:focus + .svg-calendar {
+  fill: $whiteColor;
+}
