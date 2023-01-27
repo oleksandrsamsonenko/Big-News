@@ -11,8 +11,6 @@ async function getFetch(searchValue) {
   try {
     const response = await axios.get(`${INPUT_URL}`);
 
-    console.log(response.data.results);
-    console.log(response.data.results[0].media[0]['media-metadata'][0].url);
     return response.data.results;
   } catch (error) {
     console.log(error);
@@ -31,7 +29,6 @@ export function createMarkup(arr) {
       let description;
 
       if (item.multimedia) {
-        console.log('Mult');
         imgUrl =
           item.multimedia.length === 0
             ? '../img/placeholder.png'
@@ -41,8 +38,6 @@ export function createMarkup(arr) {
             ? 'Sorry, this article has no description'
             : item.multimedia[0].caption;
       } else {
-        console.log('Media');
-        console.log(item.media[0]?.['media-metadata']);
         imgUrl =
           item.media.length === 0
             ? placeholder
@@ -54,15 +49,15 @@ export function createMarkup(arr) {
       }
 
       return ` <li class="images">
-<img src="${imgUrl}" alt="" width="288px" height="395px" />
-<button class="img-btn">Add to favorite</button>
+      <img src="${imgUrl}" alt="" width="288px" height="395px" />
+      <button class="img-btn">Add to favorite</button>
       <h2 class="description-title">${item.title}</h2>
       <p>${description}</p>
       <div class="info-more">
         <p class="date">${getTime}</p>
         <a class="read-more-link" href="${item.url}" target="_blank" rel="noopener noreferrer">Read more</a>
       </div>
-    </li>`;
+      </li>`;
     })
     .join('');
   newsList.innerHTML = markup;
