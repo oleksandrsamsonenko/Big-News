@@ -1,30 +1,31 @@
 import axios from 'axios';
 const newsList = document.querySelector('.list-news');
 const inputEl = document.querySelector('.nav-input');
-const NEW_URL = 'https://newsapi.org/v2/everything?';
-const API_KEY = 'cfc62234939b43f5b960da3e6ec231b2';
+const INPUT_URL =
+  'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=B0ZUSVlU2ktbEQtsL20Qu7htIcN31yWz';
+const API_KEY = 'B0ZUSVlU2ktbEQtsL20Qu7htIcN31yWz';
 async function getFetch(searchValue) {
   try {
-    const response = await axios.get(`${NEW_URL}`, {
+    const response = await axios.get(`${INPUT_URL}`, {
       params: {
-        q: searchValue,
-        from: '2022-12-26',
-        apiKey: API_KEY,
-        sortBy: 'publishedAt',
-        searchIn: 'title',
+        // q: searchValue,
+        // from: '2022-12-26',
+        // apiKey: API_KEY,
+        // sortBy: 'publishedAt',
+        // searchIn: 'title',
         safesearch: true,
         page: 1,
         pageSize: 40,
       },
     });
-    console.log(response.data.articles);
-    const atributes = response.data.articles;
+    console.log(response.data.response);
+    const atributes = response.data.response;
     return atributes;
   } catch (error) {
     console.log(error);
   }
 }
-getFetch('everything').then(data => createMarkup(data));
+getFetch().then(data => createMarkup(data));
 function createMarkup(arr) {
   const markup = arr
     .map(item => {
@@ -35,11 +36,13 @@ function createMarkup(arr) {
       const getTime = `${day} / ${month} / ${date.getFullYear()} `;
       return ` <li>
 <div class="images"><img src="${item.urlToImage}" alt="" width="288px" height="395px" />
-<button class="img-btn">Add to favorite</button></div>     
+<button class="img-btn">Add to favorite  <svg class="favorite-icon" width="16" height="16">
+    <use href="../img/symbol-defs.svg#icon-heart"></use>
+</svg></button></div>     
         <h2 class="description-title">${item.title}</h2>
-        <p>${item.description}</p>
+        <p class="description-of-news">${item.description}</p>
         <div class="info-more">
-          <p class="date">${getTime}</p>
+          <p class="date-of-news">${getTime}</p>
           <a href="">Read more</a>
         </div>
 
