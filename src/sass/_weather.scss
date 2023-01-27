@@ -118,8 +118,8 @@
   margin: auto;
 }
 
-.day,
-.date {
+.weather_day,
+.weather_date {
   font-size: 28px;
   line-height: 1.17;
   margin: auto;
@@ -127,7 +127,7 @@
     font-size: 36px;
   }
 }
-.date {
+.weather_date {
   margin-bottom: 18px;
   @media screen and (min-width: $tablet) {
     margin-bottom: 28px;
