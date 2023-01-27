@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const newsList = document.querySelector('.list-news');
-const inputEl = document.querySelector('.nav-input');
+const newsList = document.querySelector('.news__list');
+const inputEl = document.querySelector('.search-input');
 const NEW_URL = 'https://newsapi.org/v2/everything?';
 const API_KEY = 'fbcf1a7dbc304585bd6559245daa0d46';
 
