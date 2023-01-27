@@ -23,3 +23,9 @@ const toggleMenu = () => {
     openMenuBtn.setAttribute('aria-expanded', false);
     bodyScrollLock.enableBodyScroll(document.body);
     });
+
+
+
+// search input mobile version
+
+
