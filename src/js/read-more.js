@@ -25,19 +25,17 @@ function handleLinkClick(e) {
   const year = today.getFullYear();
   const dateKey = `${date}/${month}/${year}`;
   const newsObj = {
-      id: newsId,
-      imgUrl: newsImgURL,
-      category: newsCategory,
-      title: newsTitle,
-      descr: newsDescr,
-      date: newsPublishedDate,
-      originUrl: newsOriginalLink,
-      dateKey,
-    };
-
+    id: newsId,
+    imgUrl: newsImgURL,
+    category: newsCategory,
+    title: newsTitle,
+    descr: newsDescr,
+    date: newsPublishedDate,
+    originUrl: newsOriginalLink,
+    dateKey,
+  };
 
   readArr.push(newsObj);
 
-  console.log(readArr);
   localStorage.setItem('read', JSON.stringify(readArr));
 }
