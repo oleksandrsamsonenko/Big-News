@@ -2,6 +2,7 @@ const burgerMenu = document.querySelector('.js-menu-container');
 const openMenuBtn = document.querySelector('.js-open-menu');
 const closeMenuBtn = document.querySelector('.js-close-menu');
 
+
 const toggleMenu = () => {
     const isMenuOpen =
     openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
@@ -24,8 +25,12 @@ const toggleMenu = () => {
     bodyScrollLock.enableBodyScroll(document.body);
     });
 
+// current page
 
+const menuLinks = document.querySelectorAll('.mobile-menu__link')
 
-// search input mobile version
-
-
+for (const link of menuLinks) {
+    if (link.href === window.location.href) {
+        link.parentNode.classList.add('current')
+}
+}

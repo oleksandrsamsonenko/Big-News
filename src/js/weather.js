@@ -55,8 +55,8 @@ async function addMarkupByGeo(lat, lon) {
       }</p>
       <p class="weather_geolocation">${currentCity}</p></div></div>
       <img class="weather_image" src="${`https://openweathermap.org/img/wn/${weather.data.list[0].weather[0].icon}@2x.png`}" alt="Weather condition" width=128 height=121 />
-      <p class="day">${days[date.getDay()]}</p>
-      <p class="date">${String(date.getDate()).padStart(2, '0')}-${
+      <p class="weather_day">${days[date.getDay()]}</p>
+      <p class="weather_date">${String(date.getDate()).padStart(2, '0')}-${
       months[date.getMonth()]
     }-${date.getFullYear()}</p>
     <a class="weather_forecast"
