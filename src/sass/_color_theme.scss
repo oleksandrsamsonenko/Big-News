@@ -81,6 +81,16 @@
     cursor: pointer;
   }
   /*////////////////////////CHANGE COLOR THEME///////////////////////////////////*/
+  .light__theme .calendar-inp{
+    border: 1px solid #111321;
+    color: rgba(17, 19, 33, 0.4);
+  }
+  .dark__theme .calendar-inp{
+    border: 1px solid #F4F4F4;
+    color:rgba(244, 244, 244, 0.4);
+  }
+
+
   .light__theme, 
   .burger-menu__wrapper{
     background-color:#F4F4F4;
