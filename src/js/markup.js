@@ -25,11 +25,6 @@ newsList.addEventListener('click', e => {
       id: e.target.dataset.id,
     });
     localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
-    const newFav = JSON.parse(localStorage.getItem('savedNews')).filter(
-      item => {
-        item.id !== e.target.dataset.id;
-      }
-    );
   }
 
   if (e.target.classList.contains('favorite-false')) {
