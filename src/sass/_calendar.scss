@@ -19,8 +19,8 @@
   color: rgba(17, 19, 33, 0.4);
 }
 
-.calendar-inp:hover,
-:focus {
+.calendar-input:hover,
+.calendar-input:focus {
   background-color: $hoverColor;
   color: $whiteColor;
 }
