@@ -1,0 +1,23 @@
+.filter-box {
+  display: flex;
+  gap: 14px;
+
+  @media screen and (min-width: $tablet) {
+    gap: 16px;
+  }
+}
+
+.filter-btn,
+.filter-select {
+  padding: 8px 21px;
+  border: 1px solid #4440f7;
+  border-radius: 20px;
+
+  font-family: 'Manrope';
+  font-size: 12px;
+  line-height: calc(16 / 12);
+  text-align: center;
+
+  color: #4b48db;
+  background-color: $whiteColor;
+}

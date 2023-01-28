@@ -10,6 +10,7 @@ const API_KEY = 'B0ZUSVlU2ktbEQtsL20Qu7htIcN31yWz';
 async function getFetch(searchValue) {
   try {
     const response = await axios.get(`${INPUT_URL}`);
+    console.log(response.data)
 
     return response.data.results;
   } catch (error) {
@@ -50,6 +51,7 @@ export function createMarkup(arr) {
 
       return ` <li class="images">
       <img src="${imgUrl}" alt="" width="288px" height="395px" />
+      <p>${item.nytdsection}</p>
       <button class="img-btn">Add to favorite</button>
       <h2 class="description-title">${item.title}</h2>
       <p>${description}</p>

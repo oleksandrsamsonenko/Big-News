@@ -1,52 +1,143 @@
 import axios from 'axios';
-import {createMarkup} from './markup'
+import { createMarkup } from './markup';
+import notFound from '../img/notFound.jpg';
 
-const formEl = document.querySelector('.filter-form')
-// const selectEl = document.querySelector('.filter-select')
-// console.dir(selectEl)
+const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
+const BASE_URL = 'https://api.nytimes.com/svc/news/v3/content/inyt/';
 
-formEl.addEventListener('click', handleSelectClick)
+const formEl = document.querySelector('.filter-form');
+const newsListEl = document.querySelector('.news__list');
+
+formEl.addEventListener('click', handleSelectClick);
 
 function handleSelectClick(e) {
-    if(e.target.value === 'Categories'){
-        return
+  if (e.target.value === 'Categories') {
+    return;
+  }
+
+  getFetch(e.target.value).then(data => {
+    if (!data) {
+      createNotFoundMarkup();
+      return;
     }
-    console.log(e.target.value)
-    getFetch(e.target.value).then(data => createMarkup(data))
+    createMarkup(data);
+  });
 }
+
 async function getFetchCategories() {
   try {
-  const response = await axios.get(`https://api.nytimes.com/svc/news/v3/content/section-list.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b`);
-  const arrey = response.data.results;
+    const response = await axios.get(
+      `https://api.nytimes.com/svc/news/v3/content/section-list.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b`
+    );
+    const arrey = response.data.results;
 
-  return arrey;
+    return arrey;
   } catch (error) {
     console.log(error);
   }
 }
 
-function CreateFilterMarkup (arr) {
-  const categoriesArr = arr.map(item =>{
-    console.log('item', item)
-    return `<option value="${item.section}">${item.display_name}</option>`}
-     ).join('');
-     console.log(categoriesArr)
-     const markup = `<select class="filter-select" name="categories">
+function createFilterMarkup(arr) {
+  let categoriesArr;
+  let btnArr;
+  let optionArr;
+  let markup;
+
+  if (window.innerWidth >= 1280) {
+    btnArr = arr
+      .map((item, index) => {
+        if (index <= 5) {
+          console.log(index);
+          return `<button class="filter-btn" data-value="${item.section}">${item.display_name}</button>`;
+        } else {
+          return;
+        }
+      })
+      .join('');
+    optionArr = arr
+      .map((item, index) => {
+        if (index > 5) {
+          console.log(index);
+          return `<option value="${item.section}">${item.display_name}</option>`;
+        } else {
+          return;
+        }
+      })
+      .join('');
+
+      markup = `<div class="filter-box">${btnArr}
+      <select class="filter-select" name="categories">
+     <option value="Others">Others</option>
+     ${optionArr}
+     </select></div>`;
+  } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+    btnArr = arr
+      .map((item, index) => {
+        if (index <= 3) {
+          console.log(index);
+          return `<button class="filter-btn" data-value="${item.section}">${item.display_name}</button>`;
+        } else {
+          return;
+        }
+      })
+      .join('');
+    optionArr = arr
+      .map((item, index) => {
+        if (index > 3) {
+          console.log(index);
+          return `<option value="${item.section}">${item.display_name}</option>`;
+        } else {
+          return;
+        }
+      })
+      .join('');
+
+      markup = `<div class="filter-box">${btnArr}
+      <select class="filter-select" name="categories">
+      <option value="Others">Others</option>
+     ${optionArr}
+     </select></div>`;
+  } else {
+    categoriesArr = arr
+      .map(item => {
+        return `<option value="${item.section}">${item.display_name}</option>`;
+      })
+      .join('');
+      markup = `<select class="filter-select" name="categories">
      <option value="Categories">Categories</option>
      ${categoriesArr}
-     </select>`
-     formEl.innerHTML = markup;
+     </select>`;
+  }
+
+
+  formEl.innerHTML = markup;
+}
+
+function createNotFoundMarkup() {
+  const markup = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
+  <img class="not-found__img" src="${notFound}" alt="News not found" width="248px" height="198px" /></div>`;
+  newsListEl.innerHTML = markup;
 }
 
 async function getFetch(categoryName) {
-    try {
-    const response = await axios.get(`https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b`);
+  try {
+    const params = {
+      'api-key': API_KEY,
+      'field-name': ('title', 'section', 'url', 'published_date', 'multimedia'),
+    };
+    // const response = await axios.get(
+    //   `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
+    // );
+    const response = await axios.get(`${BASE_URL}${categoryName}.json`, {
+      params,
+    });
+    console.log(response);
     return response.data.results;
-    } catch (error) {
-      console.log(error);
-    }
+  } catch (error) {
+    console.log(error);
   }
+}
 
-  getFetchCategories().then(data => {
-    console.log('Data', data)
-    CreateFilterMarkup(data)})
+getFetchCategories().then(data => {
+  createFilterMarkup(data);
+});
