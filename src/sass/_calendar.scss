@@ -1,13 +1,8 @@
-path,
-use {
-  fill: inherit;
-}
-
 .calendar {
   position: relative;
 }
 
-.calendar-input {
+.calendar-inp {
   width: 168px;
   height: 31px;
   border: 1px solid #111321;
@@ -19,11 +14,12 @@ use {
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 0.02em;
+  background-color: transparent;
 
   color: rgba(17, 19, 33, 0.4);
 }
 
-.calendar-input:hover,
+.calendar-inp:hover,
 :focus {
   background-color: $hoverColor;
   color: $whiteColor;
@@ -41,9 +37,9 @@ use {
   fill: $hoverColor;
 }
 
-.calendar-input:hover + .svg-calendar {
+.calendar-inp:hover + .svg-calendar {
   fill: $whiteColor;
 }
-.calendar-input:focus + .svg-calendar {
+.calendar-inp:focus + .svg-calendar {
   fill: $whiteColor;
 }

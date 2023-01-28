@@ -90,7 +90,7 @@ function handleInput(e) {
   getValueFetch(markupValue.value).then(data => createValueMarkup(data));
 }
 
-function createValueMarkup(e) {
+export function createValueMarkup(e) {
   if (e.docs.length === 0) {
     return (newsList.innerHTML = 'sadwer34');
   }
