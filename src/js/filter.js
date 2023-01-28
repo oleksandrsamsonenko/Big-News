@@ -5,17 +5,18 @@ import notFound from '../img/notFound.jpg';
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = 'https://api.nytimes.com/svc/news/v3/content/inyt/';
 
-const formEl = document.querySelector('.filter-form');
+const boxEl = document.querySelector('.filter-box');
 const newsListEl = document.querySelector('.news__list');
 
-formEl.addEventListener('click', handleSelectClick);
+boxEl.addEventListener('click', handleSelectClick);
 
 function handleSelectClick(e) {
-  if (e.target.value === 'Categories') {
+  if (e.target.value === 'Categories' || e.target.value === 'Others') {
     return;
   }
+  console.log(e.target)
 
-  getFetch(e.target.value).then(data => {
+  getFetch(e.target.value || e.target.dataset.value).then(data => {
     if (!data) {
       createNotFoundMarkup();
       return;
@@ -47,7 +48,6 @@ function createFilterMarkup(arr) {
     btnArr = arr
       .map((item, index) => {
         if (index <= 5) {
-          console.log(index);
           return `<button class="filter-btn" data-value="${item.section}">${item.display_name}</button>`;
         } else {
           return;
@@ -57,7 +57,6 @@ function createFilterMarkup(arr) {
     optionArr = arr
       .map((item, index) => {
         if (index > 5) {
-          console.log(index);
           return `<option value="${item.section}">${item.display_name}</option>`;
         } else {
           return;
@@ -65,16 +64,15 @@ function createFilterMarkup(arr) {
       })
       .join('');
 
-      markup = `<div class="filter-box">${btnArr}
+      markup = `${btnArr}<form class="filter-form">
       <select class="filter-select" name="categories">
      <option value="Others">Others</option>
      ${optionArr}
-     </select></div>`;
+     </select></form>`;
   } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
     btnArr = arr
       .map((item, index) => {
         if (index <= 3) {
-          console.log(index);
           return `<button class="filter-btn" data-value="${item.section}">${item.display_name}</button>`;
         } else {
           return;
@@ -84,7 +82,6 @@ function createFilterMarkup(arr) {
     optionArr = arr
       .map((item, index) => {
         if (index > 3) {
-          console.log(index);
           return `<option value="${item.section}">${item.display_name}</option>`;
         } else {
           return;
@@ -92,11 +89,11 @@ function createFilterMarkup(arr) {
       })
       .join('');
 
-      markup = `<div class="filter-box">${btnArr}
+      markup = `${btnArr}<form class="filter-form">
       <select class="filter-select" name="categories">
-      <option value="Others">Others</option>
+     <option value="Others">Others</option>
      ${optionArr}
-     </select></div>`;
+     </select></form>`;
   } else {
     categoriesArr = arr
       .map(item => {
@@ -108,9 +105,9 @@ function createFilterMarkup(arr) {
      ${categoriesArr}
      </select>`;
   }
+console.log(boxEl)
 
-
-  formEl.innerHTML = markup;
+  boxEl.innerHTML = markup;
 }
 
 function createNotFoundMarkup() {
@@ -121,16 +118,16 @@ function createNotFoundMarkup() {
 
 async function getFetch(categoryName) {
   try {
-    const params = {
-      'api-key': API_KEY,
-      'field-name': ('title', 'section', 'url', 'published_date', 'multimedia'),
-    };
-    // const response = await axios.get(
-    //   `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
-    // );
-    const response = await axios.get(`${BASE_URL}${categoryName}.json`, {
-      params,
-    });
+    // const params = {
+    //   'api-key': API_KEY,
+    //   'field-name': ('title', 'section', 'url', 'published_date', 'multimedia'),
+    // };
+    const response = await axios.get(
+      `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
+    );
+    // const response = await axios.get(`${BASE_URL}${categoryName}.json`, {
+    //   params,
+    // });
     console.log(response);
     return response.data.results;
   } catch (error) {
