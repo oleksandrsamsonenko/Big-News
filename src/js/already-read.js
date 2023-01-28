@@ -6,7 +6,9 @@ if(localStorage.getItem('read')) {
 }
 
 function createMarkupFromLocal(arr) {
-    const markup = arr.map(item => ` <li class="images" id="${item.id}">
+    const markup = arr.map(item => {
+    ` <li class="images" id="${item.id}">
+    <p>${item.dateKey}</p>
     <img src="${item.imgUrl}" alt="" width="288px" height="395px" />
     <p>${item.category}</p>
     <button class="img-btn">Add to favorite</button>
@@ -16,6 +18,6 @@ function createMarkupFromLocal(arr) {
       <p class="date">${item.date}</p>
       <a class="read-more-link" href="${item.originUrl}" target="_blank" rel="noopener noreferrer">Read more</a>
     </div>
-    </li>`).join('');
+    </li>`}).join('');
     readListEl.innerHTML = markup;
 }

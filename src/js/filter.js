@@ -78,7 +78,7 @@ function createFilterMarkup(arr) {
 
     markup = `${btnArr}<form class="filter-form">
       <select class="filter-select" name="categories">
-     <option value="Others">Others</option>
+     <option class="filter-option" value="Others">Others</option>
      ${optionArr}
      </select></form>`;
   } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
