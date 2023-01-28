@@ -81,13 +81,27 @@
     cursor: pointer;
   }
   /*////////////////////////CHANGE COLOR THEME///////////////////////////////////*/
-  .light__theme{
+  .light__theme, 
+  .burger-menu__wrapper{
     background-color:#F4F4F4;
     color:#111321;
   }
-  .dark__theme{
+  .light__theme .header{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.292);
+  }
+  .dark__theme,
+  .burger-menu__wrapper{
     background-color: #2E2E2E;
     color:#F4F4F4;
+  }
+  .dark__theme .header{
+    border-bottom: 1px solid #f4f4f441;
+  }
+  .light__theme a{
+    color: #111321;
+  }
+  .dark__theme a{
+    color: #F4F4F4;
   }
   .toggle__light__theme{
     stroke: #4B48DB;
@@ -114,11 +128,17 @@
     border: 1px solid #111321;
     transition:var(--transition);
   }
+//   .input__light__theme::placeholder{
+//     color: #111321;
+//   }
   .input__dark__theme{
     background-color: transparent;
     border: 1px solid #f4f4f4;
     transition:var(--transition);
   }
+//   .input__dark__theme::placeholder{
+//     color:#f4f4f4;
+//   }
   ///////////
   .svg__light__theme{
     stroke: #111321;
@@ -130,6 +150,15 @@
     fill: #f4f4f4;
     transition:var(--transition);
   }
+  /////
+  .date{
+    color:#A8A8A8;
+  }
+  img{
+    display: block;
+    object-fit: cover;
+  }
+  
   ////
   // .r::placeholder{
   //   color: red;
