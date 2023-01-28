@@ -24,7 +24,7 @@ use {
 }
 
 .calendar-input:hover,
-:focus {
+.calendar-input:focus {
   background-color: $hoverColor;
   color: $whiteColor;
 }

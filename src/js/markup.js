@@ -4,18 +4,57 @@ import placeholder from '../img/placeholder.png';
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
 const markupValue = document.querySelector('.search-input');
+const favoriteArticles = [];
+newsList.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  } else {
+    e.target.classList.toggle('favorite-true');
+    e.target.classList.toggle('favorite-false');
+  }
+  if (e.target.classList.contains('favorite-true')) {
+    e.target.style.width = '168px';
+    e.target.textContent = 'Remove from favorite';
 
+    favoriteArticles.push({
+      img: e.target.parentNode.children[0].src,
+      href: e.target.parentNode.lastElementChild.lastElementChild.href,
+      h2: e.target.parentNode.children[3].textContent,
+      description: e.target.parentNode.children[4].textContent,
+      date: e.target.parentNode.lastElementChild.children[0].textContent,
+      id: e.target.dataset.id,
+    });
+    localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
+    const newFav = JSON.parse(localStorage.getItem('savedNews')).filter(
+      item => {
+        item.id !== e.target.dataset.id;
+      }
+    );
+  }
+
+  if (e.target.classList.contains('favorite-false')) {
+    e.target.style.width = '126px';
+    e.target.textContent = 'Add to favorite';
+  }
+});
+if (localStorage.getItem('savedNews')) {
+  JSON.parse(localStorage.getItem('savedNews')).map(item => {
+    favoriteArticles.push(item);
+  });
+}
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
 
 async function getFetch() {
   try {
     const response = await axios.get(`${BASE_URL}`);
+
     return response.data.results;
   } catch (error) {
     console.log(error);
   }
 }
+
 getFetch().then(data => createMarkup(data));
 export function createMarkup(arr) {
   const markup = arr
@@ -50,7 +89,7 @@ export function createMarkup(arr) {
       return `<li class="images">
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
           <p>${item.nytdsection}</p>
-          <button class="img-btn">Add to favorite</button>
+          <button class="img-btn favorite-false " data-id="${item.id}" >Add to favorite </button>
           <h2 class="description-title">${item.title}</h2>
           <p>${description}</p>
           <div class="info-more">
@@ -67,6 +106,7 @@ export function createMarkup(arr) {
         </li>`;
     })
     .join('');
+
   newsList.innerHTML = markup;
 }
 
@@ -109,11 +149,8 @@ function createValueMarkup(e) {
             width="288px"
             height="395px"
           />
-          <button class="img-btn">
-            Add to favorite{' '}
-            <svg class="favorite-icon" width="16" height="16">
-              <use href="../img/symbol-defs.svg#icon-heart"></use>
-            </svg>{' '}
+          <button class="img-btn favorite-false " id="favbtn">
+            Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
           <p class="description-of-news">${item.abstract}</p>
