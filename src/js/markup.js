@@ -30,7 +30,7 @@ export function createMarkup(arr) {
       if (item.multimedia) {
         imgUrl =
           item.multimedia.length === 0
-            ? '../img/placeholder.png'
+            ? placeholder
             : item.multimedia[2].url;
         description =
           item.multimedia.length === 0
