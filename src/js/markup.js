@@ -63,9 +63,7 @@ export function createMarkup(arr) {
 
       if (item.multimedia) {
         imgUrl =
-          item.multimedia.length === 0
-            ? '../img/placeholder.png'
-            : item.multimedia[2].url;
+          item.multimedia.length === 0 ? placeholder : item.multimedia[2].url;
         description =
           item.multimedia.length === 0
             ? 'Sorry, this article has no description'
@@ -125,7 +123,7 @@ function handleInput(e) {
   getValueFetch(markupValue.value).then(data => createValueMarkup(data));
 }
 
-function createValueMarkup(e) {
+export function createValueMarkup(e) {
   if (e.docs.length === 0) {
     return (newsList.innerHTML = 'sadwer34');
   }
