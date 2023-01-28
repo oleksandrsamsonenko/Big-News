@@ -53,6 +53,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 276px;
+  min-height: 112px;
 
   @media screen and (min-width: $tablet) {
     width: 560px;

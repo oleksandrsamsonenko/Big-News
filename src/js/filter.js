@@ -1,20 +1,32 @@
 import axios from 'axios';
 import { createMarkup } from './markup';
 import notFound from '../img/notFound.jpg';
+import throttle from 'lodash.throttle'
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = 'https://api.nytimes.com/svc/news/v3/content/inyt/';
 
 const boxEl = document.querySelector('.filter-box');
 const newsListEl = document.querySelector('.news__list');
+const bodyEl = document.body
 
 boxEl.addEventListener('click', handleSelectClick);
+console.log(document.documentElement.clientWidth)
+console.log(bodyEl)
+
+window.onresize = throttle(handleScreenWidthCange, 500);
+
+getFetchCategories().then(data => {
+  createFilterMarkup(data);
+});
+
+function handleScreenWidthCange(e) {
+}
 
 function handleSelectClick(e) {
   if (e.target.value === 'Categories' || e.target.value === 'Others') {
     return;
   }
-  console.log(e.target)
 
   getFetch(e.target.value || e.target.dataset.value).then(data => {
     if (!data) {
@@ -105,7 +117,6 @@ function createFilterMarkup(arr) {
      ${categoriesArr}
      </select>`;
   }
-console.log(boxEl)
 
   boxEl.innerHTML = markup;
 }
@@ -134,7 +145,3 @@ async function getFetch(categoryName) {
     console.log(error);
   }
 }
-
-getFetchCategories().then(data => {
-  createFilterMarkup(data);
-});
