@@ -4,7 +4,13 @@ import placeholder from '../img/placeholder.png';
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
 const markupValue = document.querySelector('.search-input');
-const favoriteArticles = [];
+let favoriteArticles = [];
+if (localStorage.getItem('savedNews')) {
+  JSON.parse(localStorage.getItem('savedNews')).map(item => {
+    console.log(item.id);
+    favoriteArticles.push(item);
+  });
+}
 newsList.addEventListener('click', e => {
   if (e.target.nodeName !== 'BUTTON') {
     return;
@@ -30,13 +36,16 @@ newsList.addEventListener('click', e => {
   if (e.target.classList.contains('favorite-false')) {
     e.target.style.width = '126px';
     e.target.textContent = 'Add to favorite';
+    const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
+      item => item.id !== e.target.dataset.id
+    );
+
+    localStorage.removeItem('savedNews');
+    localStorage.setItem('savedNews', JSON.stringify(superNewObj));
+    favoriteArticles = superNewObj;
   }
 });
-if (localStorage.getItem('savedNews')) {
-  JSON.parse(localStorage.getItem('savedNews')).map(item => {
-    favoriteArticles.push(item);
-  });
-}
+
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
 
@@ -79,7 +88,50 @@ export function createMarkup(arr) {
             : item.media[0].caption;
       }
 
-      return `<li class="images">
+      if (!localStorage.getItem('savedNews')) {
+        return `<li class="images">
+          <img src="${imgUrl}" alt="" width="288px" height="395px" />
+          <p>${item.nytdsection}</p>
+          <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
+          <h2 class="description-title">${item.title}</h2>
+          <p>${description}</p>
+          <div class="info-more">
+            <p class="date">${getTime}</p>
+            <a
+              class="read-more-link"
+              href="${item.url}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
+          </div>
+        </li>`;
+      } else if (
+        JSON.parse(localStorage.getItem('savedNews')).find(elem => {
+          return elem.id === String(item.id);
+        })
+      ) {
+        return `<li class="images">
+          <img src="${imgUrl}" alt="" width="288px" height="395px" />
+          <p>${item.nytdsection}</p>
+          <button class="img-btn favorite-true " data-id="${item.id}" width="168px">Remove from favorite </button>
+          <h2 class="description-title">${item.title}</h2>
+          <p>${description}</p>
+          <div class="info-more">
+            <p class="date">${getTime}</p>
+            <a
+              class="read-more-link"
+              href="${item.url}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
+          </div>
+        </li>`;
+      } else {
+        return `<li class="images">
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
           <p>${item.nytdsection}</p>
           <button class="img-btn favorite-false " data-id="${item.id}" >Add to favorite </button>
@@ -97,6 +149,7 @@ export function createMarkup(arr) {
             </a>
           </div>
         </li>`;
+      }
     })
     .join('');
 
