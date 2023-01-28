@@ -30,7 +30,7 @@ export function createMarkup(arr) {
       if (item.multimedia) {
         imgUrl =
           item.multimedia.length === 0
-            ? '../img/placeholder.png'
+            ? placeholder
             : item.multimedia[2].url;
         description =
           item.multimedia.length === 0
@@ -47,24 +47,17 @@ export function createMarkup(arr) {
             : item.media[0].caption;
       }
 
-      return `<li class="images">
-          <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${item.nytdsection}</p>
-          <button class="img-btn">Add to favorite</button>
-          <h2 class="description-title">${item.title}</h2>
-          <p>${description}</p>
-          <div class="info-more">
-            <p class="date">${getTime}</p>
-            <a
-              class="read-more-link"
-              href="${item.url}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read more
-            </a>
-          </div>
-        </li>`;
+      return ` <li class="images">
+      <img src="${imgUrl}" alt="" width="288px" height="395px" />
+      <p>${item.nytdsection}</p>
+      <button class="img-btn">Add to favorite</button>
+      <h2 class="description-title">${item.title}</h2>
+      <p>${description}</p>
+      <div class="info-more">
+        <p class="date">${getTime}</p>
+        <a class="read-more-link" href="${item.url}" target="_blank" rel="noopener noreferrer">Read more</a>
+      </div>
+      </li>`;
     })
     .join('');
   newsList.innerHTML = markup;

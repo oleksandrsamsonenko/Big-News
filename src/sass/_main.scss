@@ -1,3 +1,102 @@
+.description-title {
+  font-family: $mainFF;
+  font-style: $fontStyle;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.01em;
+  color: $blackColor;
+}
+
+// .description-of-news {
+//   font-family: $mainFF;
+//   font-style: $fontStyle;
+//   font-weight: 400;
+//   font-size: 14px;
+//   line-height: 19px;
+//   color: $blackColor;
+// }
+
+// .date-of-news {
+//   font-family: $fontStyle;
+//   font-style: $fontStyle;
+//   font-weight: 400;
+//   font-size: 14px;
+//   line-height: 19px;
+//   color: $dateColor;
+// }
+
+// .info-more {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+.images {
+  position: relative;
+}
+
+.img-btn {
+  border: none;
+  position: absolute;
+  right: 27%;
+  left: 112px;
+  top: 355px;
+  width: 168px;
+  height: 28px;
+  bottom: 10%;
+  background: #f4f4f4;
+  border-radius: 20px;
+}
+
+.not-found__box {
+  margin-left: auto;
+  margin-right: auto;
+  width: 276px;
+
+  @media screen and (min-width: $tablet) {
+    width: 560px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 601px;
+  }
+
+  text-align: center;
+}
+
+.not-found__text {
+    margin-top: 40px;
+  margin-bottom: 40px;
+
+  font-family: 'Manrope';
+  font-weight: 700;
+  font-size: 20px;
+  line-height: calc(27 / 20);
+  letter-spacing: -0.01em;
+
+  @media screen and (min-width: $tablet) {
+    margin-top: 88px;
+
+    font-size: 40px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    margin-top: 121px;
+  }
+}
+
+.not-found__img {
+  @media screen and (min-width: $tablet) {
+    width: 560px;
+    height: 444px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 601px;
+    height: 478px;
+  }
+}
 .news__list {
     display: flex;
     flex-direction: column;
@@ -21,7 +120,7 @@
     min-width: 288px;
     height: 630px;
 
-    
+
     @media screen and (min-width: 768px) {
             width: 353px;
             height: 675px;
@@ -65,7 +164,7 @@
 
     font-size: 12px;
     line-height: 16px;
-        
+
 
 }
 
@@ -103,7 +202,7 @@
             font-size: 32px;
             line-height: 44px;
         }
-    
+
         @media screen and (min-width: $desktop) {
             width: 395px;
         }
