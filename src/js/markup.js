@@ -26,6 +26,7 @@ export function createMarkup(arr) {
       const getTime = `${day} / ${month} / ${date.getFullYear()}`;
       let imgUrl;
       let description;
+      let category;
 
       if (item.multimedia) {
         imgUrl =
@@ -36,6 +37,7 @@ export function createMarkup(arr) {
           item.multimedia.length === 0
             ? 'Sorry, this article has no description'
             : item.multimedia[0].caption;
+            category = item.section;
       } else {
         imgUrl =
           item.media.length === 0
@@ -45,11 +47,12 @@ export function createMarkup(arr) {
           item.media.length === 0 || item.media[0].caption === ''
             ? 'Sorry, this article has no description'
             : item.media[0].caption;
+            category = item.nytdsection
       }
 
-      return ` <li class="images">
+      return ` <li class="images" id="${item.asset_id}">
       <img src="${imgUrl}" alt="" width="288px" height="395px" />
-      <p>${item.nytdsection}</p>
+      <p>${category}</p>
       <button class="img-btn">Add to favorite</button>
       <h2 class="description-title">${item.title}</h2>
       <p>${description}</p>
