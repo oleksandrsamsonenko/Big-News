@@ -47,7 +47,7 @@
   }
   
   input:checked + .slider {
-    background-color: #FFFFFF;
+    background-color: transparent;
     border: .6px solid #4B48DB;
     transition: all 1s;
   }
