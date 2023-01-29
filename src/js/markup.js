@@ -95,7 +95,7 @@ export function createMarkup(arr) {
       if (!localStorage.getItem('savedNews')) {
         return `<li class="images">
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${item.nytdsection}</p>
+          <p>${category}</p>
           <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
           <h2 class="description-title">${item.title}</h2>
           <p>${description}</p>

@@ -3,7 +3,12 @@ body {
 }
 
 ul {
+  margin: 0;
   list-style: none;
+}
+
+li {
+  margin: 0;
 }
 
 a {
@@ -41,7 +46,6 @@ p {
 }
 
 .visually-hidden {
-    // visibility: hidden;
   position: absolute;
   width: 1px;
   height: 1px;
