@@ -1,4 +1,3 @@
-console.log(JSON.parse(localStorage.getItem('savedNews')));
 const savedNews = document.querySelector('.saved-news');
 
 function createMarkup() {
@@ -6,7 +5,7 @@ function createMarkup() {
     .map(item => {
       return `<li class="images">
           <img src="${item.img}" alt="" width="288px" height="395px" />
-          <button class="img-btn favorite-true"  data-id="${item.id}">Add  favorite </button>
+          <button class="img-btn favorite-true"  data-id="${item.uri}">Remove from favorite</button>
           <h2 class="description-title">${item.h2}</h2>
           <p>${item.description}</p>
           <div class="info-more">
@@ -32,7 +31,7 @@ savedNews.addEventListener('click', e => {
     return;
   }
   const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
-    item => item.id !== e.target.dataset.id
+    item => item.uri !== e.target.dataset.id
   );
 
   localStorage.removeItem('savedNews');
