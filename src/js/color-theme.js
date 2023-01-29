@@ -4,8 +4,8 @@ const body = document.querySelector('body');
 const svgLight = document.querySelector('.svg__light');
 const svgDark = document.querySelector('.svg__dark');
 
-// const svgSun = document.querySelector('.svg__sun');
-// const svgMoon = document.querySelector('.svg__moon');
+const svgSun = document.querySelector('.svg__sun');
+const svgMoon = document.querySelector('.svg__moon');
 
 const inputT = document.querySelector('.input__theme');
 
@@ -13,10 +13,16 @@ const svgLupa = document.querySelector('.lupa__theme');
 const svgMenu = document.querySelector('.menu__theme');
 const svgX = document.querySelector('.x__theme');
 
+const burger = document.querySelector('.burger-menu__wrapper');
+console.log(svgSun,svgMoon);
 function colorTheme(){
     
     body.classList.toggle('light__theme');
     body.classList.toggle('dark__theme');//body
+
+    burger.classList.toggle('light__theme');
+    burger.classList.toggle('dark__theme');//burger
+
 
     svgLight.classList.toggle('toggle__light__theme');
     svgLight.classList.toggle('toggle__dark__theme');//light
@@ -24,11 +30,11 @@ function colorTheme(){
     svgDark.classList.toggle('toggle__light__theme');
     svgDark.classList.toggle('toggle__dark__theme');//dark
 
-    // svgSun.classList.toggle('toggle__sun__theme');
-    // svgSun.classList.toggle('toggle__moon__theme');//sun
+    svgSun.classList.toggle('toggle__sun__theme');
+    svgSun.classList.toggle('toggle__moon__theme');//sun
 
-    // svgMoon.classList.toggle('toggle__sun__theme');
-    // svgMoon.classList.toggle('toggle__moon__theme');//moon
+    svgMoon.classList.toggle('toggle__sun__theme');
+    svgMoon.classList.toggle('toggle__moon__theme');//moon
 
     inputT.classList.toggle('input__light__theme');
     inputT.classList.toggle('input__dark__theme');//input
@@ -42,7 +48,6 @@ function colorTheme(){
     svgX.classList.toggle('svg__light__theme');
     svgX.classList.toggle('svg__dark__theme');// X esc
 
-    
     
     // console.log(themeKey);
     // if(themeKey){
