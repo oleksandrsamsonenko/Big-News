@@ -1,5 +1,7 @@
 const newslistEl = document.querySelector('.news__list');
 const readArr = [];
+const keyArr = [];
+const idArr =['test'];
 let today = new Date();
 const date =
 today.getDate() < 10
@@ -12,12 +14,11 @@ today.getMonth() < 10
 const year = today.getFullYear();
 const dateKey = `${date}/${month}/${year}`;
 // const dateKey = `27/01/2023`
-const keyArr = [];
-console.log('keyArr', keyArr)
+
+localStorage.setItem('id', JSON.stringify(idArr))
 
 if (localStorage.getItem('read')) {
-  const localKeyArr =JSON.parse(localStorage.getItem('read'));
-  console.log('localKeyArr',localKeyArr)
+  const localKeyArr = JSON.parse(localStorage.getItem('read'));
   if(!localKeyArr.includes(dateKey)){
     localKeyArr.push(dateKey);
     localStorage.setItem('read', JSON.stringify(localKeyArr))
@@ -27,6 +28,7 @@ if (localStorage.getItem('read')) {
   keyArr.push(dateKey)
   localStorage.setItem(`read`, JSON.stringify(keyArr));
 }
+
 newslistEl.addEventListener('click', handleLinkClick);
 
 function handleLinkClick(e) {
@@ -42,6 +44,17 @@ function handleLinkClick(e) {
   const newsDescr = e.target.parentNode.parentNode.children[4].textContent;
   const newsPublishedDate = e.target.previousElementSibling.textContent;
   const newsOriginalLink = e.target.href;
+
+  if(localStorage.getItem('id')) {
+    const localIdArr = JSON.parse(localStorage.getItem('id'));
+    console.log(localIdArr)
+    if(!localIdArr.includes(newsId)) {
+      localIdArr.push(newsId);
+      localStorage.setItem('id', JSON.stringify(localIdArr))
+    } else {
+      return
+    }
+  }
 
   const newsObj = {
     id: newsId,

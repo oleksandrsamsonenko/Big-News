@@ -48,8 +48,6 @@ function handleHideBtnClick(e) {
   // if(e.terget.className.value === 'read-btn') {
   //   e.target.parentNode.nextElementSibling.classList.toggle('visually-hidden');
   // }
-
-
 }
 
 function handleReadMoreBtnClick(e) {
