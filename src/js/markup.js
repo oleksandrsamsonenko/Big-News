@@ -1,5 +1,6 @@
 import axios from 'axios';
 import placeholder from '../img/placeholder.png';
+import notFound from '../img/notFound_mob.jpg';
 
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
@@ -52,7 +53,7 @@ const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-k
 async function getFetch() {
   try {
     const response = await axios.get(`${BASE_URL}`);
-
+    console.log(response.data);
     return response.data.results;
   } catch (error) {
     console.log(error);
@@ -178,7 +179,8 @@ function handleInput(e) {
 
 export function createValueMarkup(e) {
   if (e.docs.length === 0) {
-    return (newsList.innerHTML = 'sadwer34');
+    return (newsList.innerHTML = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
+  <img class="not-found__img" src="${notFound}" alt="News not found" width="248px" height="198px" /></div>`);
   }
   const valueMarkup = e.docs
     .map(item => {
