@@ -1,18 +1,25 @@
 import axios from 'axios';
 import { createMarkup } from './markup';
 import notFound from '../img/notFound.jpg';
+import throttle from 'lodash.throttle';
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = 'https://api.nytimes.com/svc/news/v3/content/inyt/';
 
 const boxEl = document.querySelector('.filter-box');
-const newsListEl = document.querySelector('.news__list');
+export const newsListEl = document.querySelector('.news__list');
 
 boxEl.addEventListener('click', handleSelectClick);
+
+window.onresize = throttle(handleScreenWidthCange, 500);
 
 getFetchCategories().then(data => {
   createFilterMarkup(data);
 });
+
+function handleScreenWidthCange(e) {
+  console.log(window.innerWidth);
+}
 
 function handleSelectClick(e) {
   if (e.target.dataset.value === 'categories' || e.target.value === 'Others') {
@@ -24,6 +31,7 @@ function handleSelectClick(e) {
       createNotFoundMarkup();
       return;
     }
+    console.log(data);
     createMarkup(data);
   });
 }
@@ -69,7 +77,7 @@ function createFilterMarkup(arr) {
 
     markup = `${btnArr}<form class="filter-form">
       <select class="filter-select" name="categories">
-     <option value="Others">Others</option>
+     <option class="filter-option" value="Others">Others</option>
      ${optionArr}
      </select></form>`;
   } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
@@ -119,16 +127,9 @@ function createNotFoundMarkup() {
 
 async function getСategoryNameFetch(categoryName) {
   try {
-    // const params = {
-    //   'api-key': API_KEY,
-    //   'field-name': ('title', 'section', 'url', 'published_date', 'multimedia'),
-    // };
     const response = await axios.get(
       `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
     );
-    // const response = await axios.get(`${BASE_URL}${categoryName}.json`, {
-    //   params,
-    // });
     console.log(response);
     return response.data.results;
   } catch (error) {
