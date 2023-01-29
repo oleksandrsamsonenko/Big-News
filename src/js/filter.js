@@ -10,13 +10,16 @@ const newsListEl = document.querySelector('.news__list');
 
 boxEl.addEventListener('click', handleSelectClick);
 
+getFetchCategories().then(data => {
+  createFilterMarkup(data);
+});
+
 function handleSelectClick(e) {
-  if (e.target.value === 'Categories' || e.target.value === 'Others') {
+  if (e.target.dataset.value === 'categories' || e.target.value === 'Others') {
     return;
   }
-  console.log(e.target)
 
-  getFetch(e.target.value || e.target.dataset.value).then(data => {
+  getСategoryNameFetch(e.target.value || e.target.dataset.value).then(data => {
     if (!data) {
       createNotFoundMarkup();
       return;
@@ -64,7 +67,7 @@ function createFilterMarkup(arr) {
       })
       .join('');
 
-      markup = `${btnArr}<form class="filter-form">
+    markup = `${btnArr}<form class="filter-form">
       <select class="filter-select" name="categories">
      <option value="Others">Others</option>
      ${optionArr}
@@ -89,7 +92,7 @@ function createFilterMarkup(arr) {
       })
       .join('');
 
-      markup = `${btnArr}<form class="filter-form">
+    markup = `${btnArr}<form class="filter-form">
       <select class="filter-select" name="categories">
      <option value="Others">Others</option>
      ${optionArr}
@@ -97,15 +100,13 @@ function createFilterMarkup(arr) {
   } else {
     categoriesArr = arr
       .map(item => {
-        return `<option value="${item.section}">${item.display_name}</option>`;
+        return `<li class="filter-item" data-value="${item.section}">${item.display_name}</li>`;
       })
       .join('');
-      markup = `<select class="filter-select" name="categories">
-     <option value="Categories">Categories</option>
-     ${categoriesArr}
-     </select>`;
+    markup = `<button class="filter-dropdowv-btn" data-value="categories">>Categories</button>
+      <ul class="filter-list visually-hidden">${categoriesArr}</ul>`;
   }
-console.log(boxEl)
+  console.log(boxEl);
 
   boxEl.innerHTML = markup;
 }
@@ -116,7 +117,7 @@ function createNotFoundMarkup() {
   newsListEl.innerHTML = markup;
 }
 
-async function getFetch(categoryName) {
+async function getСategoryNameFetch(categoryName) {
   try {
     // const params = {
     //   'api-key': API_KEY,
@@ -134,7 +135,3 @@ async function getFetch(categoryName) {
     console.log(error);
   }
 }
-
-getFetchCategories().then(data => {
-  createFilterMarkup(data);
-});

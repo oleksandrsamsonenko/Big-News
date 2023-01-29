@@ -2,6 +2,11 @@
   display: flex;
   gap: 14px;
 
+  @media screen and(max-width: $mobileMax) {
+    flex-direction: column;
+    gap: 0;
+  }
+
   @media screen and (min-width: $tablet) {
     gap: 16px;
   }
@@ -20,4 +25,69 @@
 
   color: #4b48db;
   background-color: $whiteColor;
+}
+
+.filter-dropdowv-btn {
+  width: 112px;
+  height: 31px;
+  padding: 7px 37px 7px 13px;
+  border: 1px solid #4440f7;
+  border-radius: 20px;
+
+  font-family: $mainFF;
+  font-size: 12px;
+  line-height: calc(16 / 12);
+  letter-spacing: 0.01em;
+  text-align: center;
+
+  color: #4b48db;
+  background-color: $whiteColor;
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: '';
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background-image: url("data:image/svg+xml,%3Csymbol id='icon-down' viewBox='0 0 32 32'%3E%3Cpath d='M3.76 9.143l-3.76 3.479 16 14.806 16-14.806-3.76-3.479-12.24 11.302-12.24-11.302z'%3E%3C/path%3E%3C/symbol%3E");
+    pointer-events: none;
+    position: absolute;
+  }
+
+&:hover,
+&:focus {
+  color: $whiteColor;
+  background-color: $hoverColor;
+}
+}
+
+.filter-list {
+  padding: 14px;
+  width: 148px;
+  height: 380px;
+
+  color: #4b48db;
+  background-color: $whiteColor;
+  border-radius: 20px;
+  box-shadow: (0px 10px 60px rgba(0, 0, 0, 0.1));
+  overflow: hidden;
+  font-family: $mainFF;
+  font-size: 12px;
+  line-height: calc(16 / 12);
+  letter-spacing: 0.01em;
+
+  z-index: 1;
+}
+
+.filter-item {
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.filter-item:not(:last-child) {
+  margin-bottom: 12px;
 }
