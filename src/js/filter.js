@@ -19,7 +19,6 @@ getFetchCategories().then(data => {
 
 function handleScreenWidthCange(e) {
   console.log(window.innerWidth);
-
 }
 
 function handleSelectClick(e) {

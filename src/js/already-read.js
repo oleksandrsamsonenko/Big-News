@@ -48,9 +48,9 @@ function handleHideBtnClick(e) {
   // if(!e.terget.classList.contains('roll-icon')) {
   //   return
   // }
-  console.log(e.target)
-  setTimeout((e) => {
+  console.log(e.target);
+  setTimeout(e => {
     const readListEl = document.querySelector('.news__list');
-    readListEl.classList.toggle('visually-hidden')
-  }, 1000)
+    readListEl.classList.toggle('visually-hidden');
+  }, 1000);
 }
