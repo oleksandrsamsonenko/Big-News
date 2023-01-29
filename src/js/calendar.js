@@ -11,7 +11,7 @@ let day
 let year
 let month
 const options = {
-  
+
     dateFormat:"d/m/Y",
     defaultDate: new Date(),
     onClose(selectedDates) {
@@ -22,8 +22,8 @@ const options = {
           console.log(inputEl.value)
 
         getNewsByDate(value).then(data => {
+            console.log('DATA', data)
             createValueMarkup(data)
-            console.log(data)
         })
     }
 }
@@ -35,9 +35,9 @@ async function getNewsByDate(value) {
         const res = await axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?
         q=${value}&facet_field=day_of_week&facet=true&begin_date=${year}${month}${day}&end_date=${year}${month}${day}&api-key=${KEY}`)
        //https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${API_KEY}&facet_fields=section_name&facet_filter=true&begin_date=20150101
-       
+
         // https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=romney&facet_field=day_of_week&facet=true&begin_date=20120101&end_date=20120101&api-key=your-api-key
-       
+
         return res.data.response;
 
     }
@@ -49,6 +49,6 @@ async function getNewsByDate(value) {
 // function createMarkupByDate(news) {
 //     const markup = news.map(item => {
 //     })
-    
+
 // }
 

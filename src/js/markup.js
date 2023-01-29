@@ -53,7 +53,6 @@ const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-k
 async function getFetch() {
   try {
     const response = await axios.get(`${BASE_URL}`);
-    console.log(response.data);
     return response.data.results;
   } catch (error) {
     console.log(error);
@@ -96,7 +95,7 @@ export function createMarkup(arr) {
         return `<li class="images">
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
           <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
+          <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
           <h2 class="description-title">${item.title}</h2>
           <p>${description}</p>
           <div class="info-more">
@@ -119,7 +118,7 @@ export function createMarkup(arr) {
         return `<li class="images">
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
           <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-true " data-id="${item.id}" width="168px">Remove from favorite </button>
+          <button class="img-btn favorite-true " data-id="${item.uri}" width="168px">Remove from favorite </button>
           <h2 class="description-title">${item.title}</h2>
           <p>${description}</p>
           <div class="info-more">
@@ -138,7 +137,7 @@ export function createMarkup(arr) {
         return `<li class="images">
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
           <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-false " data-id="${item.id}" >Add to favorite </button>
+          <button class="img-btn favorite-false " data-id="${item.uri}" >Add to favorite </button>
           <h2 class="description-title">${item.title}</h2>
           <p>${description}</p>
           <div class="info-more">
@@ -200,14 +199,22 @@ export function createValueMarkup(e) {
             width="288px"
             height="395px"
           />
-          <button class="img-btn favorite-false " id="favbtn">
+          <p>${item.section_name}</p>
+          <button class="img-btn favorite-false " id="${item.uri}">
             Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
           <p class="description-of-news">${item.abstract}</p>
           <div class="info-more">
             <p class="date-of-news">${getTime}</p>
-            <a href="">Read more</a>
+            <a
+              class="read-more-link"
+              href="${item.web_url}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
           </div>
         </li>`;
     })
