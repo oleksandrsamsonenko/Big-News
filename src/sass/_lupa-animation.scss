@@ -1,62 +1,59 @@
 .nav__input {
-    opacity: 0;
-    transition: 500ms ease-in-out;
-    border-radius: 30px;
-    min-width: 173px;
-    height: 31px;
-    padding-inline-start: 48px;
+  opacity: 0;
+  transition: 500ms ease-in-out;
+  border-radius: 30px;
+  max-width: 173px;
+  height: 31px;
+  padding-inline-start: 48px;
 
-    @media screen and (min-width:$tablet) {
-        max-width: 230px;
-        opacity: 1;
-        display: inline-block;
-    }
+  @media screen and (min-width: $tablet) {
+    max-width: 230px;
+    opacity: 1;
+    display: inline-block;
+  }
 
-    @media screen and (min-width:$desktop) {
-        width: 288px;
-    }
+  @media screen and (min-width: $desktop) {
+    width: 288px;
+  }
 }
 
 .active-input {
-    opacity: 1;
-    transition: 500ms ease-in-out;
+  opacity: 1;
+  transition: 500ms ease-in-out;
 }
 
 .lupa {
-    position: absolute;
-    padding: 0;
-    top: 0;
-    transition: 500ms ease-in-out;
-    top: -3px;
-    right: 15px;
-    transform: translateX(50%) translateY(50%);
-    cursor: pointer;
-    z-index: 1;
-    @media screen and (min-width:$tablet) {
-        right: 90%;
-    }
-
+  position: absolute;
+  padding: 0;
+  top: 0;
+  transition: 500ms ease-in-out;
+  top: -3px;
+  right: 15px;
+  transform: translateX(50%) translateY(50%);
+  cursor: pointer;
+  z-index: 1;
+  @media screen and (min-width: $tablet) {
+    right: 90%;
+  }
 }
 
 .search-form {
-    cursor: pointer;
-    position: relative;
-    margin-right: 38px;
+  cursor: pointer;
+  position: relative;
+  margin-right: 38px;
 
-    @media screen and (min-width:$tablet) {
-        margin-right: 0;
-
-    }
+  @media screen and (min-width: $tablet) {
+    margin-right: 0;
+  }
 }
 
 .lupa-container {
-    top: -3.5;
-    right: 90%;
-    transition: 500ms ease-in-out;
-
+  top: -3.5;
+  right: 90%;
+  transition: 500ms ease-in-out;
 }
 
 .header__active {
-    border-bottom: 1px solid #4440F7;
-    padding-bottom: 8px;
+  border-bottom: 1px solid #4440f7;
+  padding-bottom: 8px;
 }
