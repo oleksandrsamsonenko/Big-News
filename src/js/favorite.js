@@ -2,6 +2,11 @@ import notFound from '../img/notFound_mob.jpg';
 const savedNews = document.querySelector('.saved-news');
 
 function createMarkup() {
+  if (!localStorage.getItem('savedNews')) {
+    return (savedNews.innerHTML = `<div class="not-found__box"><p class="not-found__text">You have no saved news</p>
+  <img class="not-found__img" src="${notFound}" alt="News not found" width="288px" height="198px" /></div>`);
+  }
+
   const markup = JSON.parse(localStorage.getItem('savedNews'))
     .map(item => {
       let itemTitle;
@@ -45,5 +50,8 @@ savedNews.addEventListener('click', e => {
 
   localStorage.removeItem('savedNews');
   localStorage.setItem('savedNews', JSON.stringify(superNewObj));
+  if (JSON.parse(localStorage.getItem(`savedNews`)).length < 1) {
+    localStorage.removeItem('savedNews');
+  }
   createMarkup();
 });
