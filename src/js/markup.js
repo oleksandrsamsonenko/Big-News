@@ -71,6 +71,13 @@ export function createMarkup(arr) {
       let description;
       let category;
 
+      let itemTitle;
+      if (item.title.length > 59) {
+        itemTitle = item.title.slice(0, 54) + '...'
+      } else {
+        itemTitle = item.title
+      }
+
       if (item.multimedia) {
         imgUrl =
           item.multimedia.length === 0 ? placeholder : item.multimedia[2].url;
@@ -91,13 +98,19 @@ export function createMarkup(arr) {
         category = item.nytdsection;
       }
 
+      if (description.length > 130) {
+        description = description.slice(0, 127) + '...'
+      } else {
+        description = description
+      }
+
       if (!localStorage.getItem('savedNews')) {
         return `<li class="images">
-          <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
-          <h2 class="description-title">${item.title}</h2>
-          <p>${description}</p>
+          <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
+          <p class="news-list__category">${item.nytdsection}</p>
+          <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
+          <h2 class="description-title">${itemTitle}</h2>
+          <p class="description-of-news">${description}</p>
           <div class="info-more">
             <p class="date">${getTime}</p>
             <a
