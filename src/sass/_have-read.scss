@@ -35,3 +35,23 @@
   // border: none;
   background-color: transparent;
 }
+
+.roll-icon {
+  pointer-events: none;
+}
+
+.images {
+  position: relative;
+}
+
+// .have-read {
+//   position: absolute;
+//   top: 20px;
+//   right: 21px;
+
+//   font-family: $mainFF;
+//   font-size: 14px;
+//   line-height: calc(19 / 14);
+
+//   color: #00b912;
+// }

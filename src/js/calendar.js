@@ -11,7 +11,7 @@ let day
 let year
 let month
 const options = {
-  
+
     dateFormat:"d/m/Y",
     defaultDate: new Date(),
     onClose(selectedDates) {
@@ -42,6 +42,6 @@ async function getNewsByDate(value) {
 // function createMarkupByDate(news) {
 //     const markup = news.map(item => {
 //     })
-    
+
 // }
 
