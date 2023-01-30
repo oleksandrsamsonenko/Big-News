@@ -22,18 +22,37 @@ function handleScreenWidthCange(e) {
 }
 
 function handleSelectClick(e) {
-  if (e.target.value === 'Categories' || e.target.value === 'Others') {
+  const listEl = document.querySelector('.filter-list')
+  // const mainBtn = document.querySelector('[data-value="categories"]')
+  if(!e.target.dataset.value) {
+    return
+  }
+  if (e.target.dataset.value === 'categories' || e.target.dataset.value === 'others') {
+    listEl.classList.toggle('visually-hidden')
     return;
   }
 
-  getFetch(e.target.value || e.target.dataset.value).then(data => {
+  getСategoryNameFetch(e.target.dataset.value).then(data => {
     if (!data) {
       createNotFoundMarkup();
       return;
     }
-    console.log(data);
+    listEl.classList.add('visually-hidden')
+    // mainBtn.textContent = e.target.textContent
     createMarkup(data);
   });
+}
+
+async function getСategoryNameFetch(categoryName) {
+  try {
+    const response = await axios.get(
+      `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
+    );
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getFetchCategories() {
@@ -59,62 +78,56 @@ function createFilterMarkup(arr) {
     btnArr = arr
       .map((item, index) => {
         if (index <= 5) {
-          return `<button class="filter-btn" data-value="${item.section}">${item.display_name}</button>`;
+          return `<li><button class="filter-btn" data-value="${item.section}">${item.display_name}</button></li>`;
         } else {
           return;
         }
       })
       .join('');
-    optionArr = arr
+      categoriesArr = arr
       .map((item, index) => {
         if (index > 5) {
-          return `<option value="${item.section}">${item.display_name}</option>`;
+          return `<li class="filter-item" data-value="${item.section}">${item.display_name}</li>`;
         } else {
           return;
         }
       })
       .join('');
 
-    markup = `${btnArr}<form class="filter-form">
-      <select class="filter-select" name="categories">
-     <option class="filter-option" value="Others">Others</option>
-     ${optionArr}
-     </select></form>`;
+    markup = `<ul class="filter-btn-list">${btnArr}</ul>
+    <div><button class="filter-dropdowv-btn" data-value="others">Others</button>
+    <ul class="filter-list visually-hidden">${categoriesArr}</ul></div>`;
   } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
     btnArr = arr
       .map((item, index) => {
         if (index <= 3) {
-          return `<button class="filter-btn" data-value="${item.section}">${item.display_name}</button>`;
+          return `<li><button class="filter-btn" data-value="${item.section}">${item.display_name}</button></li>`;
         } else {
           return;
         }
       })
       .join('');
-    optionArr = arr
+      categoriesArr = arr
       .map((item, index) => {
         if (index > 3) {
-          return `<option value="${item.section}">${item.display_name}</option>`;
+          return `<li class="filter-item" data-value="${item.section}">${item.display_name}</li>`;
         } else {
           return;
         }
       })
       .join('');
 
-    markup = `${btnArr}<form class="filter-form">
-      <select class="filter-select" name="categories">
-     <option value="Others">Others</option>
-     ${optionArr}
-     </select></form>`;
+    markup = `<ul class="filter-btn-list">${btnArr}</ul>
+    <div><button class="filter-dropdowv-btn" data-value="others">Others</button>
+    <ul class="filter-list visually-hidden">${categoriesArr}</ul></div>`;
   } else {
     categoriesArr = arr
       .map(item => {
-        return `<option value="${item.section}">${item.display_name}</option>`;
+        return `<li class="filter-item" data-value="${item.section}">${item.display_name}</li>`;
       })
       .join('');
-    markup = `<select class="filter-select" name="categories">
-     <option value="Categories">Categories</option>
-     ${categoriesArr}
-     </select>`;
+    markup = `<button class="filter-dropdowv-btn" data-value="categories">Categories</button>
+      <ul class="filter-list visually-hidden">${categoriesArr}</ul>`;
   }
 
   boxEl.innerHTML = markup;
@@ -126,14 +139,4 @@ function createNotFoundMarkup() {
   newsListEl.innerHTML = markup;
 }
 
-async function getFetch(categoryName) {
-  try {
-    const response = await axios.get(
-      `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
-    );
-    console.log(response);
-    return response.data.results;
-  } catch (error) {
-    console.log(error);
-  }
-}
+
