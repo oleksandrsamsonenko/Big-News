@@ -13,7 +13,6 @@ if (localStorage.getItem('read')) {
 readWrapperEl.addEventListener('click', handleHideBtnClick);
 readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
-
 function createMarkupFromLocal(arr, newsArrDate) {
   const liMarkup = arr
     .map(
@@ -21,7 +20,7 @@ function createMarkupFromLocal(arr, newsArrDate) {
     <img src="${item.imgUrl}" alt="" width="288px" height="395px" />
     <p class="have-read visually-hidden">Have Read</p>
     <p>${item.category}</p>
-    <button class="img-btn">Add to favorite</button>
+    <button class="img-btn favorite-false" data-id="${item.id}">Add to favorite</button>
     <h2 class="description-title">${item.title}</h2>
     <p>${item.descr}</p>
     <div class="info-more">
@@ -31,6 +30,24 @@ function createMarkupFromLocal(arr, newsArrDate) {
     </li>`
     )
     .join('');
+
+  setTimeout(() => {
+    if (!localStorage.getItem('savedNews')) {
+      return;
+    }
+    const favoriteBtn = document.querySelectorAll('.img-btn');
+    favoriteBtn.forEach(item => {
+      if (
+        JSON.parse(localStorage.getItem('id')).find(elem => {
+          return elem === String(item.dataset.id);
+        })
+      ) {
+        item.classList.add('favorite-true');
+        item.classList.remove('favorite-false');
+        item.textContent = 'Remove from favorite';
+      }
+    });
+  }, 500);
   const markup = `<div class="read-list-box">
     <div class="read-box-inner">
     <p class="read-date">${newsArrDate}</p>

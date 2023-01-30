@@ -5,6 +5,7 @@ function createMarkup() {
     .map(item => {
       return `<li class="images">
           <img src="${item.img}" alt="" width="288px" height="395px" />
+          <p class="news-list__category">${item.category}</p>
           <button class="img-btn favorite-true"  data-id="${item.uri}">Remove from favorite</button>
           <h2 class="description-title">${item.h2}</h2>
           <p>${item.description}</p>
