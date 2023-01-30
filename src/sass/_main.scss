@@ -47,7 +47,7 @@
   }
 }
 
-.news__list {
+.all-news {
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -150,6 +150,10 @@
   height: 28px;
   top: 355px;
   right: 2%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
   background: #ffffff;
   border-radius: 20px;

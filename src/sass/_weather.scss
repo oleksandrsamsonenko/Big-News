@@ -3,7 +3,6 @@
   background-color: #4440f7;
   border-radius: 4px;
   color: #ffffff;
-  padding: 32px 0px 32px;
   display: flex;
   flex-direction: column;
   max-width: 480px;
@@ -11,18 +10,16 @@
 
   @media screen and (min-width: $tablet) {
     width: 353px;
-    padding: 40px 0px 60px;
   }
   @media screen and (min-width: $desktop) {
     width: 395px;
-    padding: 40px 0px 60px;
   }
 }
 
 .weather_wrapper {
   display: flex;
   justify-content: center;
-  padding-top: 5px;
+  padding-top: 37px;
   padding-bottom: 14px;
   padding-left: 36px;
   padding-right: 36px;
@@ -32,7 +29,7 @@
     justify-content: space-between;
     padding-bottom: 2px;
     margin-bottom: 89px;
-    padding-top: 0px;
+    padding-top: 40px;
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -67,11 +64,13 @@
   font-size: 16px;
   width: 151px;
   height: 34px;
-  color: #ffffff!important;
+  color: #ffffff !important;
+  margin-bottom: 28px;
   @media screen and (min-width: $tablet) {
     width: 177px;
     height: 42px;
     font-size: 20px;
+    margin-bottom: 60px;
   }
 }
 .weather_geolocation {
@@ -116,7 +115,8 @@
   border-style: none;
   color: #ffffff;
   transition: all 250ms;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .weather_day,
