@@ -80,7 +80,10 @@ inputEl.addEventListener('submit', handleInput);
 function handleInput(e) {
   e.preventDefault();
 
-  getValueFetch(markupValue.value).then(data => createValueMarkup(data));
+  getValueFetch(markupValue.value).then(data => {
+    console.log(data)
+    createValueMarkup(data)
+  });
 }
 
 export function createValueMarkup(e) {
@@ -112,7 +115,7 @@ export function createValueMarkup(e) {
           <p class="description-of-news">${item.abstract}</p>
           <div class="info-more">
             <p class="date-of-news">${getTime}</p>
-            <a href="">Read more</a>
+        <a class="read-more-link" href="${item.web_url}" target="_blank" rel="noopener noreferrer">Read more</a>
           </div>
         </li>`;
     })
