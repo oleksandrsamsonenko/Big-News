@@ -5,8 +5,8 @@ function createMarkup() {
   const markup = JSON.parse(localStorage.getItem('savedNews'))
     .map(item => {
       let itemTitle;
-      if (item.h2.length > 59) {
-        itemTitle = item.h2.slice(0, 54) + '...';
+      if (item.h2.length > 54) {
+        itemTitle = item.h2.slice(0, 50) + '...';
       } else {
         itemTitle = item.h2;
       }
