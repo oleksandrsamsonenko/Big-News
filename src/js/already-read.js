@@ -47,8 +47,8 @@ function createMarkupFromLocal(arr, newsArrDate) {
     const favoriteBtn = document.querySelectorAll('.img-btn');
     favoriteBtn.forEach(item => {
       if (
-        JSON.parse(localStorage.getItem('id')).find(elem => {
-          return elem === String(item.dataset.id);
+        JSON.parse(localStorage.getItem('savedNews')).find(elem => {
+          return elem.uri === String(item.dataset.id);
         })
       ) {
         item.classList.add('favorite-true');

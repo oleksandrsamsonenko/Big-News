@@ -6,48 +6,6 @@ import { getWeatherCoords } from './weather';
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
 const markupValue = document.querySelector('.search-input');
-// let favoriteArticles = [];
-// if (localStorage.getItem('savedNews')) {
-//   JSON.parse(localStorage.getItem('savedNews')).map(item => {
-//     console.log(item.id);
-//     favoriteArticles.push(item);
-//   });
-// }
-// newsList.addEventListener('click', e => {
-//   if (e.target.nodeName !== 'BUTTON') {
-//     return;
-//   } else {
-//     e.target.classList.toggle('favorite-true');
-//     e.target.classList.toggle('favorite-false');
-//   }
-//   if (e.target.classList.contains('favorite-true')) {
-//     e.target.style.width = '168px';
-//     e.target.textContent = 'Remove from favorite';
-
-//     favoriteArticles.push({
-//       img: e.target.parentNode.children[0].src,
-//       href: e.target.parentNode.lastElementChild.lastElementChild.href,
-//       h2: e.target.parentNode.children[3].textContent,
-//       description: e.target.parentNode.children[4].textContent,
-//       date: e.target.parentNode.lastElementChild.children[0].textContent,
-//       uri: e.target.dataset.id,
-//       category: e.target.parentNode.children[1].textContent,
-//     });
-//     localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
-//   }
-
-//   if (e.target.classList.contains('favorite-false')) {
-//     e.target.style.width = '126px';
-//     e.target.textContent = 'Add to favorite';
-//     const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
-//       item => item.uri !== e.target.dataset.id
-//     );
-
-//     localStorage.removeItem('savedNews');
-//     localStorage.setItem('savedNews', JSON.stringify(superNewObj));
-//     favoriteArticles = superNewObj;
-//   }
-// });
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
@@ -74,8 +32,8 @@ export function createMarkup(arr) {
       let category;
 
       let itemTitle;
-      if (item.title.length > 59) {
-        itemTitle = item.title.slice(0, 54) + '...';
+      if (item.title.length > 54) {
+        itemTitle = item.title.slice(0, 50) + '...';
       } else {
         itemTitle = item.title;
       }
@@ -125,7 +83,7 @@ export function createMarkup(arr) {
 
       return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p class="news-list__category">${item.nytdsection}</p>
+          <p class="news-list__category">${category}</p>
           <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
           <h2 class="description-title">${itemTitle}</h2>
           <p class="description-of-news">${description}</p>
@@ -173,6 +131,7 @@ function handleInput(e) {
 
 export function createValueMarkup(e) {
   if (e.docs.length === 0) {
+    document.querySelector(`.weather`).innerHTML = ``;
     return (newsList.innerHTML = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
   <img class="not-found__img" src="${notFound}" alt="News not found" width="288px" height="198px" /></div>`);
   }
@@ -184,6 +143,12 @@ export function createValueMarkup(e) {
       const getTime = `${day} / ${month} / ${date.getFullYear()}`;
       const inputImg =
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
+      let itemTitle;
+      if (item.headline.main.length > 54) {
+        itemTitle = item.headline.main.slice(0, 50) + '...';
+      } else {
+        itemTitle = item.headline.main.title;
+      }
       return `<li class="images">
           <img class="news-list__img"
             src="https://static01.nyt.com/${inputImg}"
@@ -192,7 +157,7 @@ export function createValueMarkup(e) {
             height="395px"
           />
           <p class="news-list__category">${item.section_name}</p>
-          <button class="img-btn favorite-false "  data-id="${item.uri}">
+          <button class="img-btn favorite-false"  data-id="${item.uri}">
             Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
