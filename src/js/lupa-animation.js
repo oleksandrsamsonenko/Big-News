@@ -29,7 +29,7 @@ searchInput.addEventListener("mouseout", removeClass);
 // current page
 function setActive() {
   const aObj = document.getElementById('main-nav').getElementsByTagName('a');
-  for(i=0;i<aObj.length;i++) {
+  for(let i=0;i<aObj.length;i++) {
     if(document.location.href.indexOf(aObj[i].href)>=0) {
       aObj[i].className='header__active';
     }
