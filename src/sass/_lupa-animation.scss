@@ -2,19 +2,19 @@
   opacity: 0;
   transition: 500ms ease-in-out;
   border-radius: 30px;
-  max-width: 173px;
+  // max-width: 173px;
   height: 31px;
-  padding-inline-start: 14px;
+  // margin-left: 14px;
 
   @media screen and (min-width: $tablet) {
-    max-width: 230px;
+    // max-width: 230px;
     opacity: 1;
     display: inline-block;
-    padding-inline-start: 48px;
+    // margin-left: 48px;
   }
 
   @media screen and (min-width: $desktop) {
-    width: 288px;
+    width: 287px;
   }
 }
 
@@ -45,13 +45,19 @@
 
   @media screen and (min-width: $tablet) {
     margin-right: 0;
+    max-width: 213px;
+  }
+  @media screen and (min-width: $desktop) {
+    max-width: 293px;
   }
 }
 
 .lupa-container {
-  top: -3.5;
-  right: 90%;
-  transition: 500ms ease-in-out;
+  @media screen and (max-width: 767.98px) {
+    top: -3.5;
+    right: 85%;
+    transition: 500ms ease-in-out;
+  }
 }
 
 .header__active {
