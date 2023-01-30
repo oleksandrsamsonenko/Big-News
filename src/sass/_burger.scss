@@ -21,8 +21,8 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vw;
-    padding-top: 31px;
+    height: 100vh;
+    padding-top: 24px;
     padding-bottom: 18px;
     z-index: 100;
 
@@ -36,15 +36,15 @@
 
 .mobile-menu {
     list-style-type: none;
-
+    
     &__item {
         height: 44px;
         display: flex;
 
         &.current {
-            color: #F4F4F4;
-            background-color: $hoverColor;
-        }
+                color: #F4F4F4;
+                background-color: $hoverColor;
+            }
     }
 
     &__item:not(:last-child) {
@@ -73,10 +73,9 @@
     margin-top: 0;
     margin-left: 24px;
 
-
     font-size: 24px;
     line-height: 33px;
 
-
+    
 }
-// ___________________________
+
