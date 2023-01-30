@@ -185,7 +185,7 @@ export function createValueMarkup(e) {
       const inputImg =
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
       return `<li class="images">
-          <img class="news__list-img"
+          <img class="news-list__img"
             src="https://static01.nyt.com/${inputImg}"
             alt=""
             width="288px"
