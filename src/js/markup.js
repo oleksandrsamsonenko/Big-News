@@ -220,5 +220,4 @@ export function createValueMarkup(e) {
     .join('');
   newsList.innerHTML = valueMarkup;
   getWeatherCoords();
-  console.log(e);
 }
