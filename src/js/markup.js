@@ -114,7 +114,25 @@ export function createMarkup(arr) {
           }
         });
       }, 500);
-    
+      // if (!localStorage.getItem('savedNews'))
+      // return `<li class="images">
+      //   <img src="${imgUrl}" alt="" width="288px" height="395px" />
+      //   <p>${item.nytdsection}</p>
+      //   <button class="img-btn favorite-false " data-id="${item.uri}">Add to favorite </button>
+      //   <h2 class="description-title">${item.title}</h2>
+      //   <p>${description}</p>
+      //   <div class="info-more">
+      //     <p class="date">${getTime}</p>
+      //     <a
+      //       class="read-more-link"
+      //       href="${item.url}"
+      //       target="_blank"
+      //       rel="noopener noreferrer"
+      //     >
+      //       Read more
+      //     </a>
+      //   </div>
+      // </li>`;
 
       if (description.length > 130) {
         description = description.slice(0, 127) + '...'
@@ -122,7 +140,7 @@ export function createMarkup(arr) {
         description = description
       }
 
-      if (!localStorage.getItem('savedNews')) {
+    
         return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
           <p class="news-list__category">${item.nytdsection}</p>
@@ -141,7 +159,6 @@ export function createMarkup(arr) {
             </a>
           </div>
         </li>`;
-      }
     })
     .join('');
 
