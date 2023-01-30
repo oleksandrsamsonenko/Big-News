@@ -140,11 +140,11 @@ export function createMarkup(arr) {
         description = description
       }
 
-    
+
         return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
           <p class="news-list__category">${item.nytdsection}</p>
-          <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
+          <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
           <h2 class="description-title">${itemTitle}</h2>
           <p class="description-of-news">${description}</p>
           <div class="info-more">
@@ -208,12 +208,8 @@ export function createValueMarkup(e) {
             width="288px"
             height="395px"
           />
-<<<<<<< HEAD
-          <button class="img-btn favorite-false "  data-id="${item.uri}">
-=======
           <p>${item.section_name}</p>
-          <button class="img-btn favorite-false " id="${item.uri}">
->>>>>>> main
+          <button class="img-btn favorite-false "  data-id="${item.uri}">
             Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
