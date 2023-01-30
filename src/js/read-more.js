@@ -1,4 +1,4 @@
-const newslistEl = document.querySelector('.news__list');
+const newslistEl = document.querySelector('.news-wrapper');
 const readArr = [];
 const keyArr = [];
 const idArr = [];
@@ -12,8 +12,10 @@ const month =
     ? (today.getMonth() + 1).toString().padStart(2, 0)
     : today.getMonth() + 1;
 const year = today.getFullYear();
-export const dateKey = `${date}/${month}/${year}`;
+const dateKey = `${date}/${month}/${year}`;
 // const dateKey = `20/01/2023`;
+
+console.log(newslistEl)
 
 if (localStorage.getItem('read')) {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));

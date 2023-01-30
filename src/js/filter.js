@@ -7,6 +7,7 @@ const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = 'https://api.nytimes.com/svc/news/v3/content/inyt/';
 
 const boxEl = document.querySelector('.filter-box');
+let arrForMarkup = [];
 export const newsListEl = document.querySelector('.news__list');
 
 boxEl.addEventListener('click', handleSelectClick);
@@ -18,7 +19,7 @@ getFetchCategories().then(data => {
 });
 
 function handleScreenWidthCange(e) {
-  console.log(window.innerWidth);
+  createFilterMarkup(arrForMarkup);
 }
 
 function handleSelectClick(e) {
@@ -61,7 +62,7 @@ async function getFetchCategories() {
       `https://api.nytimes.com/svc/news/v3/content/section-list.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b`
     );
     const arrey = response.data.results;
-
+    arrForMarkup.push(...arrey)
     return arrey;
   } catch (error) {
     console.log(error);
@@ -71,7 +72,6 @@ async function getFetchCategories() {
 function createFilterMarkup(arr) {
   let categoriesArr;
   let btnArr;
-  let optionArr;
   let markup;
 
   if (window.innerWidth >= 1280) {

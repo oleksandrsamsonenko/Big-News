@@ -1,3 +1,8 @@
+.read-list{
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
 .read-box-inner {
   display: flex;
   align-items: center;
@@ -30,13 +35,14 @@
 
 .read-btn {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   // border: none;
   background-color: transparent;
 }
 
 .roll-icon {
+  display: block;
   pointer-events: none;
 }
 

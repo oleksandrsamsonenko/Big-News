@@ -1,12 +1,12 @@
 import {dateKey} from '../js/read-more';
-// import {up} from '../img/symbol-defs.svg#icon-Vector-up'
-// import {down} from '../img/symbol-defs.svg#icon-down'
+import {up} from '../img/symbol-defs.svg#icon-Vector-up'
+import {down} from '../img/symbol-defs.svg#icon-down'
 
 const readWrapperEl = document.querySelector('.read-wrapper');
 
 if (localStorage.getItem('read')) {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
-  localKeyArr.forEach(element => {
+  localKeyArr.sort().forEach(element => {
     const date = element;
     const localArr = JSON.parse(localStorage.getItem(`${element}`));
     createMarkupFromLocal(localArr, date);
@@ -60,22 +60,22 @@ function handleReadMoreBtnClick(e) {
     e.target.parentNode.parentNode.children[1].classList.remove('visually-hidden');
     const newsReadingDate = e.target.previousElementSibling.dataset.date;
     const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
-    const newsEl = localArr.find(item => item.id === newsId);
-    const indexOfNews = localArr.indexOf(newsEl);
+    const newsItem = localArr.find(item => item.id === newsId);
+    const indexOfNews = localArr.indexOf(newsItem);
     localArr.splice(indexOfNews, 1);
 
     console.log('newsReadingDate', newsReadingDate)
     console.log('localArr', localArr)
-    console.log('newsEl', newsEl)
+    console.log('newsItem', newsItem)
     console.log('localArr after splice', localArr)
 
     if(localStorage.getItem(`${dateKey}`)) {
       const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`))
-      fromLocal.push(newsEl)
+      fromLocal.push(newsItem)
       console.log('fromLocal', fromLocal)
       localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
     } else {
-      localStorage.setItem(`${dateKey}`, JSON.stringify(newsEl));
+      localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
     }
   }
 }
