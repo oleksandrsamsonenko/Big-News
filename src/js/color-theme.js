@@ -14,7 +14,6 @@ const svgMenu = document.querySelector('.menu__theme');
 const svgX = document.querySelector('.x__theme');
 
 const burger = document.querySelector('.burger-menu__wrapper');
-console.log(svgSun,svgMoon);
 function colorTheme(){
     
     body.classList.toggle('light__theme');
