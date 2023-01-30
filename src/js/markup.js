@@ -53,7 +53,6 @@ const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-k
 async function getFetch() {
   try {
     const response = await axios.get(`${BASE_URL}`);
-    console.log(response.data);
     return response.data.results;
   } catch (error) {
     console.log(error);
@@ -71,6 +70,13 @@ export function createMarkup(arr) {
       let imgUrl;
       let description;
       let category;
+
+      let itemTitle;
+      if (item.title.length > 59) {
+        itemTitle = item.title.slice(0, 54) + '...'
+      } else {
+        itemTitle = item.title
+      }
 
       if (item.multimedia) {
         imgUrl =
@@ -128,31 +134,19 @@ export function createMarkup(arr) {
       //   </div>
       // </li>`;
 
-      // return `<li class="images">
-      //   <img src="${imgUrl}" alt="" width="288px" height="395px" />
-      //   <p>${item.nytdsection}</p>
-      //   <button class="img-btn favorite-true " data-id="${item.uri}" width="168px">Remove from favorite </button>
-      //   <h2 class="description-title">${item.title}</h2>
-      //   <p>${description}</p>
-      //   <div class="info-more">
-      //     <p class="date">${getTime}</p>
-      //     <a
-      //       class="read-more-link"
-      //       href="${item.url}"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Read more
-      //     </a>
-      //   </div>
-      // </li>`;
+      if (description.length > 130) {
+        description = description.slice(0, 127) + '...'
+      } else {
+        description = description
+      }
 
-      return `<li class="images">
-          <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-false " data-id="${item.uri}" >Add to favorite </button>
-          <h2 class="description-title">${item.title}</h2>
-          <p>${description}</p>
+      if (!localStorage.getItem('savedNews')) {
+        return `<li class="images">
+          <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
+          <p class="news-list__category">${item.nytdsection}</p>
+          <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
+          <h2 class="description-title">${itemTitle}</h2>
+          <p class="description-of-news">${description}</p>
           <div class="info-more">
             <p class="date">${getTime}</p>
             <a
@@ -188,7 +182,10 @@ inputEl.addEventListener('submit', handleInput);
 function handleInput(e) {
   e.preventDefault();
 
-  getValueFetch(markupValue.value).then(data => createValueMarkup(data));
+  getValueFetch(markupValue.value).then(data => {
+    console.log(data)
+    createValueMarkup(data)
+  });
 }
 
 export function createValueMarkup(e) {
@@ -211,6 +208,7 @@ export function createValueMarkup(e) {
             width="288px"
             height="395px"
           />
+          <p class="news-list__category">${item.section_name}</p>
           <button class="img-btn favorite-false "  data-id="${item.uri}">
             Add to favorite
           </button>
@@ -218,7 +216,14 @@ export function createValueMarkup(e) {
           <p class="description-of-news">${item.abstract}</p>
           <div class="info-more">
             <p class="date-of-news">${getTime}</p>
-            <a href="">Read more</a>
+            <a
+              class="read-more-link"
+              href="${item.web_url}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
           </div>
         </li>`;
     })
