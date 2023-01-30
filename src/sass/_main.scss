@@ -70,27 +70,27 @@
   margin-left: auto;
   margin-right: auto;
   @media screen and (min-width: 768px) {
-      position: relative;
-      width: 736px;
-    }
-  
-    @media screen and (min-width: 1280px) {
-      width: 1248px;
-    }
+    position: relative;
+    width: 736px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1248px;
+  }
 }
 .weather {
   @media screen and (min-width: 768px) {
-      position: absolute;
-      z-index: 100;
-      top: 0;
-      right: 0;
-    }
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+  }
 }
 
 .news__list li:nth-child(2) {
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-      grid-column: 1 / 2;
-    }
+    grid-column: 1 / 2;
+  }
 }
 
 .news__list li:nth-child(3) {
@@ -150,6 +150,10 @@
   height: 28px;
   top: 355px;
   right: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
   background: #ffffff;
   border-radius: 20px;
@@ -194,7 +198,6 @@
   font-size: 24px;
   line-height: 33px;
   letter-spacing: -0.01em;
-  color: $blackColor;
 
   height: 132px;
 
@@ -213,7 +216,6 @@
   font-style: $fontStyle;
   font-size: 14px;
   line-height: 19px;
-  color: $blackColor;
   height: 66px;
 
   @media screen and (min-width: $tablet) {

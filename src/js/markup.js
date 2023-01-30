@@ -1,51 +1,53 @@
 import axios from 'axios';
 import placeholder from '../img/placeholder.png';
 import notFound from '../img/notFound_mob.jpg';
+import { getWeatherCoords } from './weather';
 
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
 const markupValue = document.querySelector('.search-input');
-let favoriteArticles = [];
-if (localStorage.getItem('savedNews')) {
-  JSON.parse(localStorage.getItem('savedNews')).map(item => {
-    console.log(item.id);
-    favoriteArticles.push(item);
-  });
-}
-newsList.addEventListener('click', e => {
-  if (e.target.nodeName !== 'BUTTON') {
-    return;
-  } else {
-    e.target.classList.toggle('favorite-true');
-    e.target.classList.toggle('favorite-false');
-  }
-  if (e.target.classList.contains('favorite-true')) {
-    e.target.style.width = '168px';
-    e.target.textContent = 'Remove from favorite';
+// let favoriteArticles = [];
+// if (localStorage.getItem('savedNews')) {
+//   JSON.parse(localStorage.getItem('savedNews')).map(item => {
+//     console.log(item.id);
+//     favoriteArticles.push(item);
+//   });
+// }
+// newsList.addEventListener('click', e => {
+//   if (e.target.nodeName !== 'BUTTON') {
+//     return;
+//   } else {
+//     e.target.classList.toggle('favorite-true');
+//     e.target.classList.toggle('favorite-false');
+//   }
+//   if (e.target.classList.contains('favorite-true')) {
+//     e.target.style.width = '168px';
+//     e.target.textContent = 'Remove from favorite';
 
-    favoriteArticles.push({
-      img: e.target.parentNode.children[0].src,
-      href: e.target.parentNode.lastElementChild.lastElementChild.href,
-      h2: e.target.parentNode.children[3].textContent,
-      description: e.target.parentNode.children[4].textContent,
-      date: e.target.parentNode.lastElementChild.children[0].textContent,
-      uri: e.target.dataset.id,
-    });
-    localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
-  }
+//     favoriteArticles.push({
+//       img: e.target.parentNode.children[0].src,
+//       href: e.target.parentNode.lastElementChild.lastElementChild.href,
+//       h2: e.target.parentNode.children[3].textContent,
+//       description: e.target.parentNode.children[4].textContent,
+//       date: e.target.parentNode.lastElementChild.children[0].textContent,
+//       uri: e.target.dataset.id,
+//       category: e.target.parentNode.children[1].textContent,
+//     });
+//     localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
+//   }
 
-  if (e.target.classList.contains('favorite-false')) {
-    e.target.style.width = '126px';
-    e.target.textContent = 'Add to favorite';
-    const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
-      item => item.uri !== e.target.dataset.id
-    );
+//   if (e.target.classList.contains('favorite-false')) {
+//     e.target.style.width = '126px';
+//     e.target.textContent = 'Add to favorite';
+//     const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
+//       item => item.uri !== e.target.dataset.id
+//     );
 
-    localStorage.removeItem('savedNews');
-    localStorage.setItem('savedNews', JSON.stringify(superNewObj));
-    favoriteArticles = superNewObj;
-  }
-});
+//     localStorage.removeItem('savedNews');
+//     localStorage.setItem('savedNews', JSON.stringify(superNewObj));
+//     favoriteArticles = superNewObj;
+//   }
+// });
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
@@ -73,9 +75,9 @@ export function createMarkup(arr) {
 
       let itemTitle;
       if (item.title.length > 59) {
-        itemTitle = item.title.slice(0, 54) + '...'
+        itemTitle = item.title.slice(0, 54) + '...';
       } else {
-        itemTitle = item.title
+        itemTitle = item.title;
       }
 
       if (item.multimedia) {
@@ -114,34 +116,14 @@ export function createMarkup(arr) {
           }
         });
       }, 500);
-      // if (!localStorage.getItem('savedNews'))
-      // return `<li class="images">
-      //   <img src="${imgUrl}" alt="" width="288px" height="395px" />
-      //   <p>${item.nytdsection}</p>
-      //   <button class="img-btn favorite-false " data-id="${item.uri}">Add to favorite </button>
-      //   <h2 class="description-title">${item.title}</h2>
-      //   <p>${description}</p>
-      //   <div class="info-more">
-      //     <p class="date">${getTime}</p>
-      //     <a
-      //       class="read-more-link"
-      //       href="${item.url}"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Read more
-      //     </a>
-      //   </div>
-      // </li>`;
 
       if (description.length > 130) {
-        description = description.slice(0, 127) + '...'
+        description = description.slice(0, 127) + '...';
       } else {
-        description = description
+        description = description;
       }
 
-
-        return `<li class="images">
+      return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
           <p class="news-list__category">${item.nytdsection}</p>
           <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
@@ -161,6 +143,7 @@ export function createMarkup(arr) {
         </li>`;
     })
     .join('');
+  getWeatherCoords();
 
   newsList.innerHTML = markup;
 }
@@ -183,15 +166,15 @@ function handleInput(e) {
   e.preventDefault();
 
   getValueFetch(markupValue.value).then(data => {
-    console.log(data)
-    createValueMarkup(data)
+    console.log(data);
+    createValueMarkup(data);
   });
 }
 
 export function createValueMarkup(e) {
   if (e.docs.length === 0) {
     return (newsList.innerHTML = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
-  <img class="not-found__img" src="${notFound}" alt="News not found" width="248px" height="198px" /></div>`);
+  <img class="not-found__img" src="${notFound}" alt="News not found" width="288px" height="198px" /></div>`);
   }
   const valueMarkup = e.docs
     .map(item => {
@@ -202,13 +185,13 @@ export function createValueMarkup(e) {
       const inputImg =
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
       return `<li class="images">
-          <img
+          <img class="news-list__img"
             src="https://static01.nyt.com/${inputImg}"
             alt=""
             width="288px"
             height="395px"
           />
-          <p>${item.section_name}</p>
+          <p class="news-list__category">${item.section_name}</p>
           <button class="img-btn favorite-false "  data-id="${item.uri}">
             Add to favorite
           </button>
@@ -229,4 +212,5 @@ export function createValueMarkup(e) {
     })
     .join('');
   newsList.innerHTML = valueMarkup;
+  getWeatherCoords();
 }

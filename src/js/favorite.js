@@ -1,10 +1,12 @@
+import notFound from '../img/notFound_mob.jpg';
 const savedNews = document.querySelector('.saved-news');
 
 function createMarkup() {
   const markup = JSON.parse(localStorage.getItem('savedNews'))
     .map(item => {
       return `<li class="images">
-          <img class="news-list__img" src="${item.img}" alt="" width="288px" height="395px" />
+          <img src="${item.img}" alt="" width="288px" height="395px" class="news-list__img"/>
+          <p class="news-list__category">${item.category}</p>
           <button class="img-btn favorite-true"  data-id="${item.uri}">Remove from favorite</button>
           <h2 class="description-title">${item.h2}</h2>
           <p class="description-of-news">${item.description}</p>
@@ -26,6 +28,7 @@ function createMarkup() {
 }
 
 createMarkup();
+
 savedNews.addEventListener('click', e => {
   if (e.target.nodeName !== 'BUTTON') {
     return;
