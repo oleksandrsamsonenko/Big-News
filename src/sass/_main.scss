@@ -66,6 +66,39 @@
   }
 }
 
+.news-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (min-width: 768px) {
+      position: relative;
+      width: 736px;
+    }
+  
+    @media screen and (min-width: 1280px) {
+      width: 1248px;
+    }
+}
+.weather {
+  @media screen and (min-width: 768px) {
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      right: 0;
+    }
+}
+
+.news__list li:nth-child(2) {
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+      grid-column: 1 / 2;
+    }
+}
+
+.news__list li:nth-child(3) {
+  @media screen and (min-width: 1280px) {
+    grid-column: 1 / 2;
+  }
+}
+
 /////category!!!!!
 .news-list__category {
   position: absolute;
