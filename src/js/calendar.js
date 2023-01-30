@@ -12,7 +12,7 @@ let day
 let year
 let month
 const options = {
-
+    disableMobile: "true",
     dateFormat:"d/m/Y",
     defaultDate: new Date(),
     onClose(selectedDates) {

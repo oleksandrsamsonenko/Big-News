@@ -2,7 +2,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 16px;
 
   // mobile
   @media screen and (min-width: 480px) {
@@ -12,13 +12,11 @@
   // tablet
   @media screen and (min-width: 768px) {
     width: 768px;
-    padding: 0 32px;
     // outline: 2px solid green;
   }
   // desktop
   @media screen and (min-width: 1280px) {
     width: 1280px;
-    padding: 0 68px;
     // outline: 2px solid green;
   }
 }
