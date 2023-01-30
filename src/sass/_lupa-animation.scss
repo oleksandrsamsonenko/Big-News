@@ -4,12 +4,13 @@
   border-radius: 30px;
   max-width: 173px;
   height: 31px;
-  padding-inline-start: 48px;
+  padding-inline-start: 14px;
 
   @media screen and (min-width: $tablet) {
     max-width: 230px;
     opacity: 1;
     display: inline-block;
+    padding-inline-start: 48px;
   }
 
   @media screen and (min-width: $desktop) {
