@@ -22,13 +22,16 @@ function handleScreenWidthCange(e) {
 }
 
 function handleSelectClick(e) {
-  const listEl = document.querySelector('.filter-list')
+  const listEl = document.querySelector('.filter-list');
   // const mainBtn = document.querySelector('[data-value="categories"]')
-  if(!e.target.dataset.value) {
-    return
+  if (!e.target.dataset.value) {
+    return;
   }
-  if (e.target.dataset.value === 'categories' || e.target.dataset.value === 'others') {
-    listEl.classList.toggle('visually-hidden')
+  if (
+    e.target.dataset.value === 'categories' ||
+    e.target.dataset.value === 'others'
+  ) {
+    listEl.classList.toggle('visually-hidden');
     return;
   }
 
@@ -37,7 +40,7 @@ function handleSelectClick(e) {
       createNotFoundMarkup();
       return;
     }
-    listEl.classList.add('visually-hidden')
+    listEl.classList.add('visually-hidden');
     // mainBtn.textContent = e.target.textContent
     createMarkup(data);
   });
@@ -84,7 +87,7 @@ function createFilterMarkup(arr) {
         }
       })
       .join('');
-      categoriesArr = arr
+    categoriesArr = arr
       .map((item, index) => {
         if (index > 5) {
           return `<li class="filter-item" data-value="${item.section}">${item.display_name}</li>`;
@@ -107,7 +110,7 @@ function createFilterMarkup(arr) {
         }
       })
       .join('');
-      categoriesArr = arr
+    categoriesArr = arr
       .map((item, index) => {
         if (index > 3) {
           return `<li class="filter-item" data-value="${item.section}">${item.display_name}</li>`;
@@ -137,6 +140,5 @@ function createNotFoundMarkup() {
   const markup = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
   <img class="not-found__img" src="${notFound}" alt="News not found" width="248px" height="198px" /></div>`;
   newsListEl.innerHTML = markup;
+  document.querySelector(`.weather`).innerHTML = ``;
 }
-
-

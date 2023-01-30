@@ -1,6 +1,7 @@
 import axios from 'axios';
 import placeholder from '../img/placeholder.png';
 import notFound from '../img/notFound_mob.jpg';
+import { getWeatherCoords } from './weather';
 
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
@@ -142,6 +143,7 @@ export function createMarkup(arr) {
         </li>`;
     })
     .join('');
+  getWeatherCoords();
 
   newsList.innerHTML = markup;
 }
@@ -172,7 +174,7 @@ function handleInput(e) {
 export function createValueMarkup(e) {
   if (e.docs.length === 0) {
     return (newsList.innerHTML = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
-  <img class="not-found__img" src="${notFound}" alt="News not found" width="248px" height="198px" /></div>`);
+  <img class="not-found__img" src="${notFound}" alt="News not found" width="288px" height="198px" /></div>`);
   }
   const valueMarkup = e.docs
     .map(item => {
@@ -183,7 +185,7 @@ export function createValueMarkup(e) {
       const inputImg =
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
       return `<li class="images">
-          <img
+          <img class="news__list-img"
             src="https://static01.nyt.com/${inputImg}"
             alt=""
             width="288px"
@@ -210,4 +212,5 @@ export function createValueMarkup(e) {
     })
     .join('');
   newsList.innerHTML = valueMarkup;
+  getWeatherCoords();
 }
