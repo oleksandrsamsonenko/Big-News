@@ -208,12 +208,9 @@ export function createValueMarkup(e) {
             width="288px"
             height="395px"
           />
-<<<<<<< HEAD
-          <button class="img-btn favorite-false "  data-id="${item.uri}">
-=======
           <p>${item.section_name}</p>
-          <button class="img-btn favorite-false " id="${item.uri}">
->>>>>>> main
+          <button class="img-btn favorite-false "  data-id="${item.uri}">
+        
             Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
