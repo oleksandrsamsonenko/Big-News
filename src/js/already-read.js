@@ -1,16 +1,22 @@
-import {dateKey} from '../js/read-more';
 import {up} from '../img/symbol-defs.svg#icon-Vector-up'
 import {down} from '../img/symbol-defs.svg#icon-down'
+
+let today = new Date();
+const date =
+  today.getDate() < 10
+    ? today.getDate().toString().padStart(2, 0)
+    : today.getDate();
+const month =
+  today.getMonth() < 10
+    ? (today.getMonth() + 1).toString().padStart(2, 0)
+    : today.getMonth() + 1;
+const year = today.getFullYear();
+const dateKey = `${date}/${month}/${year}`;
 
 const readWrapperEl = document.querySelector('.read-wrapper');
 
 if (localStorage.getItem('read')) {
-  const localKeyArr = JSON.parse(localStorage.getItem('read'));
-  localKeyArr.sort().forEach(element => {
-    const date = element;
-    const localArr = JSON.parse(localStorage.getItem(`${element}`));
-    createMarkupFromLocal(localArr, date);
-  });
+  updateMarkup();
 }
 
 readWrapperEl.addEventListener('click', handleHideBtnClick);
@@ -66,6 +72,15 @@ function createMarkupFromLocal(arr, newsArrDate) {
   readWrapperEl.insertAdjacentHTML('beforeend', markup);
 }
 
+function updateMarkup() {
+  const localKeyArr = JSON.parse(localStorage.getItem('read'));
+    localKeyArr.sort((prev, next) => prev - next).forEach(element => {
+      const date = element;
+      const localArr = JSON.parse(localStorage.getItem(`${element}`));
+      createMarkupFromLocal(localArr, date);
+    });
+}
+
 function handleHideBtnClick(e) {
   if(e.target.classList.contains('read-btn')) {
     e.target.parentNode.nextElementSibling.classList.toggle('visually-hidden');
@@ -85,15 +100,18 @@ function handleReadMoreBtnClick(e) {
     console.log('newsReadingDate', newsReadingDate)
     console.log('localArr', localArr)
     console.log('newsItem', newsItem)
+    console.log('indexOfNews', indexOfNews)
     console.log('localArr after splice', localArr)
 
     if(localStorage.getItem(`${dateKey}`)) {
       const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`))
       fromLocal.push(newsItem)
-      console.log('fromLocal', fromLocal)
       localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
+      updateMarkup()
     } else {
       localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
+      const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`))
+      updateMarkup()
     }
   }
 }

@@ -2,20 +2,18 @@ const newslistEl = document.querySelector('.news-wrapper');
 const readArr = [];
 const keyArr = [];
 const idArr = [];
-let today = new Date();
-const date =
-  today.getDate() < 10
-    ? today.getDate().toString().padStart(2, 0)
-    : today.getDate();
-const month =
-  today.getMonth() < 10
-    ? (today.getMonth() + 1).toString().padStart(2, 0)
-    : today.getMonth() + 1;
-const year = today.getFullYear();
-const dateKey = `${date}/${month}/${year}`;
-// const dateKey = `20/01/2023`;
-
-console.log(newslistEl)
+// let today = new Date();
+// const date =
+//   today.getDate() < 10
+//     ? today.getDate().toString().padStart(2, 0)
+//     : today.getDate();
+// const month =
+//   today.getMonth() < 10
+//     ? (today.getMonth() + 1).toString().padStart(2, 0)
+//     : today.getMonth() + 1;
+// const year = today.getFullYear();
+// const dateKey = `${date}/${month}/${year}`;
+const dateKey = `25/01/2023`;
 
 if (localStorage.getItem('read')) {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
@@ -34,7 +32,7 @@ if (localStorage.getItem('id')) {
   idArr.push(...localIdArr);
 }
 
-newslistEl.addEventListener('click', handleLinkClick);
+newslistEl.addEventListener('click', handleLinkClick, false);
 
 function handleLinkClick(e) {
   if (e.target.nodeName !== 'A') {
