@@ -74,10 +74,10 @@ function createMarkupFromLocal(arr, newsArrDate) {
 
 function updateMarkup() {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
-    localKeyArr.sort((prev, next) => prev - next).forEach(element => {
-      const date = element;
+    localKeyArr.sort((prev, next) => prev.localCompare(next)).forEach(element => {
+      const dateNews = element;
       const localArr = JSON.parse(localStorage.getItem(`${element}`));
-      createMarkupFromLocal(localArr, date);
+      createMarkupFromLocal(localArr, dateNews);
     });
 }
 
