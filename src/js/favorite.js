@@ -4,10 +4,10 @@ function createMarkup() {
   const markup = JSON.parse(localStorage.getItem('savedNews'))
     .map(item => {
       return `<li class="images">
-          <img src="${item.img}" alt="" width="288px" height="395px" />
+          <img class="news-list__img" src="${item.img}" alt="" width="288px" height="395px" />
           <button class="img-btn favorite-true"  data-id="${item.uri}">Remove from favorite</button>
           <h2 class="description-title">${item.h2}</h2>
-          <p>${item.description}</p>
+          <p class="description-of-news">${item.description}</p>
           <div class="info-more">
             <p class="date">${item.date}</p>
             <a
