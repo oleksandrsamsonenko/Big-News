@@ -29,7 +29,7 @@ newsList.addEventListener('click', e => {
       h2: e.target.parentNode.children[3].textContent,
       description: e.target.parentNode.children[4].textContent,
       date: e.target.parentNode.lastElementChild.children[0].textContent,
-      id: e.target.dataset.id,
+      uri: e.target.dataset.id,
     });
     localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
   }
@@ -38,7 +38,7 @@ newsList.addEventListener('click', e => {
     e.target.style.width = '126px';
     e.target.textContent = 'Add to favorite';
     const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
-      item => item.id !== e.target.dataset.id
+      item => item.uri !== e.target.dataset.id
     );
 
     localStorage.removeItem('savedNews');
@@ -97,6 +97,42 @@ export function createMarkup(arr) {
             : item.media[0].caption;
         category = item.nytdsection;
       }
+      setTimeout(() => {
+        if (!localStorage.getItem('savedNews')) {
+          return;
+        }
+        const favoriteBtn = document.querySelectorAll('.img-btn');
+        favoriteBtn.forEach(item => {
+          if (
+            JSON.parse(localStorage.getItem('savedNews')).find(elem => {
+              return elem.uri === String(item.dataset.id);
+            })
+          ) {
+            item.classList.add('favorite-true');
+            item.classList.remove('favorite-false');
+            item.textContent = 'Remove from favorite';
+          }
+        });
+      }, 500);
+      // if (!localStorage.getItem('savedNews'))
+      // return `<li class="images">
+      //   <img src="${imgUrl}" alt="" width="288px" height="395px" />
+      //   <p>${item.nytdsection}</p>
+      //   <button class="img-btn favorite-false " data-id="${item.uri}">Add to favorite </button>
+      //   <h2 class="description-title">${item.title}</h2>
+      //   <p>${description}</p>
+      //   <div class="info-more">
+      //     <p class="date">${getTime}</p>
+      //     <a
+      //       class="read-more-link"
+      //       href="${item.url}"
+      //       target="_blank"
+      //       rel="noopener noreferrer"
+      //     >
+      //       Read more
+      //     </a>
+      //   </div>
+      // </li>`;
 
       if (description.length > 130) {
         description = description.slice(0, 127) + '...'
@@ -123,49 +159,6 @@ export function createMarkup(arr) {
             </a>
           </div>
         </li>`;
-      } else if (
-        JSON.parse(localStorage.getItem('savedNews')).find(elem => {
-          return elem.id === String(item.id);
-        })
-      ) {
-        return `<li class="images">
-          <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-true " data-id="${item.uri}" width="168px">Remove from favorite </button>
-          <h2 class="description-title">${item.title}</h2>
-          <p>${description}</p>
-          <div class="info-more">
-            <p class="date">${getTime}</p>
-            <a
-              class="read-more-link"
-              href="${item.url}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read more
-            </a>
-          </div>
-        </li>`;
-      } else {
-        return `<li class="images">
-          <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${item.nytdsection}</p>
-          <button class="img-btn favorite-false " data-id="${item.uri}" >Add to favorite </button>
-          <h2 class="description-title">${item.title}</h2>
-          <p>${description}</p>
-          <div class="info-more">
-            <p class="date">${getTime}</p>
-            <a
-              class="read-more-link"
-              href="${item.url}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read more
-            </a>
-          </div>
-        </li>`;
-      }
     })
     .join('');
 
@@ -210,13 +203,14 @@ export function createValueMarkup(e) {
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
       return `<li class="images">
           <img
+            class="news-list__img"
             src="https://static01.nyt.com/${inputImg}"
             alt=""
             width="288px"
             height="395px"
           />
-          <p>${item.section_name}</p>
-          <button class="img-btn favorite-false " id="${item.uri}">
+          <p class="news-list__category">${item.section_name}</p>
+          <button class="img-btn favorite-false "  data-id="${item.uri}">
             Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
