@@ -173,6 +173,7 @@ function handleInput(e) {
 
 export function createValueMarkup(e) {
   if (e.docs.length === 0) {
+    document.querySelector(`.weather`).innerHTML = ``;
     return (newsList.innerHTML = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
   <img class="not-found__img" src="${notFound}" alt="News not found" width="288px" height="198px" /></div>`);
   }
@@ -184,6 +185,12 @@ export function createValueMarkup(e) {
       const getTime = `${day} / ${month} / ${date.getFullYear()}`;
       const inputImg =
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
+      let itemTitle;
+      if (item.headline.main.length > 59) {
+        itemTitle = item.headline.main.slice(0, 54) + '...';
+      } else {
+        itemTitle = item.headline.main.title;
+      }
       return `<li class="images">
           <img class="news-list__img"
             src="https://static01.nyt.com/${inputImg}"
@@ -192,7 +199,7 @@ export function createValueMarkup(e) {
             height="395px"
           />
           <p class="news-list__category">${item.section_name}</p>
-          <button class="img-btn favorite-false "  data-id="${item.uri}">
+          <button class="img-btn favorite-false"  data-id="${item.uri}">
             Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
@@ -213,4 +220,5 @@ export function createValueMarkup(e) {
     .join('');
   newsList.innerHTML = valueMarkup;
   getWeatherCoords();
+  console.log(e);
 }
