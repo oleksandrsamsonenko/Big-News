@@ -1,9 +1,51 @@
 import axios from 'axios';
 import placeholder from '../img/placeholder.png';
+import notFound from '../img/notFound_mob.jpg';
 
 const newsList = document.querySelector('.news__list');
 const inputEl = document.querySelector('.search-form');
 const markupValue = document.querySelector('.search-input');
+let favoriteArticles = [];
+if (localStorage.getItem('savedNews')) {
+  JSON.parse(localStorage.getItem('savedNews')).map(item => {
+    console.log(item.id);
+    favoriteArticles.push(item);
+  });
+}
+newsList.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  } else {
+    e.target.classList.toggle('favorite-true');
+    e.target.classList.toggle('favorite-false');
+  }
+  if (e.target.classList.contains('favorite-true')) {
+    e.target.style.width = '168px';
+    e.target.textContent = 'Remove from favorite';
+
+    favoriteArticles.push({
+      img: e.target.parentNode.children[0].src,
+      href: e.target.parentNode.lastElementChild.lastElementChild.href,
+      h2: e.target.parentNode.children[3].textContent,
+      description: e.target.parentNode.children[4].textContent,
+      date: e.target.parentNode.lastElementChild.children[0].textContent,
+      uri: e.target.dataset.id,
+    });
+    localStorage.setItem('savedNews', JSON.stringify(favoriteArticles));
+  }
+
+  if (e.target.classList.contains('favorite-false')) {
+    e.target.style.width = '126px';
+    e.target.textContent = 'Add to favorite';
+    const superNewObj = JSON.parse(localStorage.getItem('savedNews')).filter(
+      item => item.uri !== e.target.dataset.id
+    );
+
+    localStorage.removeItem('savedNews');
+    localStorage.setItem('savedNews', JSON.stringify(superNewObj));
+    favoriteArticles = superNewObj;
+  }
+});
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
@@ -16,6 +58,7 @@ async function getFetch() {
     console.log(error);
   }
 }
+
 getFetch().then(data => createMarkup(data));
 export function createMarkup(arr) {
   const markup = arr
@@ -26,16 +69,23 @@ export function createMarkup(arr) {
       const getTime = `${day} / ${month} / ${date.getFullYear()}`;
       let imgUrl;
       let description;
+      let category;
+
+      let itemTitle;
+      if (item.title.length > 59) {
+        itemTitle = item.title.slice(0, 54) + '...'
+      } else {
+        itemTitle = item.title
+      }
 
       if (item.multimedia) {
         imgUrl =
-          item.multimedia.length === 0
-            ? placeholder
-            : item.multimedia[2].url;
+          item.multimedia.length === 0 ? placeholder : item.multimedia[2].url;
         description =
           item.multimedia.length === 0
             ? 'Sorry, this article has no description'
             : item.multimedia[0].caption;
+        category = item.section;
       } else {
         imgUrl =
           item.media.length === 0
@@ -45,21 +95,73 @@ export function createMarkup(arr) {
           item.media.length === 0 || item.media[0].caption === ''
             ? 'Sorry, this article has no description'
             : item.media[0].caption;
+        category = item.nytdsection;
+      }
+      setTimeout(() => {
+        if (!localStorage.getItem('savedNews')) {
+          return;
+        }
+        const favoriteBtn = document.querySelectorAll('.img-btn');
+        favoriteBtn.forEach(item => {
+          if (
+            JSON.parse(localStorage.getItem('savedNews')).find(elem => {
+              return elem.uri === String(item.dataset.id);
+            })
+          ) {
+            item.classList.add('favorite-true');
+            item.classList.remove('favorite-false');
+            item.textContent = 'Remove from favorite';
+          }
+        });
+      }, 500);
+      // if (!localStorage.getItem('savedNews'))
+      // return `<li class="images">
+      //   <img src="${imgUrl}" alt="" width="288px" height="395px" />
+      //   <p>${item.nytdsection}</p>
+      //   <button class="img-btn favorite-false " data-id="${item.uri}">Add to favorite </button>
+      //   <h2 class="description-title">${item.title}</h2>
+      //   <p>${description}</p>
+      //   <div class="info-more">
+      //     <p class="date">${getTime}</p>
+      //     <a
+      //       class="read-more-link"
+      //       href="${item.url}"
+      //       target="_blank"
+      //       rel="noopener noreferrer"
+      //     >
+      //       Read more
+      //     </a>
+      //   </div>
+      // </li>`;
+
+      if (description.length > 130) {
+        description = description.slice(0, 127) + '...'
+      } else {
+        description = description
       }
 
-      return ` <li class="images">
-      <img src="${imgUrl}" alt="" width="288px" height="395px" />
-      <p>${item.nytdsection}</p>
-      <button class="img-btn">Add to favorite</button>
-      <h2 class="description-title">${item.title}</h2>
-      <p>${description}</p>
-      <div class="info-more">
-        <p class="date">${getTime}</p>
-        <a class="read-more-link" href="${item.url}" target="_blank" rel="noopener noreferrer">Read more</a>
-      </div>
-      </li>`;
+    
+        return `<li class="images">
+          <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
+          <p class="news-list__category">${item.nytdsection}</p>
+          <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
+          <h2 class="description-title">${itemTitle}</h2>
+          <p class="description-of-news">${description}</p>
+          <div class="info-more">
+            <p class="date">${getTime}</p>
+            <a
+              class="read-more-link"
+              href="${item.url}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
+          </div>
+        </li>`;
     })
     .join('');
+
   newsList.innerHTML = markup;
 }
 
@@ -80,12 +182,16 @@ inputEl.addEventListener('submit', handleInput);
 function handleInput(e) {
   e.preventDefault();
 
-  getValueFetch(markupValue.value).then(data => createValueMarkup(data));
+  getValueFetch(markupValue.value).then(data => {
+    console.log(data)
+    createValueMarkup(data)
+  });
 }
 
 export function createValueMarkup(e) {
   if (e.docs.length === 0) {
-    return (newsList.innerHTML = 'sadwer34');
+    return (newsList.innerHTML = `<div class="not-found__box"><p class="not-found__text">We haven’t found news from this category</p>
+  <img class="not-found__img" src="${notFound}" alt="News not found" width="248px" height="198px" /></div>`);
   }
   const valueMarkup = e.docs
     .map(item => {
@@ -102,17 +208,26 @@ export function createValueMarkup(e) {
             width="288px"
             height="395px"
           />
-          <button class="img-btn">
-            Add to favorite{' '}
-            <svg class="favorite-icon" width="16" height="16">
-              <use href="../img/symbol-defs.svg#icon-heart"></use>
-            </svg>{' '}
+<<<<<<< HEAD
+          <button class="img-btn favorite-false "  data-id="${item.uri}">
+=======
+          <p>${item.section_name}</p>
+          <button class="img-btn favorite-false " id="${item.uri}">
+>>>>>>> main
+            Add to favorite
           </button>
           <h2 class="description-title">${item.headline.main}</h2>
           <p class="description-of-news">${item.abstract}</p>
           <div class="info-more">
             <p class="date-of-news">${getTime}</p>
-            <a href="">Read more</a>
+            <a
+              class="read-more-link"
+              href="${item.web_url}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
           </div>
         </li>`;
     })

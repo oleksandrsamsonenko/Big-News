@@ -11,7 +11,7 @@ let day
 let year
 let month
 const options = {
-  
+
     dateFormat:"d/m/Y",
     defaultDate: new Date(),
     onClose(selectedDates) {
@@ -19,11 +19,9 @@ const options = {
         day = String(selectedDate.getDate()).padStart(2,"0")
         month = String(selectedDate.getMonth()+1).padStart(2,"0")
         year = selectedDate.getFullYear()
-          console.log(inputEl.value)
-
-        getNewsByDate(value).then(data => {
+        
+        getNewsByDate(inputEl.value).then(data => {
             createValueMarkup(data)
-            console.log(data)
         })
     }
 }
@@ -32,14 +30,9 @@ flatpickr(inputCalendarEl, options)
 
 async function getNewsByDate(value) {
     try {
-        const res = await axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?
-        q=${value}&facet_field=day_of_week&facet=true&begin_date=${year}${month}${day}&end_date=${year}${month}${day}&api-key=${KEY}`)
-       //https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${API_KEY}&facet_fields=section_name&facet_filter=true&begin_date=20150101
-       
-        // https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=romney&facet_field=day_of_week&facet=true&begin_date=20120101&end_date=20120101&api-key=your-api-key
-       
+        const res = await axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${KEY}&facet_fields=section_name&facet_filter=true&begin_date=${year}${month}${day}&end_date=${year}${month}${day}
+`)
         return res.data.response;
-
     }
     catch (error) {
         console.log(error)
@@ -49,6 +42,6 @@ async function getNewsByDate(value) {
 // function createMarkupByDate(news) {
 //     const markup = news.map(item => {
 //     })
-    
+
 // }
 
