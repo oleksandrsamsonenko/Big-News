@@ -47,7 +47,6 @@ function handleLinkClick(e) {
 
   if(localStorage.getItem('id')) {
     const localIdArr = JSON.parse(localStorage.getItem('id'));
-    console.log(localIdArr)
     if(!localIdArr.includes(newsId)) {
       localIdArr.push(newsId);
       localStorage.setItem('id', JSON.stringify(localIdArr))

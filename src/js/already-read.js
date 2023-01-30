@@ -44,15 +44,13 @@ function createMarkupFromLocal(arr, newsArrDate) {
 }
 
 function handleHideBtnClick(e) {
-  console.dir(e.target);
-  // if(e.terget.className.value === 'read-btn') {
-  //   e.target.parentNode.nextElementSibling.classList.toggle('visually-hidden');
-  // }
+  if(e.target.classList.contains('read-btn')) {
+    e.target.parentNode.nextElementSibling.classList.toggle('visually-hidden');
+  }
 }
 
 function handleReadMoreBtnClick(e) {
-  // if (e.target.nodeName === 'A') {
-  // }
-
-  console.dir(e.terget.parentNode);
+  if (e.target.nodeName === 'A') {
+    console.dir(e.target.parentNode);
+  }
 }
