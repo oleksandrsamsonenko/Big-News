@@ -189,7 +189,10 @@ inputEl.addEventListener('submit', handleInput);
 function handleInput(e) {
   e.preventDefault();
 
-  getValueFetch(markupValue.value).then(data => createValueMarkup(data));
+  getValueFetch(markupValue.value).then(data => {
+    console.log(data)
+    createValueMarkup(data)
+  });
 }
 
 export function createValueMarkup(e) {
