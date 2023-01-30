@@ -5,56 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
 
   <body>
-    <header class="header">
-      <div class="container header__container">
-        <a class="logo" href="">News</a>
-        <nav class="header__nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a class="nav__link" href="./index.html">Home</a>
-            </li>
-            <li class="nav__item">
-              <a class="nav__link nav__link--current" href="./favorite.html"
-                >Favorite</a
-              >
-            </li>
-            <li class="nav__item">
-              <a class="nav__link" href="./read.html">Read</a>
-            </li>
-          </ul>
-          <form class="search-form" id="search-form">
-            <input
-              type="text"
-              name="searchQuery"
-              autocomplete="off"
-              placeholder="Search..."
-            />
-            <svg class="#" width="24" height="24">
-              <use href="#"></use>
-            </svg>
-          </form>
-          <div class="switchbox">
-            <p>Light</p>
-            <!-- <svg class="svgteme lightsvg" width="35">
-          <use href="./img/symbol-defs.svg#icon-light"></use>
-        </svg> -->
-            <label class="switch">
-              <input class="toggle" type="checkbox" checked />
-              <span class="slider round"></span>
-            </label>
-            <p>Dark</p>
-            <!-- <svg class="svgteme dark__svg" width="35">
-          <use href="./img/symbol-defs.svg#icon-dark"></use>
-        </svg> -->
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- Header -->
+    <include src="./partials/header.html"></include>
     <main>
       <ul class="saved-news all-news"></ul>
     </main>
@@ -62,6 +23,8 @@
 
     <include src="./partials/footer.html"></include>
     <script src="./js/favorite.js" type="module"></script>
+    <script src="./js/burger.js" type="module"></script>
+    <script src="./js/lupa-animation.js" type="module"></script>
     <script src="./js/favorite-button.js" module="script"></script>
   </body>
 </html>
