@@ -1,18 +1,20 @@
 .calendar {
+}
+.wrapper-calendar {
   display: flex;
   align-items: center;
 }
 
 .calendar-text {
-  display: none;
+  // display: none;
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.38;
-  @media screen and(min-width: 1280px) {
-    display: inline-block;
-  }
+  // @media screen and(min-width: 1280px) {
+  //   display: inline-block;
+  // }
 }
 .calendar-box {
   position: relative;
@@ -80,4 +82,8 @@
   // transform-origin: top center;
   transition: transform 500ms linear;
   // top: 40%;
+}
+
+.flatpickr-calendar {
+  background-color: red;
 }
