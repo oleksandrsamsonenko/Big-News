@@ -8,7 +8,7 @@ function createMarkup() {
           <p class="news-list__category">${item.category}</p>
           <button class="img-btn favorite-true"  data-id="${item.uri}">Remove from favorite</button>
           <h2 class="description-title">${item.h2}</h2>
-          <p>${item.description}</p>
+          <p class="description-of-news">${item.description}</p>
           <div class="info-more">
             <p class="date">${item.date}</p>
             <a

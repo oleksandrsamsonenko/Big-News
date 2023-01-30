@@ -11,7 +11,7 @@ if (localStorage.getItem('read')) {
 }
 
 readWrapperEl.addEventListener('click', handleHideBtnClick);
-readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
+// readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
 function createMarkupFromLocal(arr, newsArrDate) {
   const liMarkup = arr
@@ -62,14 +62,14 @@ function createMarkupFromLocal(arr, newsArrDate) {
 
 function handleHideBtnClick(e) {
   console.dir(e.target);
-  // if(e.terget.className.value === 'read-btn') {
-  //   e.target.parentNode.nextElementSibling.classList.toggle('visually-hidden');
-  // }
+  if (e.target.classList.contains('read-btn')) {
+    e.target.parentNode.nextElementSibling.classList.toggle('visually-hidden');
+  }
 }
 
-function handleReadMoreBtnClick(e) {
-  // if (e.target.nodeName === 'A') {
-  // }
+// function handleReadMoreBtnClick(e) {
+//   // if (e.target.nodeName === 'A') {
+//   // }
 
-  console.dir(e.terget.parentNode);
-}
+//   console.dir(e.terget.parentNode);
+// }
