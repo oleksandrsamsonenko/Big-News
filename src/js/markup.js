@@ -72,6 +72,13 @@ export function createMarkup(arr) {
       let description;
       let category;
 
+      let itemTitle;
+      if (item.title.length > 59) {
+        itemTitle = item.title.slice(0, 54) + '...'
+      } else {
+        itemTitle = item.title
+      }
+
       if (item.multimedia) {
         imgUrl =
           item.multimedia.length === 0 ? placeholder : item.multimedia[2].url;
@@ -92,13 +99,19 @@ export function createMarkup(arr) {
         category = item.nytdsection;
       }
 
+      if (description.length > 130) {
+        description = description.slice(0, 127) + '...'
+      } else {
+        description = description
+      }
+
       if (!localStorage.getItem('savedNews')) {
         return `<li class="images">
-          <img src="${imgUrl}" alt="" width="288px" height="395px" />
-          <p>${category}</p>
+          <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
+          <p class="news-list__category">${item.nytdsection}</p>
           <button class="img-btn favorite-false " data-id="${item.id}"  >Add to favorite </button>
-          <h2 class="description-title">${item.title}</h2>
-          <p>${description}</p>
+          <h2 class="description-title">${itemTitle}</h2>
+          <p class="description-of-news">${description}</p>
           <div class="info-more">
             <p class="date">${getTime}</p>
             <a
@@ -120,7 +133,7 @@ export function createMarkup(arr) {
           <img src="${imgUrl}" alt="" width="288px" height="395px" />
           <p>${item.nytdsection}</p>
           <button class="img-btn favorite-true " data-id="${item.id}" width="168px">Remove from favorite </button>
-          <h2 class="description-title">${item.title}</h2>
+          <h2 class="description-title">${itemTitle}</h2>
           <p>${description}</p>
           <div class="info-more">
             <p class="date">${getTime}</p>
@@ -177,7 +190,10 @@ inputEl.addEventListener('submit', handleInput);
 function handleInput(e) {
   e.preventDefault();
 
-  getValueFetch(markupValue.value).then(data => createValueMarkup(data));
+  getValueFetch(markupValue.value).then(data => {
+    console.log(data)
+    createValueMarkup(data)
+  });
 }
 
 export function createValueMarkup(e) {
@@ -207,7 +223,7 @@ export function createValueMarkup(e) {
           <p class="description-of-news">${item.abstract}</p>
           <div class="info-more">
             <p class="date-of-news">${getTime}</p>
-            <a href="">Read more</a>
+        <a class="read-more-link" href="${item.web_url}" target="_blank" rel="noopener noreferrer">Read more</a>
           </div>
         </li>`;
     })

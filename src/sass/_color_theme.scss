@@ -81,29 +81,29 @@
     cursor: pointer;
   }
   /*////////////////////////CHANGE COLOR THEME///////////////////////////////////*/
-  .light__theme .calendar-inp{
+
+  .light__theme{
+    background-color:#F4F4F4;
+    color:#111321;
+  }
+  .dark__theme{
+    background-color: #2E2E2E;
+    color:#F4F4F4;
+  }
+   .light__theme  .calendar-inp{
     border: 1px solid #111321;
     color: rgba(17, 19, 33, 0.4);
   }
-  .dark__theme .calendar-inp{
+  .dark__theme  .calendar-inp{
     border: 1px solid #F4F4F4;
     color:rgba(244, 244, 244, 0.4);
   }
 
-
-  .light__theme, 
-  .burger-menu__wrapper{
-    background-color:#F4F4F4;
-    color:#111321;
-  }
+  
   .light__theme .header{
     border-bottom: 1px solid rgba(0, 0, 0, 0.292);
   }
-  .dark__theme,
-  .burger-menu__wrapper{
-    background-color: #2E2E2E;
-    color:#F4F4F4;
-  }
+  
   .dark__theme .header{
     border-bottom: 1px solid #f4f4f441;
   }
