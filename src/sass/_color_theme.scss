@@ -1,6 +1,6 @@
 /*/////////////////////////////////////////////////////////////////////*/
 :root {
-  --transition: all 1s;
+  --transition: all .5s;
 }
 /* 
   transition:var(--transition);
@@ -29,8 +29,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #4b48db; /*фон*/
-  border: 0.6px solid #ffffff;
+  background-color: #fff; /*фон*/
+  border: 0.6px solid #4b48db;
 }
 
 .slider::before {
@@ -38,27 +38,33 @@ body {
   content: '';
   height: 16px;
   width: 16px;
-  right: 1px;
+  left: 1px;
   bottom: 1px;
-  border-radius: 20px;
-  background-color: #ffffff; /*кружочек*/
+  border-radius: 50%;
+  background-color: #4b48db; /*кружочек*/
   transition: all 1s;
 }
 
 input:checked + .slider {
-  background-color: transparent;
-  border: 0.6px solid #4b48db;
-  transition: all 1s;
+  background-color: #4b48db;
+  border: 0.6px solid #fff;
+  transition: transform .5s;
 }
 
-input:focus + .slider {
+input:focus + .slider:focus {
   box-shadow: 0 0 10px #4b48db; /*дымка вокруг овала*/
 }
 
 input:checked + .slider::before {
-  background-color: #4b48db;
-  transform: translateX(-20px);
+  background-color: #fff;
+  
 }
+input:checked + .slider::before{
+  transform: translateX(20px);
+}
+// input:checked + .slider::before{
+//   transform: translateX(-20px);
+// }
 /* Rounded sliders */
 .slider.round {
   border-radius: 20px;
@@ -124,11 +130,19 @@ input:checked + .slider::before {
   stroke: #4b48db;
   fill: #4b48db;
   transition: var(--transition);
+  // @media screen and (max-width:1280px) {
+  // fill: none;
+  // transition: var(--transition);
+  // }
 }
 .toggle__dark__theme {
   stroke: #5f6775;
   fill: #5f6775;
   transition: var(--transition);
+  // @media screen and (max-width:1280px) {
+  // fill: none;
+  // transition: var(--transition)
+  // }
 }
 .toggle__sun__theme {
   stroke: #4b48db;
@@ -143,6 +157,7 @@ input:checked + .slider::before {
 .input__light__theme {
   background-color: transparent;
   border: 1px solid #111321;
+  color: #111321;
   transition: var(--transition);
 }
 //   .input__light__theme::placeholder{
@@ -151,6 +166,7 @@ input:checked + .slider::before {
 .input__dark__theme {
   background-color: transparent;
   border: 1px solid #f4f4f4;
+  color: #f4f4f4;
   transition: var(--transition);
 }
 //   .input__dark__theme::placeholder{

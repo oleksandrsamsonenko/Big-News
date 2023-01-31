@@ -1,3 +1,8 @@
+.read-list{
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
 .read-box-inner {
   display: flex;
   align-items: center;
@@ -30,13 +35,15 @@
 
 .read-btn {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   // border: none;
   background-color: transparent;
 }
 
-.roll-icon {
+.roll-down-icon,
+.roll-up-icon {
+  display: block;
   pointer-events: none;
 }
 
@@ -44,14 +51,13 @@
   position: relative;
 }
 
-// .have-read {
-//   position: absolute;
-//   top: 20px;
-//   right: 21px;
-
-//   font-family: $mainFF;
-//   font-size: 14px;
-//   line-height: calc(19 / 14);
-
-//   color: #00b912;
-// }
+.have-read {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background: rgba(244, 244, 244, 0.4);
+}
