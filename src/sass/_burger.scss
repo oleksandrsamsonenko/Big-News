@@ -49,7 +49,6 @@
     display: flex;
 
     &.current {
-      color: #f4f4f4;
       background-color: $hoverColor;
     }
   }
@@ -59,13 +58,19 @@
   }
 
   &__link {
+    position: relative;
     display: flex;
     align-items: center;
     text-decoration: none;
+    width: 100%;
 
     font-size: 16px;
     line-height: 22px;
     margin-left: 24px;
+
+    &.current {
+      color: #f4f4f4;
+    }
   }
 
   &__icon {
@@ -75,6 +80,11 @@
     &.current {
       border: 1px solid #f4f4f4;
     }
+  }
+
+  &__chevron {
+    position: absolute;
+    right: 16px;
   }
 }
 
@@ -86,6 +96,4 @@
   font-size: 24px;
   line-height: 33px;
 }
-.toggle__box__small {
-  bottom: 19px;
-}
+

@@ -62,7 +62,32 @@ export async function getWeatherCoords() {
     rel="noreferrer noopener"
     class="socials__link link"
     >Weather for week</a>`;
-  } catch {}
+  } catch {
+    const weather = await axios.get(
+      `https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=ddb3f4f523554053da0c0f5cbef7c1eb&q=Kyiv&units=metric`
+    );
+    // console.log(weather.data.list[0].main.temp);
+    document.querySelector(
+      `.weather`
+    ).innerHTML = `<div class="weather_wrapper"><p class="weather_temperature">${Math.round(
+      weather.data.list[0].main.temp
+    )}&deg</p>
+      <div class="weather_info"><p class="weather_condition">${
+        weather.data.list[0].weather[0].main
+      }</p>
+      <p class="weather_geolocation">Kyiv</p></div></div>
+      <img class="weather_image" src="${`https://openweathermap.org/img/wn/${weather.data.list[0].weather[0].icon}@2x.png`}" alt="Weather condition" width=128 height=121 />
+      <p class="weather_day">${days[date.getDay()]}</p>
+      <p class="weather_date">${String(date.getDate()).padStart(2, '0')}-${
+      months[date.getMonth()]
+    }-${date.getFullYear()}</p>
+    <a class="weather_forecast"
+    href="https://openweathermap.org/city/${weather.data.city.id}"
+    target="_blank"
+    rel="noreferrer noopener"
+    class="socials__link link"
+    >Weather for week</a>`;
+  }
 }
 // пошук за координатами з браузера, працює через раз і тільки з дозволу користувача
 // async function addMarkupByGeo(lat, lon) {

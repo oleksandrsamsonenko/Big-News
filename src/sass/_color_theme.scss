@@ -162,7 +162,7 @@ input:checked + .slider::before{
 }
 //   .input__light__theme::placeholder{
 //     color: #111321;
-//   }
+//   }/////////
 .input__dark__theme {
   background-color: transparent;
   border: 1px solid #f4f4f4;
@@ -192,6 +192,16 @@ img {
   object-fit: cover;
 }
 
+.btns__light__theme{
+  background-color: #f4f4f4;
+}
+.btns__dark__theme{
+  background-color: #ffffff;
+}
+
+// .have-read{
+//   //оверлей
+// }
 ////
 // .r::placeholder{
 //   color: red;

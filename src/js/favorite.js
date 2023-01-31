@@ -1,4 +1,4 @@
-import notFound from '../img/notFound_mob.jpg';
+import notFound from '../img/not-found.png';
 const savedNews = document.querySelector('.saved-news');
 
 function createMarkup() {

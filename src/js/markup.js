@@ -1,6 +1,6 @@
 import axios from 'axios';
 import placeholder from '../img/placeholder.png';
-import notFound from '../img/notFound_mob.jpg';
+import notFound from '../img/not-found.png';
 import { getWeatherCoords } from './weather';
 
 const newsList = document.querySelector('.news__list');
@@ -149,7 +149,12 @@ export function createValueMarkup(e) {
       if (item.headline.main.length > 50) {
         itemTitle = item.headline.main.slice(0, 46) + '...';
       } else {
-        itemTitle = item.headline.main.title;
+        itemTitle = item.headline.main;
+      }
+      if (item.abstract.length > 130) {
+        item.abstract = item.abstract.slice(0, 127) + '...';
+      } else {
+        item.abstract = item.abstract;
       }
       return `<li class="images">
           <img class="news-list__img"
@@ -162,7 +167,7 @@ export function createValueMarkup(e) {
           <button class="img-btn favorite-false"  data-id="${item.uri}">
             Add to favorite
           </button>
-          <h2 class="description-title">${item.headline.main}</h2>
+          <h2 class="description-title">${itemTitle}</h2>
           <p class="description-of-news">${item.abstract}</p>
           <div class="info-more">
             <p class="date-of-news">${getTime}</p>

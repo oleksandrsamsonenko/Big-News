@@ -8,9 +8,15 @@ if (localStorage.getItem('savedNews')) {
 newsList.addEventListener('click', e => {
   if (e.target.nodeName !== 'BUTTON') {
     return;
-  } else {
+  }
+  if (
+    e.target.classList.contains('favorite-true') ||
+    e.target.classList.contains('favorite-false')
+  ) {
     e.target.classList.toggle('favorite-true');
     e.target.classList.toggle('favorite-false');
+  } else {
+    return;
   }
   if (e.target.classList.contains('favorite-true')) {
     e.target.style.width = '168px';
