@@ -32,5 +32,8 @@ const menuLinks = document.querySelectorAll('.mobile-menu__link')
 for (const link of menuLinks) {
     if (link.href === window.location.href) {
         link.parentNode.classList.add('current')
-}
+        for (const child of link.children) {
+            child.classList.add('current')
+        }
+    }
 }
