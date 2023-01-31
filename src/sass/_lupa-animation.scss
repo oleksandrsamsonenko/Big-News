@@ -2,12 +2,13 @@
   opacity: 0;
   transition: 500ms ease-in-out;
   border-radius: 30px;
-  // max-width: 173px;
+  max-width: 125px;
   height: 31px;
   // margin-left: 14px;
+  padding-inline-start: 48px;
 
   @media screen and (min-width: $tablet) {
-    width: 210px;
+    min-width: 159px;
     opacity: 1;
     display: inline-block;
     transition: none;
@@ -15,7 +16,7 @@
   }
 
   @media screen and (min-width: $desktop) {
-    width: 287px;
+    min-width: 239px;
   }
 }
 

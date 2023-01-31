@@ -3,6 +3,9 @@
 .wrapper-calendar {
   display: flex;
   align-items: center;
+  @media screen and (min-width: $desktop) {
+    margin-left: 37px;
+  }
 }
 
 .calendar-text {
@@ -18,7 +21,9 @@
 }
 .calendar-box {
   position: relative;
-  margin-left: 37px;
+  @media screen and (min-width: $desktop) {
+    margin-left: 37px;
+  }
 }
 .calendar-inp {
   width: 168px;
@@ -77,7 +82,7 @@
   fill: $whiteColor;
 }
 
-.is-hidden-svg {
+.is-rotate-svg {
   transform: rotateX(180deg);
   // transform-origin: top center;
   transition: transform 500ms linear;
