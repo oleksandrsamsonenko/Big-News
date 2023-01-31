@@ -9,6 +9,10 @@ const svgDark = document.querySelector('.svg__dark');
 const svgSun = document.querySelector('.svg__sun');
 const svgMoon = document.querySelector('.svg__moon');
 
+const sunT = document.querySelector('.svg__toggle__sun');
+const moonT = document.querySelector('.svg__toggle__moon');
+
+
 const inputT = document.querySelector('.input__theme');
 
 const svgLupa = document.querySelector('.lupa__theme');
@@ -48,6 +52,12 @@ function colorTheme(e){
 
     svgMoon.classList.toggle('toggle__moon__theme');
     svgMoon.classList.toggle('toggle__sun__theme');//moon
+
+    sunT.classList.toggle('toggle__sun__theme');
+    sunT.classList.toggle('toggle__moon__theme');//sun toggle
+
+    moonT.classList.toggle('toggle__sun__theme');
+    moonT.classList.toggle('toggle__moon__theme');//moon toggle
 
     inputT.classList.toggle('input__light__theme');
     inputT.classList.toggle('input__dark__theme');//input
