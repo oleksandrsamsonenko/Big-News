@@ -1,3 +1,16 @@
+.categories {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 40px;
+  @media screen and (min-width: $tablet) {
+    padding-top: 28px;
+    padding-bottom: 48px;
+  }
+  @media screen and (min-width: $desktop) {
+    padding-bottom: 60px;
+  }
+}
 .filter-box {
   display: flex;
   gap: 14px;
