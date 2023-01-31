@@ -59,9 +59,11 @@
   }
 
   &__link {
+    position: relative;
     display: flex;
     align-items: center;
     text-decoration: none;
+    width: 100%;
 
     font-size: 16px;
     line-height: 22px;
@@ -75,6 +77,11 @@
     &.current {
       border: 1px solid #f4f4f4;
     }
+  }
+
+  &__chevron {
+    position: absolute;
+    right: 16px;
   }
 }
 
