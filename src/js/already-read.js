@@ -22,16 +22,27 @@ if (localStorage.getItem('read')) {
 readWrapperEl.addEventListener('click', handleHideBtnClick);
 readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
-function createMarkupFromLocal(arr, newsArrDate) {
-  const liMarkup = arr
+function updateMarkup() {
+  const localKeyArr = JSON.parse(localStorage.getItem('read'));
+    localKeyArr.sort((prev, next) => next.localeCompare(prev)).forEach(element => {
+      const dateNews = element;
+      const localNewsArr = JSON.parse(localStorage.getItem(`${element}`));
+      createMarkupFromLocal(localNewsArr, dateNews);
+    });
+}
+
+function createMarkupFromLocal(newsArrey, newsArrDate) {
+
+  console.log(newsArrey)
+  const liMarkup = newsArrey
     .map(
-      item => ` <li class="images">
-    <img src="${item.imgUrl}" alt="" width="288px" height="395px" />
+      item => ` <li class="images read-item">
+    <img class="news-list__img" src="${item.imgUrl}" alt="" width="288px" height="395px" />
     <p class="have-read visually-hidden">Have Read</p>
-    <p>${item.category}</p>
+    <p class="news-list__category">${item.category}</p>
     <button class="img-btn favorite-false" data-id="${item.id}">Add to favorite</button>
     <h2 class="description-title">${item.title}</h2>
-    <p>${item.descr}</p>
+    <p class="description-of-news">${item.descr}</p>
     <div class="info-more">
       <p class="date" data-date="${item.dateKey}">${item.date}</p>
       <a class="read-more-link" href="${item.originUrl}" target="_blank" rel="noopener noreferrer">Read more</a>
@@ -72,14 +83,7 @@ function createMarkupFromLocal(arr, newsArrDate) {
   readWrapperEl.insertAdjacentHTML('beforeend', markup);
 }
 
-function updateMarkup() {
-  const localKeyArr = JSON.parse(localStorage.getItem('read'));
-    localKeyArr.sort((prev, next) => prev.localCompare(next)).forEach(element => {
-      const dateNews = element;
-      const localArr = JSON.parse(localStorage.getItem(`${element}`));
-      createMarkupFromLocal(localArr, dateNews);
-    });
-}
+//prev.localCompare(next)
 
 function handleHideBtnClick(e) {
   if(e.target.classList.contains('read-btn')) {
@@ -96,12 +100,6 @@ function handleReadMoreBtnClick(e) {
     const newsItem = localArr.find(item => item.id === newsId);
     const indexOfNews = localArr.indexOf(newsItem);
     localArr.splice(indexOfNews, 1);
-
-    console.log('newsReadingDate', newsReadingDate)
-    console.log('localArr', localArr)
-    console.log('newsItem', newsItem)
-    console.log('indexOfNews', indexOfNews)
-    console.log('localArr after splice', localArr)
 
     if(localStorage.getItem(`${dateKey}`)) {
       const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`))
