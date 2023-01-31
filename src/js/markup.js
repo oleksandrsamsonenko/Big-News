@@ -1,6 +1,6 @@
 import axios from 'axios';
 import placeholder from '../img/placeholder.png';
-import notFound from '../img/notFound_mob.jpg';
+import notFound from '../img/not-found.png';
 import { getWeatherCoords } from './weather';
 
 const newsList = document.querySelector('.news__list');

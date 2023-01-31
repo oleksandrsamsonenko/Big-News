@@ -17,6 +17,10 @@ const svgX = document.querySelector('.x__theme');
 
 const burger = document.querySelector('.burger-menu__wrapper');
 
+// const btns = document.querySelector('.filter-btn');
+// const others = document.querySelector('.filter-dropdowv-btn');
+// console.log(btns,others);
+
 function colorTheme(e){
     if (e.type==='click')  {
         themeKey = themeKey==='light'?'dark':'light';
@@ -57,7 +61,13 @@ function colorTheme(e){
     svgX.classList.toggle('svg__light__theme');
     svgX.classList.toggle('svg__dark__theme');// X esc
 
-    
+    // btns.classList.toggle('');
+    // btns.classList.toggle('');
+
+    // others.classList.toggle('');
+    // others.classList.toggle('');
+
+
     // console.log(themeKey);
     // if(themeKey){
     //     themeKey=false;
@@ -80,5 +90,5 @@ document.addEventListener("DOMContentLoaded", (e)=> {
 toggles.forEach(toggle=> {toggle.addEventListener('click',colorTheme)
   if(themeKey === 'dark'){
     toggle.checked=true;}
-    //else{toggle.checked=false;}
+    else{toggle.checked=false;}
 });

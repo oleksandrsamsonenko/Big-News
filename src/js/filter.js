@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createMarkup } from './markup';
-import notFound from '../img/notFound.jpg';
+import notFound from '../img/not-found.png';
 import throttle from 'lodash.throttle';
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
