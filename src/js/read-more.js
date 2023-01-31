@@ -1,4 +1,4 @@
-const newslistEl = document.querySelector('.news__list');
+const newslistEl = document.querySelector('.news-wrapper');
 const readArr = [];
 const keyArr = [];
 const idArr = [];
@@ -15,24 +15,12 @@ const year = today.getFullYear();
 const dateKey = `${date}/${month}/${year}`;
 // const dateKey = `20/01/2023`;
 
-if (localStorage.getItem('read')) {
-  const localKeyArr = JSON.parse(localStorage.getItem('read'));
-  if (!localKeyArr.includes(dateKey)) {
-    localKeyArr.push(dateKey);
-    localStorage.setItem('read', JSON.stringify(localKeyArr));
-  }
-  keyArr.push(...localKeyArr);
-} else {
-  keyArr.push(dateKey);
-  localStorage.setItem(`read`, JSON.stringify(keyArr));
-}
-
 if (localStorage.getItem('id')) {
   const localIdArr = JSON.parse(localStorage.getItem('id'));
-  idArr.push(localIdArr);
+  idArr.push(...localIdArr);
 }
 
-newslistEl.addEventListener('click', handleLinkClick);
+newslistEl.addEventListener('click', handleLinkClick, false);
 
 function handleLinkClick(e) {
   if (e.target.nodeName !== 'A') {
@@ -40,6 +28,19 @@ function handleLinkClick(e) {
   }
 
   e.target.parentNode.parentNode.classList.add('have-read');
+
+  if (localStorage.getItem('read')) {
+    const localKeyArr = JSON.parse(localStorage.getItem('read'));
+    if (!localKeyArr.includes(dateKey)) {
+      localKeyArr.push(dateKey);
+      localStorage.setItem('read', JSON.stringify(localKeyArr));
+    } else {
+      keyArr.push(...localKeyArr);
+    }
+  } else {
+    keyArr.push(dateKey);
+    localStorage.setItem('read', JSON.stringify(keyArr));
+  }
 
   const newsId = e.target.parentNode.parentNode.children[2].dataset.id;
 
@@ -51,7 +52,7 @@ function handleLinkClick(e) {
     return;
   }
 
-  localStorage.setItem('id', JSON.stringify(newsId));
+  localStorage.setItem('id', JSON.stringify(`${newsId}`));
   pushObj();
 
   function pushObj() {

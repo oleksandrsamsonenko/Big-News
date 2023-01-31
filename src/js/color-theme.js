@@ -1,4 +1,6 @@
-const toggle = document.querySelector('.toggle');   
+const toggles = document.querySelectorAll('.toggle');   
+
+let themeKey = localStorage.getItem("themeKey")|| 'light';
 
 const body = document.querySelector('body');
 const svgLight = document.querySelector('.svg__light');
@@ -14,9 +16,16 @@ const svgMenu = document.querySelector('.menu__theme');
 const svgX = document.querySelector('.x__theme');
 
 const burger = document.querySelector('.burger-menu__wrapper');
-console.log(svgSun,svgMoon);
-function colorTheme(){
-    
+
+function colorTheme(e){
+    if (e.type==='click')  {
+        themeKey = themeKey==='light'?'dark':'light';
+
+     localStorage.setItem("themeKey", themeKey);
+
+    }   
+
+    // if(local){вся функція } else{ret}
     body.classList.toggle('light__theme');
     body.classList.toggle('dark__theme');//body
 
@@ -33,8 +42,8 @@ function colorTheme(){
     svgSun.classList.toggle('toggle__sun__theme');
     svgSun.classList.toggle('toggle__moon__theme');//sun
 
-    svgMoon.classList.toggle('toggle__sun__theme');
-    svgMoon.classList.toggle('toggle__moon__theme');//moon
+    svgMoon.classList.toggle('toggle__moon__theme');
+    svgMoon.classList.toggle('toggle__sun__theme');//moon
 
     inputT.classList.toggle('input__light__theme');
     inputT.classList.toggle('input__dark__theme');//input
@@ -56,8 +65,20 @@ function colorTheme(){
     //     themeKey=true;
     // }
 
-    // localStorage.setItem("themeKey", a);
+
 
 }
 
-toggle.addEventListener('click', colorTheme);//(themeKey)
+
+
+document.addEventListener("DOMContentLoaded", (e)=> {
+    if (themeKey === 'dark') {
+        colorTheme(e);
+    }
+});
+
+toggles.forEach(toggle=> {toggle.addEventListener('click',colorTheme)
+  if(themeKey === 'dark'){
+    toggle.checked=true;}
+    //else{toggle.checked=false;}
+});

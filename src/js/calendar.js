@@ -4,6 +4,7 @@ import axios from "axios";
 import {createValueMarkup} from './markup'
 
 const inputCalendarEl = document.querySelector(".calendar-inp")
+const svgOpenEl = document.querySelector(".svg-open-calendar")
 const inputEl = document.querySelector(".search-input")
 const KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b'
 const value = inputEl.value
@@ -11,10 +12,11 @@ let day
 let year
 let month
 const options = {
-
+    disableMobile: "true",
     dateFormat:"d/m/Y",
     defaultDate: new Date(),
     onClose(selectedDates) {
+        svgOpenEl.classList.remove("is-rotate-svg")
         const selectedDate = selectedDates[0]
         day = String(selectedDate.getDate()).padStart(2,"0")
         month = String(selectedDate.getMonth()+1).padStart(2,"0")
@@ -23,6 +25,10 @@ const options = {
         getNewsByDate(inputEl.value).then(data => {
             createValueMarkup(data)
         })
+    },
+    onOpen() {
+        svgOpenEl.classList.add("is-rotate-svg")
+        
     }
 }
 // Вызов библиотеки чтоб в инпуте появился календарь
