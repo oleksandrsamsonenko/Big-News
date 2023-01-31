@@ -23,6 +23,8 @@ getFetch().then(data => createMarkup(data));
 export function createMarkup(arr) {
   const markup = arr
     .map(item => {
+      // console.log(item.uri);
+      // console.log(item.uri.slice(14, 22));
       const date = new Date(item.published_date);
       const day = String(date.getDate()).padStart(2, '0');
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -84,7 +86,10 @@ export function createMarkup(arr) {
       return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
           <p class="news-list__category">${category}</p>
-          <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
+          <button class="img-btn favorite-false " data-id="${item.uri.slice(
+            14,
+            22
+          )}"  >Add to favorite </button>
           <h2 class="description-title">${itemTitle}</h2>
           <p class="description-of-news">${description}</p>
           <div class="info-more">
@@ -98,6 +103,10 @@ export function createMarkup(arr) {
               Read more
             </a>
           </div>
+          <div class="read-overlay" data-id="${item.uri.slice(
+            14,
+            22
+          )}"><p class="overlay-text">Already read V<p></div>
         </li>`;
     })
     .join('');
@@ -162,7 +171,10 @@ export function createValueMarkup(e) {
             height="395px"
           />
           <p class="news-list__category">${item.section_name}</p>
-          <button class="img-btn favorite-false"  data-id="${item.uri}">
+          <button class="img-btn favorite-false"  data-id="${item.uri.slice(
+            14,
+            22
+          )}">
             Add to favorite
           </button>
           <h2 class="description-title">${itemTitle}</h2>
@@ -178,6 +190,10 @@ export function createValueMarkup(e) {
               Read more
             </a>
           </div>
+          <div class="read-overlay" data-id="${item.uri.slice(
+            14,
+            22
+          )}"><p class="overlay-text">Already read V</p></div>
         </li>`;
     })
     .join('');

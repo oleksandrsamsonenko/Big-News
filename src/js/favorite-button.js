@@ -24,10 +24,12 @@ newsList.addEventListener('click', e => {
 
     favoriteArticles.push({
       img: e.target.parentNode.children[0].src,
-      href: e.target.parentNode.lastElementChild.lastElementChild.href,
+      // href: e.target.parentNode.lastElementChild.lastElementChild.href, //1
+      href: e.target.parentNode.children[5].lastElementChild.href,
       h2: e.target.parentNode.children[3].textContent,
       description: e.target.parentNode.children[4].textContent,
-      date: e.target.parentNode.lastElementChild.children[0].textContent,
+      date: e.target.parentNode.children[5].children[0].textContent,
+      // date: e.target.parentNode.lastElementChild.children[0].textContent, //1
       uri: e.target.dataset.id,
       category: e.target.parentNode.children[1].textContent,
     });

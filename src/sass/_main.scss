@@ -90,7 +90,7 @@
 
     // z-index: 100;
     top: 48px;
-    right: 0;
+    right: 16px;
   }
   @media screen and (min-width: 1280px) {
     top: 60px;
@@ -131,6 +131,7 @@
 
 //////list-item
 .images {
+  overflow: hidden;
   position: relative;
   max-width: 480px;
   max-height: 630px;
@@ -155,6 +156,7 @@
 
 /////add to favorite
 .img-btn {
+  z-index: 5;
   position: absolute;
   width: 126px;
   height: 28px;
@@ -226,7 +228,7 @@
   font-style: $fontStyle;
   font-size: 14px;
   line-height: 19px;
-  height: 66px;
+  min-height: 66px;
 
   @media screen and (min-width: $tablet) {
     font-size: 16px;
@@ -264,5 +266,37 @@
 
   @media screen and (min-width: 768px) {
     margin-top: 150px;
+  }
+}
+
+.overlay-text {
+  position: absolute;
+  color: rgba(0, 221, 115, 1);
+  font-family: 'Manrope';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.35;
+  padding-left: 168px;
+  padding-top: 14px;
+  @media screen and (min-width: 768px) {
+    padding-left: 300px;
+    padding-top: 16px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-left: 268px;
+    padding-top: 20px;
+  }
+}
+.overlay-shown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(244, 244, 244, 0.4);
+
+  height: 630px;
+
+  @media screen and (min-width: 768px) {
+    height: 675px;
   }
 }
