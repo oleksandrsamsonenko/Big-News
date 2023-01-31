@@ -114,7 +114,9 @@ export function createMarkup(arr) {
 
   newsList.innerHTML = markup;
 }
+// const params = {
 
+// }
 async function getValueFetch(value) {
   try {
     const fullfield = await axios.get(
