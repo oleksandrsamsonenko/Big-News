@@ -1,4 +1,6 @@
 .calendar {
+}
+.wrapper-calendar {
   display: flex;
   align-items: center;
 }
@@ -80,4 +82,8 @@
   // transform-origin: top center;
   transition: transform 500ms linear;
   // top: 40%;
+}
+
+.flatpickr-calendar {
+  background-color: red;
 }

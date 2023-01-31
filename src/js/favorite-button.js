@@ -2,7 +2,6 @@ const newsList = document.querySelector('.news__list');
 let favoriteArticles = [];
 if (localStorage.getItem('savedNews')) {
   JSON.parse(localStorage.getItem('savedNews')).map(item => {
-    console.log(item.id);
     favoriteArticles.push(item);
   });
 }
