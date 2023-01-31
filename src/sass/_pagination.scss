@@ -50,6 +50,10 @@ background-size: contain;
                 gap: 14px;
        
 }
+.button__pagination:hover{
+    background-color: #4440F7;
+
+}
 .hiden-number{
     display: none;
     @media screen and (min-width:$tablet){
@@ -61,6 +65,9 @@ background-size: contain;
     }
 }
 
+.number-mobile:hover{
+    background: #4440F7;
+}
 .number-mobile{
     width: 28px;
         height: 28px;
@@ -95,5 +102,5 @@ font-family: 'Manrope';
     justify-content: center;
 }
 .current{
-    background: #4440F7
+    background: #4440F7;
 }
