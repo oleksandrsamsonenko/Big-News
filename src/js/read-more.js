@@ -23,9 +23,8 @@ if (localStorage.getItem('id')) {
 newslistEl.addEventListener('click', handleLinkClick, false);
 
 function handleLinkClick(e) {
-  if (e.target.nodeName !== 'A') {
-    return;
-  }
+  if (e.target.classList.contains('read-more-link')) {
+
 
   e.target.parentNode.parentNode.classList.add('have-read');
 
@@ -70,4 +69,5 @@ function handleLinkClick(e) {
   }
 
   localStorage.setItem(`${dateKey}`, JSON.stringify(readArr));
+}
 }
