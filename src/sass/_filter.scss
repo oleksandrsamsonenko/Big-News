@@ -68,11 +68,11 @@
     // }
   }
 
-&:hover,
-&:focus {
-  color: $whiteColor;
-  background-color: $hoverColor;
-}
+  &:hover,
+  &:focus {
+    color: $whiteColor;
+    background-color: $hoverColor;
+  }
 }
 
 .filter-list {
@@ -91,13 +91,14 @@
   letter-spacing: 0.01em;
 
   z-index: 1;
+  position: absolute;
 
   ::-webkit-scrollbar {
     width: 12px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: blue
+    background-color: blue;
   }
 }
 
