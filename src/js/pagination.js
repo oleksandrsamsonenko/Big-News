@@ -22,9 +22,28 @@ function createMarkup() {
   const asd1 = asd.slice(0, 8);
   const asd2 = asd.slice(8, 17);
   const asd3 = asd.slice(17, asd.length);
-  let total = [];
-  total.push(asd1, asd2, asd3);
-  console.log(total);
 
-  total.map(item => console.log('123', item[0]));
+  console.log(asd1);
+  const firstPage = asd1.map(item => {
+    console.log(item.abstract);
+    item.abstract === '' ? item.abstract === '123' : item.abstract;
+    // return `<li class="images">
+    //       <img  class="news-list__img" src="${item.media[0]['media-metadata'][0].url}" alt="" width="288px" height="395px" />
+    //       <p class="news-list__category">${item.nytdsection}</p>
+    //       <button class="img-btn favorite-false " data-id="${item.uri}"  >Add to favorite </button>
+    //       <h2 class="description-title">${itemTitle}</h2>
+    //       <p class="description-of-news">${description}</p>
+    //       <div class="info-more">
+    //         <p class="date">${getTime}</p>
+    //         <a
+    //           class="read-more-link"
+    //           href="${item.url}"
+    //           target="_blank"
+    //           rel="noopener noreferrer"
+    //         >
+    //           Read more
+    //         </a>
+    //       </div>
+    //     </li>`;
+  });
 }
