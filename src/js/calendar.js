@@ -16,7 +16,7 @@ const options = {
     dateFormat:"d/m/Y",
     defaultDate: new Date(),
     onClose(selectedDates) {
-        svgOpenEl.classList.remove("is-hidden-svg")
+        svgOpenEl.classList.remove("is-rotate-svg")
         const selectedDate = selectedDates[0]
         day = String(selectedDate.getDate()).padStart(2,"0")
         month = String(selectedDate.getMonth()+1).padStart(2,"0")
@@ -27,7 +27,7 @@ const options = {
         })
     },
     onOpen() {
-        svgOpenEl.classList.add("is-hidden-svg")
+        svgOpenEl.classList.add("is-rotate-svg")
         
     }
 }
