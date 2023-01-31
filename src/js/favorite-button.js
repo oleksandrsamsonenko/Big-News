@@ -38,5 +38,8 @@ newsList.addEventListener('click', e => {
     localStorage.removeItem('savedNews');
     localStorage.setItem('savedNews', JSON.stringify(superNewObj));
     favoriteArticles = superNewObj;
+    if (JSON.parse(localStorage.getItem(`savedNews`)).length < 1) {
+      localStorage.removeItem('savedNews');
+    }
   }
 });
