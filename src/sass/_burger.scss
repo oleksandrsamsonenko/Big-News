@@ -49,7 +49,6 @@
     display: flex;
 
     &.current {
-      color: #f4f4f4;
       background-color: $hoverColor;
     }
   }
@@ -68,6 +67,10 @@
     font-size: 16px;
     line-height: 22px;
     margin-left: 24px;
+
+    &.current {
+      color: #f4f4f4;
+    }
   }
 
   &__icon {

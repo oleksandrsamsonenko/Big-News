@@ -35,6 +35,7 @@ for (const link of menuLinks) {
         </svg>`
     if (link.href === window.location.href) {
         link.parentNode.classList.add('current')
+        link.classList.add('current')
         link.insertAdjacentHTML('beforeend', svg)
         for (const child of link.children) {
             child.classList.add('current')
