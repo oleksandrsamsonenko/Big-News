@@ -32,8 +32,8 @@ export function createMarkup(arr) {
       let category;
 
       let itemTitle;
-      if (item.title.length > 54) {
-        itemTitle = item.title.slice(0, 50) + '...';
+      if (item.title.length > 50) {
+        itemTitle = item.title.slice(0, 46) + '...';
       } else {
         itemTitle = item.title;
       }
@@ -144,8 +144,8 @@ export function createValueMarkup(e) {
       const inputImg =
         item.multimedia.length === 0 ? '' : item.multimedia[0].url;
       let itemTitle;
-      if (item.headline.main.length > 54) {
-        itemTitle = item.headline.main.slice(0, 50) + '...';
+      if (item.headline.main.length > 50) {
+        itemTitle = item.headline.main.slice(0, 46) + '...';
       } else {
         itemTitle = item.headline.main.title;
       }
