@@ -17,7 +17,7 @@ if (localStorage.getItem('read')) {
 }
 
 readWrapperEl.addEventListener('click', handleHideBtnClick);
-readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
+// readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
 function updateMarkup() {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
@@ -35,7 +35,6 @@ function createMarkupFromLocal(newsArrey, newsArrDate) {
     .map(
       item => ` <li class="images read-item">
     <img class="news-list__img" src="${item.imgUrl}" alt="" width="288px" height="395px" />
-    <p class="have-read visually-hidden">Have Read</p>
     <p class="news-list__category">${item.category}</p>
     <button class="img-btn favorite-false" data-id="${item.id}">Add to favorite</button>
     <h2 class="description-title">${item.title}</h2>
@@ -43,7 +42,7 @@ function createMarkupFromLocal(newsArrey, newsArrDate) {
     <div class="info-more">
       <p class="date" data-date="${item.dateKey}">${item.date}</p>
       <a class="already-read-link" href="${item.originUrl}" target="_blank" rel="noopener noreferrer">Read more</a>
-    </div>
+    </div><div></div>
     </li>`
     )
     .join('');
