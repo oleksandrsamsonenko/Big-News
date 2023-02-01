@@ -6,6 +6,7 @@ function handleLinkClick(e) {
   if (!e.target.classList.contains('read-more-link')) {
     return;
   }
+  e.target.parentNode.nextElementSibling.classList.add(`overlay-shown`);
 
   const readArr = [];
   const keyArr = [];

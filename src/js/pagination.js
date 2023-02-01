@@ -23,9 +23,9 @@ function createMarkup() {
   const asd2 = asd.slice(8, 17);
   const asd3 = asd.slice(17, asd.length);
 
-  console.log(asd1);
+  // console.log(asd1);
   const firstPage = asd1.map(item => {
-    console.log(item.abstract);
+    // console.log(item.abstract);
     item.abstract === '' ? item.abstract === '123' : item.abstract;
     // return `<li class="images">
     //       <img  class="news-list__img" src="${item.media[0]['media-metadata'][0].url}" alt="" width="288px" height="395px" />

@@ -17,7 +17,7 @@ if (localStorage.getItem('read')) {
 }
 
 readWrapperEl.addEventListener('click', handleHideBtnClick);
-readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
+// readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
 function updateMarkup() {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
