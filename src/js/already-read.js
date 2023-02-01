@@ -22,7 +22,7 @@ readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 function updateMarkup() {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
   localKeyArr
-    .sort((prev, next) => next.localeCompare(prev))
+    .sort((prev, next) => prev.localeCompare(next))
     .forEach(element => {
       const dateNews = element;
       const localNewsArr = JSON.parse(localStorage.getItem(`${element}`));
@@ -93,35 +93,35 @@ function handleHideBtnClick(e) {
   }
 }
 
-function handleReadMoreBtnClick(e) {
-  if (e.target.classList.contains('already-read-link')) {
-    const newsId = e.target.parentNode.parentNode.children[3].dataset.id;
-    e.target.parentNode.parentNode.children[1].classList.remove(
-      'visually-hidden'
-    );
-    const newsReadingDate = e.target.previousElementSibling.dataset.date;
-    const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
-    const newsItem = localArr.find(item => item.id === newsId);
-    const indexOfNews = localArr.indexOf(newsItem);
-    console.log('localArr', localArr);
-    localArr.splice(indexOfNews, 1);
+// function handleReadMoreBtnClick(e) {
+//   if (e.target.classList.contains('already-read-link')) {
+//     const newsId = e.target.parentNode.parentNode.children[3].dataset.id;
+//     e.target.parentNode.parentNode.children[1].classList.remove(
+//       'visually-hidden'
+//     );
+//     const newsReadingDate = e.target.previousElementSibling.dataset.date;
+//     const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
+//     const newsItem = localArr.find(item => item.id === newsId);
+//     const indexOfNews = localArr.indexOf(newsItem);
+//     console.log('localArr', localArr);
+//     localArr.splice(indexOfNews, 1);
 
-    console.log('newsReadingDate', newsReadingDate);
-    console.log('newsItem', newsItem);
-    console.log('indexOfNews', indexOfNews);
-    console.log('localArr after splice', localArr);
+//     console.log('newsReadingDate', newsReadingDate);
+//     console.log('newsItem', newsItem);
+//     console.log('indexOfNews', indexOfNews);
+//     console.log('localArr after splice', localArr);
 
-    localStorage.setItem(`${newsReadingDate}`, JSON.stringify(localArr));
-    newsItem.dateKey = dateKey;
+//     localStorage.setItem(`${newsReadingDate}`, JSON.stringify(localArr));
+//     newsItem.dateKey = dateKey;
 
-    if (localStorage.getItem(`${dateKey}`)) {
-      const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`));
-      fromLocal.push(newsItem);
-      localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
-      // updateMarkup();
-    } else {
-      localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
-      // updateMarkup();
-    }
-  }
-}
+//     if (localStorage.getItem(`${dateKey}`)) {
+//       const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`));
+//       fromLocal.push(newsItem);
+//       localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
+//       // updateMarkup();
+//     } else {
+//       localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
+//       // updateMarkup();
+//     }
+//   }
+// }

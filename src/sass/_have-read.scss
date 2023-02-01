@@ -1,17 +1,22 @@
-.read-list{
+.read-list {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
   justify-content: flex-start;
   align-items: center;
-
+  margin-top: 28px;
+  margin-bottom: 40px;
 
   @media screen and (min-width: $tablet) {
     flex-basis: calc((100% - 30px) / 2);
+    margin-top: 30px;
+    margin-bottom: 48px;
   }
 
   @media screen and (min-width: $desktop) {
     flex-basis: calc((100% - 2 * 32px) / 3);
+    margin-top: 40px;
+    margin-bottom: 60px;
   }
 }
 
