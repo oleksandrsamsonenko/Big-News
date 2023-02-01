@@ -17,7 +17,7 @@ if (localStorage.getItem('read')) {
 }
 
 readWrapperEl.addEventListener('click', handleHideBtnClick);
-// readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
+readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
 function updateMarkup() {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
@@ -35,6 +35,7 @@ function createMarkupFromLocal(newsArrey, newsArrDate) {
     .map(
       item => ` <li class="images read-item">
     <img class="news-list__img" src="${item.imgUrl}" alt="" width="288px" height="395px" />
+    <p class="have-read visually-hidden">Have Read</p>
     <p class="news-list__category">${item.category}</p>
     <button class="img-btn favorite-false" data-id="${item.id}">Add to favorite</button>
     <h2 class="description-title">${item.title}</h2>
@@ -42,7 +43,7 @@ function createMarkupFromLocal(newsArrey, newsArrDate) {
     <div class="info-more">
       <p class="date" data-date="${item.dateKey}">${item.date}</p>
       <a class="already-read-link" href="${item.originUrl}" target="_blank" rel="noopener noreferrer">Read more</a>
-    </div><div></div>
+    </div>
     </li>`
     )
     .join('');
@@ -92,35 +93,37 @@ function handleHideBtnClick(e) {
   }
 }
 
-// function handleReadMoreBtnClick(e) {
-//   if (e.target.classList.contains('already-read-link')) {
-//     const newsId = e.target.parentNode.parentNode.children[3].dataset.id;
-//     e.target.parentNode.parentNode.children[1].classList.remove(
-//       'visually-hidden'
-//     );
-//     const newsReadingDate = e.target.previousElementSibling.dataset.date;
-//     const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
-//     const newsItem = localArr.find(item => item.id === newsId);
-//     const indexOfNews = localArr.indexOf(newsItem);
-//     console.log('localArr', localArr);
-//     localArr.splice(indexOfNews, 1);
+function handleReadMoreBtnClick(e) {
+  if (e.target.classList.contains('already-read-link')) {
+    const newsId = e.target.parentNode.parentNode.children[3].dataset.id;
+    e.target.parentNode.parentNode.children[1].classList.remove(
+      'visually-hidden'
+    );
+    const newsReadingDate = e.target.previousElementSibling.dataset.date;
+    const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
+    const newsItem = localArr.find(item => item.id === newsId);
+    const indexOfNews = localArr.indexOf(newsItem);
+    console.log('localArr', localArr);
+    localArr.splice(indexOfNews, 1);
 
-//     console.log('newsReadingDate', newsReadingDate);
-//     console.log('newsItem', newsItem);
-//     console.log('indexOfNews', indexOfNews);
-//     console.log('localArr after splice', localArr);
+    console.log('newsReadingDate', newsReadingDate);
+    console.log('newsItem', newsItem);
+    console.log('indexOfNews', indexOfNews);
+    console.log('localArr after splice', localArr);
 
-//     localStorage.setItem(`${newsReadingDate}`, JSON.stringify(localArr));
-//     newsItem.dateKey = dateKey;
+    localStorage.setItem(`${newsReadingDate}`, JSON.stringify(localArr));
+    newsItem.dateKey = dateKey;
 
-//     if (localStorage.getItem(`${dateKey}`)) {
-//       const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`));
-//       fromLocal.push(newsItem);
-//       localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
-//       // updateMarkup();
-//     } else {
-//       localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
-//       // updateMarkup();
-//     }
-//   }
-// }
+    if (localStorage.getItem(`${dateKey}`)) {
+      const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`));
+      fromLocal.push(newsItem);
+      localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
+      readWrapperEl.innerHTML = '';
+      updateMarkup();
+    } else {
+      localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
+      readWrapperEl.innerHTML = '';
+      updateMarkup();
+    }
+  }
+}
