@@ -106,7 +106,7 @@ export function createMarkup(arr) {
           <div class="read-overlay" data-id="${item.uri.slice(
             14,
             22
-          )}"><p class="overlay-text">Already read V<p></div>
+          )}"><p class="overlay-text">Already read<p></div>
         </li>`;
     })
     .join('');
@@ -195,7 +195,7 @@ export function createValueMarkup(e) {
           <div class="read-overlay" data-id="${item.uri.slice(
             14,
             22
-          )}"><p class="overlay-text">Already read V</p></div>
+          )}"><p class="overlay-text">Already read</p></div>
         </li>`;
     })
     .join('');

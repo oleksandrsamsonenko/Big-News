@@ -24,50 +24,49 @@ newslistEl.addEventListener('click', handleLinkClick, false);
 
 function handleLinkClick(e) {
   if (e.target.classList.contains('read-more-link')) {
+    e.target.parentNode.parentNode.classList.add('have-read');
+    e.target.parentNode.nextElementSibling.classList.add(`overlay-shown`);
 
-
-  e.target.parentNode.parentNode.classList.add('have-read');
-
-  if (localStorage.getItem('read')) {
-    const localKeyArr = JSON.parse(localStorage.getItem('read'));
-    if (!localKeyArr.includes(dateKey)) {
-      localKeyArr.push(dateKey);
-      localStorage.setItem('read', JSON.stringify(localKeyArr));
+    if (localStorage.getItem('read')) {
+      const localKeyArr = JSON.parse(localStorage.getItem('read'));
+      if (!localKeyArr.includes(dateKey)) {
+        localKeyArr.push(dateKey);
+        localStorage.setItem('read', JSON.stringify(localKeyArr));
+      } else {
+        keyArr.push(...localKeyArr);
+      }
     } else {
-      keyArr.push(...localKeyArr);
+      keyArr.push(dateKey);
+      localStorage.setItem('read', JSON.stringify(keyArr));
     }
-  } else {
-    keyArr.push(dateKey);
-    localStorage.setItem('read', JSON.stringify(keyArr));
-  }
 
-  const newsId = e.target.parentNode.parentNode.children[2].dataset.id;
+    const newsId = e.target.parentNode.parentNode.children[2].dataset.id;
 
-  if (!idArr.includes(newsId)) {
-    idArr.push(newsId);
-    localStorage.setItem('id', JSON.stringify(idArr));
+    if (!idArr.includes(newsId)) {
+      idArr.push(newsId);
+      localStorage.setItem('id', JSON.stringify(idArr));
+      pushObj();
+      localStorage.setItem(`${dateKey}`, JSON.stringify(readArr));
+      return;
+    }
+
+    localStorage.setItem('id', JSON.stringify(`${newsId}`));
     pushObj();
+
+    function pushObj() {
+      readArr.push({
+        id: e.target.parentNode.parentNode.children[2].dataset.id,
+        imgUrl: e.target.parentNode.parentNode.children[0].src,
+        category: e.target.parentNode.parentNode.children[1].textContent,
+        title: e.target.parentNode.parentNode.children[3].textContent,
+        descr: e.target.parentNode.parentNode.children[4].textContent,
+        date: e.target.previousElementSibling.textContent,
+        originUrl: e.target.href,
+        dateKey,
+      });
+      return readArr;
+    }
+
     localStorage.setItem(`${dateKey}`, JSON.stringify(readArr));
-    return;
   }
-
-  localStorage.setItem('id', JSON.stringify(`${newsId}`));
-  pushObj();
-
-  function pushObj() {
-    readArr.push({
-      id: e.target.parentNode.parentNode.children[2].dataset.id,
-      imgUrl: e.target.parentNode.parentNode.children[0].src,
-      category: e.target.parentNode.parentNode.children[1].textContent,
-      title: e.target.parentNode.parentNode.children[3].textContent,
-      descr: e.target.parentNode.parentNode.children[4].textContent,
-      date: e.target.previousElementSibling.textContent,
-      originUrl: e.target.href,
-      dateKey,
-    });
-    return readArr;
-  }
-
-  localStorage.setItem(`${dateKey}`, JSON.stringify(readArr));
-}
 }
