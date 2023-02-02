@@ -86,7 +86,7 @@ export function createMarkup(arr) {
       return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
           <p class="news-list__category">${category}</p>
-          <button class="img-btn favorite-false " data-id="${item.uri.slice(
+          <button class="img-btn favorite-false " data-id="a${item.uri.slice(
             14,
             22
           )}"  >Add to favorite </button>
@@ -173,7 +173,7 @@ export function createValueMarkup(e) {
             height="395px"
           />
           <p class="news-list__category">${item.section_name}</p>
-          <button class="img-btn favorite-false"  data-id="${item.uri.slice(
+          <button class="img-btn favorite-false"  data-id="a${item.uri.slice(
             14,
             22
           )}">
