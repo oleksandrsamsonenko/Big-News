@@ -201,7 +201,7 @@ export function createValueMarkup(e) {
   getWeatherCoords();
 }
 
-function addAlreadyReadMarkup() {
+export function addAlreadyReadMarkup() {
   if (!localStorage.getItem('id')) {
     return 
   }

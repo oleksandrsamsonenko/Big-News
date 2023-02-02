@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createMarkup } from './markup';
 import notFound from '../img/not-found.png';
 import throttle from 'lodash.throttle';
+import { addAlreadyReadMarkup } from './markup';
 
 const API_KEY = 'RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b';
 const BASE_URL = 'https://api.nytimes.com/svc/news/v3/content/inyt/';
@@ -44,6 +45,7 @@ function handleSelectClick(e) {
     listEl.classList.add('visually-hidden');
     // mainBtn.textContent = e.target.textContent
     createMarkup(data);
+    addAlreadyReadMarkup();
   });
 }
 
@@ -52,7 +54,7 @@ async function getСategoryNameFetch(categoryName) {
     const response = await axios.get(
       `https://api.nytimes.com/svc/news/v3/content/inyt/${categoryName}.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b&fq=field-name:("title", "section", "url", "published_date", "multimedia")`
     );
-    console.log(response);
+    // console.log(response);
     return response.data.results;
   } catch (error) {
     console.log(error);
@@ -65,7 +67,7 @@ async function getFetchCategories() {
       `https://api.nytimes.com/svc/news/v3/content/section-list.json?api-key=RX66xbpKTOQTP8uW8ejKF6pod0BTlz7b`
     );
     const arrey = response.data.results;
-    arrForMarkup.push(...arrey)
+    arrForMarkup.push(...arrey);
     return arrey;
   } catch (error) {
     console.log(error);
