@@ -8,7 +8,7 @@ const month =
     ? (today.getMonth() + 1).toString().padStart(2, 0)
     : today.getMonth() + 1;
 const year = today.getFullYear();
-const dateKey = `${date}/${month}/${year}`;
+const dateNow = `${date}/${month}/${year}`;
 
 const readWrapperEl = document.querySelector('.read-wrapper');
 
@@ -17,7 +17,7 @@ if (localStorage.getItem('read')) {
 }
 
 readWrapperEl.addEventListener('click', handleHideBtnClick);
-// readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
+readWrapperEl.addEventListener('click', handleReadMoreBtnClick);
 
 function updateMarkup() {
   const localKeyArr = JSON.parse(localStorage.getItem('read'));
@@ -31,20 +31,42 @@ function updateMarkup() {
 }
 
 function createMarkupFromLocal(newsArrey, newsArrDate) {
+  let itemMarkup = '';
+  let idFromLocal = [];
+
   const liMarkup = newsArrey
-    .map(
-      item => ` <li class="images read-item">
-    <img class="news-list__img" src="${item.imgUrl}" alt="" width="288px" height="395px" />
+    .map(item => {
+      if (localStorage.getItem('already read id')) {
+        idFromLocal = JSON.parse(localStorage.getItem('already read id'));
+      }
+
+      if (idFromLocal.includes(item.id)) {
+        itemMarkup = ' overlay-shown';
+      } else {
+        itemMarkup = '';
+      }
+      return ` <li class="images read-item">
+    <img class="news-list__img" src="${
+      item.imgUrl
+    }" alt="" width="288px" height="395px" />
     <p class="news-list__category">${item.category}</p>
-    <button class="img-btn favorite-false" data-id="${item.id}">Add to favorite</button>
+    <button class="img-btn favorite-false" data-id="${
+      item.id
+    }">Add to favorite</button>
     <h2 class="description-title">${item.title}</h2>
     <p class="description-of-news">${item.descr}</p>
     <div class="info-more">
       <p class="date" data-date="${item.dateKey}">${item.date}</p>
-      <a class="already-read-link" href="${item.originUrl}" target="_blank" rel="noopener noreferrer">Read more</a>
-    </div><div></div>
-    </li>`
-    )
+      <a class="already-read-link" href="${
+        item.originUrl
+      }" target="_blank" rel="noopener noreferrer">Read more</a>
+    </div>
+    <div class="read-overlay${itemMarkup}" data-id="${item.id.slice(
+        14,
+        22
+      )}"><p class="overlay-read-text">Have read</p></div>
+    </li>`;
+    })
     .join('');
 
   setTimeout(() => {
@@ -92,35 +114,39 @@ function handleHideBtnClick(e) {
   }
 }
 
-// function handleReadMoreBtnClick(e) {
-//   if (e.target.classList.contains('already-read-link')) {
-//     const newsId = e.target.parentNode.parentNode.children[3].dataset.id;
-//     e.target.parentNode.parentNode.children[1].classList.remove(
-//       'visually-hidden'
-//     );
-//     const newsReadingDate = e.target.previousElementSibling.dataset.date;
-//     const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
-//     const newsItem = localArr.find(item => item.id === newsId);
-//     const indexOfNews = localArr.indexOf(newsItem);
-//     console.log('localArr', localArr);
-//     localArr.splice(indexOfNews, 1);
+function handleReadMoreBtnClick(e) {
+  if (e.target.classList.contains('already-read-link')) {
+    const newsId = e.target.parentNode.parentNode.children[2].dataset.id;
 
-//     console.log('newsReadingDate', newsReadingDate);
-//     console.log('newsItem', newsItem);
-//     console.log('indexOfNews', indexOfNews);
-//     console.log('localArr after splice', localArr);
+    if (localStorage.getItem(`already read id`)) {
+      const idFromLocal = JSON.parse(localStorage.getItem(`already read id`));
+      idFromLocal.push(newsId);
+      localStorage.setItem('already read id', JSON.stringify(idFromLocal));
+    } else {
+      const idToLocal = [];
+      idToLocal.push(newsId);
+      localStorage.setItem('already read id', JSON.stringify(idToLocal));
+    }
 
-//     localStorage.setItem(`${newsReadingDate}`, JSON.stringify(localArr));
-//     newsItem.dateKey = dateKey;
+    const newsReadingDate = e.target.previousElementSibling.dataset.date;
+    const localArr = JSON.parse(localStorage.getItem(`${newsReadingDate}`));
+    const newsItem = localArr.find(item => item.id === newsId);
+    const indexOfNews = localArr.indexOf(newsItem);
 
-//     if (localStorage.getItem(`${dateKey}`)) {
-//       const fromLocal = JSON.parse(localStorage.getItem(`${dateKey}`));
-//       fromLocal.push(newsItem);
-//       localStorage.setItem(`${dateKey}`, JSON.stringify(fromLocal));
-//       // updateMarkup();
-//     } else {
-//       localStorage.setItem(`${dateKey}`, JSON.stringify(newsItem));
-//       // updateMarkup();
-//     }
-//   }
-// }
+    localArr.splice(indexOfNews, 1);
+    localStorage.setItem(`${newsReadingDate}`, JSON.stringify(localArr));
+    newsItem.dateKey = dateNow;
+
+    if (localStorage.getItem(`${dateNow}`)) {
+      const fromLocal = JSON.parse(localStorage.getItem(`${dateNow}`));
+      fromLocal.push(newsItem);
+      localStorage.setItem(`${dateNow}`, JSON.stringify(fromLocal));
+      readWrapperEl.innerHTML = '';
+      updateMarkup();
+    } else {
+      localStorage.setItem(`${dateNow}`, JSON.stringify(newsItem));
+      readWrapperEl.innerHTML = '';
+      updateMarkup();
+    }
+  }
+}

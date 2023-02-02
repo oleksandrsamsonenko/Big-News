@@ -22,7 +22,6 @@ function handleLinkClick(e) {
       : today.getMonth() + 1;
   const year = today.getFullYear();
   const dateKey = `${date}/${month}/${year}`;
-  // const dateKey = `20/01/2023`;
 
   const newsId = e.target.parentNode.parentNode.children[2].dataset.id;
 

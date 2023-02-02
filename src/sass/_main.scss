@@ -159,6 +159,7 @@
   min-height: 395px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 4px;
 }
 
 /////add to favorite
@@ -175,13 +176,19 @@
   gap: 4px;
   font-family: $mainFF;
   background: #ffffff;
+  border: 2px solid transparent;
   border-radius: 20px;
   border: none;
   cursor: pointer;
 
   font-size: 12px;
   line-height: 16px;
+
+  &:hover {
+    border: 1px solid $heartColor;
+  }
 }
+
 .favorite-false::after {
   content: '';
   display: block;
@@ -321,6 +328,18 @@
   background-color: rgba(244, 244, 244, 0.4);
 
   height: 630px;
+
+  @media screen and (min-width: 768px) {
+    height: 675px;
+  }
+}
+
+.favourite-news {
+  margin-top: 40px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 48px;
+  }
 
   @media screen and (min-width: 768px) {
     height: 675px;

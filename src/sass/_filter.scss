@@ -29,6 +29,12 @@
 
 .filter-btn {
   padding: 8px 21px;
+  transition: ease-in-out 300ms;
+
+  &:hover, &:focus {
+    background-color: $btnBorderColor;
+    color: #f4f4f4;
+  }
 }
 
 .filter-btn,
