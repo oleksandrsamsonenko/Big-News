@@ -19,12 +19,12 @@ async function getFetch() {
   }
 }
 
-getFetch().then(data => createMarkup(data));
+getFetch()
+  .then(data => createMarkup(data))
+  .then(e => addAlreadyReadMarkup());
 export function createMarkup(arr) {
   const markup = arr
     .map(item => {
-      // console.log(item.uri);
-      // console.log(item.uri.slice(14, 22));
       const date = new Date(item.published_date);
       const day = String(date.getDate()).padStart(2, '0');
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -86,7 +86,7 @@ export function createMarkup(arr) {
       return `<li class="images">
           <img  class="news-list__img" src="${imgUrl}" alt="" width="288px" height="395px" />
           <p class="news-list__category">${category}</p>
-          <button class="img-btn favorite-false " data-id="${item.uri.slice(
+          <button class="img-btn favorite-false " data-id="a${item.uri.slice(
             14,
             22
           )}"  >Add to favorite </button>
@@ -103,7 +103,7 @@ export function createMarkup(arr) {
               Read more
             </a>
           </div>
-          <div class="read-overlay" data-id="${item.uri.slice(
+          <div class="read-overlay" data-id="a${item.uri.slice(
             14,
             22
           )}"><p class="overlay-text">Already read<p></div>
@@ -114,9 +114,7 @@ export function createMarkup(arr) {
 
   newsList.innerHTML = markup;
 }
-// const params = {
 
-// }
 async function getValueFetch(value) {
   try {
     const fullfield = await axios.get(
@@ -135,8 +133,8 @@ function handleInput(e) {
   e.preventDefault();
 
   getValueFetch(markupValue.value).then(data => {
-    console.log(data);
     createValueMarkup(data);
+    addAlreadyReadMarkup();
   });
 }
 
@@ -173,7 +171,7 @@ export function createValueMarkup(e) {
             height="395px"
           />
           <p class="news-list__category">${item.section_name}</p>
-          <button class="img-btn favorite-false"  data-id="${item.uri.slice(
+          <button class="img-btn favorite-false"  data-id="a${item.uri.slice(
             14,
             22
           )}">
@@ -192,7 +190,7 @@ export function createValueMarkup(e) {
               Read more
             </a>
           </div>
-          <div class="read-overlay" data-id="${item.uri.slice(
+          <div class="read-overlay" data-id="a${item.uri.slice(
             14,
             22
           )}"><p class="overlay-text">Already read</p></div>
@@ -201,4 +199,21 @@ export function createValueMarkup(e) {
     .join('');
   newsList.innerHTML = valueMarkup;
   getWeatherCoords();
+}
+
+function addAlreadyReadMarkup() {
+  if (!localStorage.getItem('id')) {
+    return 
+  }
+  
+  const articleOverlay = document.querySelectorAll('.read-overlay');
+  articleOverlay.forEach(item => {
+    JSON.parse(localStorage.getItem(`id`)).find(element => {
+      if (element === item.dataset.id) {
+        document
+          .querySelector(`div[data-id=${element}]`)
+          .classList.add(`overlay-shown`);
+      }
+    });
+  });
 }
