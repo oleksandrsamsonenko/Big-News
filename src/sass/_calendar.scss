@@ -39,6 +39,8 @@
   letter-spacing: 0.02em;
   background-color: transparent;
   color: rgba(17, 19, 33, 0.4);
+
+  transition: ease-in-out 300ms;
 }
 .calendar-inp:hover,
 .calendar-inp:focus {
